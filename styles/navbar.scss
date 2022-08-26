@@ -11,15 +11,18 @@
   align-items: center;
 
   padding: 1rem 2rem;
+
+  @media screen and (min-width: 1600px) {
+    padding: 1rem 4rem;
+  }
 }
 
 .scrolled {
   background-color: var(--darkDialogColor);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
 }
 
 .app__navbar_logo {
-  position: relative;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -27,7 +30,11 @@
 
   img {
     width: 100%;
-    height: auto;
+    height: 5rem;
+
+    @media screen and (max-width: 768px) {
+      height: 4rem;
+    }
   }
 }
 

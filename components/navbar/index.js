@@ -27,10 +27,9 @@ const Navbar = () => {
     return (
         <nav className={scolled ? 'app__navbar scrolled' : 'app__navbar'}>
 
-            <div className="app__navbar__logo">
-                <Link href='/' >
-                    <img
-                        src='/logo.webp'
+            <div className="app__navbar_logo">
+                <Link href='/home' >
+                    <img src='/logo.webp'
                         alt='logo'
                     />
                 </Link>

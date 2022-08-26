@@ -5,7 +5,7 @@ import styles from '../../styles/hero.module.scss';
 
 const Hero = () => {
     return (
-        <>
+        <div className={styles.app__hero}>
             <div className={styles.ocean}>
                 <div className={styles.wave}></div>
                 <div className={styles.wave}></div>
@@ -21,7 +21,7 @@ const Hero = () => {
 
 
             </div>
-        </>
+        </div>
     )
 }
 
