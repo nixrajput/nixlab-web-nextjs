@@ -1,9 +1,9 @@
 import Navbar from "../navbar";
 
-const AppWrap = (Component, idName, classNames) => {
+const AppWrap = (Component, idName) => {
     const HOC = () => {
         return (
-            <div id={idName} className={`app__container ${classNames}`}>
+            <div id={idName} className={`app__container`}>
 
                 <Navbar />
 

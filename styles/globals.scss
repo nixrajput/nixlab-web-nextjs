@@ -1,20 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 :root {
   --lato: "Lato", sans-serif;
   --poppins: "Poppins", sans-serif;
 
-  --lightGrayColor: #e4e4e4;
-  --grayColor: #6d6868;
-  --brown-color: #46364a;
-  --whiteColor: #ffffff;
+  --successColor: #4caf50;
+  --errorColor: #f44336;
+  --warningColor: #f09c00;
+
+  --grayColor: #b4b4b4;
+  --darkGrayColor: #787878;
+  --darkerGrayColor: #505050;
+  --lightGrayColor: #d2d2d2;
+
   --darkBgColor: #1c1d31;
   --darkDialogColor: #333446;
-  --darkPrimaryTextColor: rgb(182, 182, 182);
-  --accentColor: #ff5a5f;
-  --lightAccentColor: #e7696d;
-  --firstColor: #8a1342;
-  --secondColor: #55025e;
-  --activeColor: #3498db;
+
+  --whiteColor: #ffffff;
+  --blackColor: #000000;
+
+  --primaryTextColor: #dddddd;
+  --primaryColor: #e3096f;
+  --secondaryColor: #2878f0;
+  --primaryLightColor: #dd5896;
 }
 
 * {
@@ -24,28 +32,18 @@
   scroll-behavior: smooth;
 }
 
-// @media (prefers-color-scheme: dark) {
-//   // html {
-//   //   color-scheme: dark;
-//   // }
-//   // body {
-//   //   color: white;
-//   //   background: black;
-//   // }
-// }
-
 body {
-  background-color: var(--darkBgColor);
   font-family: var(--lato), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  color: var(--darkPrimaryTextColor);
+  background-color: var(--darkBgColor);
+  color: var(--primaryTextColor);
   overflow-x: hidden;
 }
 
 a {
-  color: var(--activeColor);
+  color: var(--primaryLightColor);
 }
 
 input {
@@ -74,8 +72,8 @@ iframe {
 
 .app {
   background-color: var(--darkBgColor);
-  color: var(--darkPrimaryTextColor);
-  font-family: var(--font-base);
+  color: var(--primaryTextColor);
+  font-family: var(--lato);
 }
 
 .spacer {
@@ -90,7 +88,7 @@ iframe {
 p {
   font-size: 1.15rem;
   font-weight: 400;
-  color: var(--darkPrimaryTextColor);
+  color: var(--primaryTextColor);
   line-height: 1.5;
   transition: all 0.5s ease-in-out;
 
@@ -106,7 +104,7 @@ p {
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--darkPrimaryTextColor);
+  color: var(--primaryTextColor);
   line-height: 1.5;
   transition: all 0.5s ease-in-out;
 
@@ -122,7 +120,7 @@ h1 {
 h2 {
   font-size: 2rem;
   font-weight: 700;
-  color: var(--darkPrimaryTextColor);
+  color: var(--primaryTextColor);
   line-height: 1.5;
   transition: all 0.5s ease-in-out;
 
@@ -138,7 +136,7 @@ h2 {
 h3 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--darkPrimaryTextColor);
+  color: var(--primaryTextColor);
   line-height: 1.5;
   transition: all 0.5s ease-in-out;
 
@@ -155,8 +153,6 @@ h3 {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  width: 100%;
-  min-height: 100vh;
 }
 
 .app__flex {
@@ -178,6 +174,8 @@ h3 {
   flex: 1;
   flex-direction: column;
   padding: 4rem 2rem;
+  width: 100%;
+  min-height: 100vh;
 
   @media screen and (min-width: 1600px) {
     padding: 4rem;
@@ -197,13 +195,13 @@ h3 {
   text-decoration: none;
   outline: none;
   background-color: transparent;
-  color: var(--accentColor);
-  border: 2px solid var(--accentColor);
-  border-radius: 2rem;
-  padding: 0.5rem 1.5rem;
-  font-size: 1.1rem;
+  color: var(--primaryColor);
+  border: 0.1rem solid var(--primaryColor);
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem;
+  font-size: 1.15rem;
   text-transform: capitalize;
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 
@@ -212,8 +210,45 @@ h3 {
   }
 
   &:hover {
-    background-color: var(--accentColor);
-    color: var(--whiteColor);
+    border-color: var(--primaryLightColor);
+    color: var(--primaryLightColor);
+  }
+
+  @media screen and (min-width: 1600px) {
+    font-size: 1.25rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1rem;
+  }
+}
+
+.app__filled_btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+  outline: none;
+  background-color: var(--primaryColor);
+  color: var(--whiteColor);
+  border: 0.1rem solid var(--primaryColor);
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem;
+  font-size: 1.15rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+
+  svg {
+    margin-right: 0.5rem;
+  }
+
+  &:hover {
+    background-color: var(--primaryLightColor);
+    border: 0.1rem solid var(--primaryLightColor);
   }
 
   @media screen and (min-width: 1600px) {
@@ -234,11 +269,11 @@ h3 {
   text-decoration: none;
   outline: none;
   background-color: transparent;
-  color: var(--accentColor);
+  color: var(--primaryColor);
   border: none;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   text-transform: capitalize;
-  font-weight: 700;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 
@@ -247,45 +282,7 @@ h3 {
   }
 
   &:hover {
-    color: var(--whiteColor);
-  }
-
-  @media screen and (min-width: 1600px) {
-    font-size: 1.25rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    font-size: 1rem;
-  }
-}
-
-.app__filled_btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  text-decoration: none;
-  outline: none;
-  background-color: var(--accentColor);
-  color: var(--whiteColor);
-  border: 2px solid var(--accentColor);
-  border-radius: 2rem;
-  padding: 0.5rem 1.5rem;
-  font-size: 1.1rem;
-  text-transform: capitalize;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.25s ease-in-out;
-
-  svg {
-    margin-right: 0.5rem;
-  }
-
-  &:hover {
-    background-color: transparent;
-    border: 2px solid var(--accentColor);
-    color: var(--accentColor);
+    color: var(--primaryLightColor);
   }
 
   @media screen and (min-width: 1600px) {
