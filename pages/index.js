@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Hero from '../components/hero';
+import AppWrap from '../components/app-wrap';
 
-export default function Home() {
+const Home = () => {
 
   return (
     <div className="app">
@@ -17,3 +18,5 @@ export default function Home() {
   );
 
 }
+
+export default AppWrap(Home, 'home');

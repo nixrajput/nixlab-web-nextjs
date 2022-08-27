@@ -7,9 +7,10 @@ function usePath() {
 
     useEffect(() => {
         if (router) {
-            let path = router.asPath.slice(1);
-            if (path === "") {
-                path = "#home";
+            let path = router.asPath;
+            console.log(path);
+            if (path === "/") {
+                path = "/home";
             }
             setCurrPath(path);
         }

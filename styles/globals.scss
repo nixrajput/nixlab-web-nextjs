@@ -198,7 +198,7 @@ h3 {
   }
 }
 
-.app__box_container {
+.app__box__form_container {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -222,6 +222,36 @@ h3 {
   }
 
   @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
+}
+
+.app__box_container {
+  position: relative;
+  width: 100%;
+  max-width: 50rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--darkDialogColor);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  overflow: hidden;
+
+  .title {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: inherit;
+    margin-bottom: 2rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    min-width: 100%;
     max-width: 100%;
   }
 }

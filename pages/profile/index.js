@@ -1,8 +1,11 @@
-import React from 'react';
-import AppWrap from '../../components/wrapper';
+import { } from 'react';
+import Head from 'next/head';
+import AppWrap from '../../components/app-wrap';
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { removeUser, authenticating } from "../../redux/slices/authSlice";
+import Image from 'next/image';
+import styles from '../../styles/profile.module.scss';
 
 const Profile = () => {
 
@@ -20,12 +23,43 @@ const Profile = () => {
     }
 
     return (
-        <div>
-            <button className="app__text_btn"
-                onClick={logoutUser}>
-                Logout
-            </button>
-        </div>
+        <div className={styles.profile}>
+            <Head>
+                <title>{`${auth.user.fname} - Profile`}</title>
+            </Head>
+
+            <div className="app__box_container">
+
+                <div className={styles.profile__image}>
+                    <Image src={auth.user?.avatar?.url}
+                        alt={auth.user.fname}
+                        layout='fill'
+                        priority
+                        placeholder='/avatar.png'
+                    />
+                </div>
+
+                <div className={styles.profile__info}>
+
+                    <div className={styles.profile__info__name}>
+                        <h3>{`${auth.user.fname} ${auth.user.lname}`}</h3>
+                    </div>
+
+                    <div className={styles.profile__info__uname}>
+                        <p>{auth.user.uname}</p>
+                    </div>
+
+                </div>
+
+                <button className={`app__text_btn ${styles.logout_btn}`}
+                    onClick={logoutUser}>
+                    Logout
+                </button>
+
+            </div>
+
+
+        </div >
     )
 }
 

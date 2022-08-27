@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import React from 'react';
-import AppWrap from '../wrapper';
 import { useSelector } from "react-redux";
 import styles from '../../styles/hero.module.scss';
 
@@ -32,4 +31,4 @@ const Hero = () => {
     )
 }
 
-export default AppWrap(Hero, 'hero');
+export default Hero;

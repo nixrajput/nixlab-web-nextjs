@@ -1,5 +1,5 @@
 import Head from "next/head";
-import AppWrap from "../../components/wrapper";
+import AppWrap from "../../components/app-wrap";
 import { useSelector, useDispatch } from "react-redux";
 import { client } from "../../api/client";
 import Link from "next/link";
@@ -57,7 +57,7 @@ const Login = () => {
                 <title>Login - NixLab Technologies</title>
             </Head>
 
-            <form className="app__box_container"
+            <form className="app__box__form_container"
                 onSubmit={(e) => dispatch(loginUser(e))}>
 
                 <p className="title">Login to account</p>
