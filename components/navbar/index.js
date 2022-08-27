@@ -3,6 +3,7 @@ import { HiX } from 'react-icons/hi';
 import { RiMenu3Fill } from 'react-icons/ri';
 import { useState, useEffect } from 'react';
 import usePath from "../../hooks/usePath";
+import styles from '../../styles/navbar.module.scss';
 
 const menuItems = ['home', 'services', 'projects', 'about', 'contact'];
 
@@ -25,41 +26,78 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className={scolled ? 'app__navbar scrolled' : 'app__navbar'}>
+        <nav className={
+            scolled ?
+                `${styles.app__navbar} ${styles.scrolled}` :
+                styles.app__navbar
+        }>
 
-            <div className="app__navbar_logo">
-                <Link href='/home' >
-                    <img src='/logo.webp'
+            <div className={styles.app__navbar_logo}>
+                <Link href='/' >
+                    <img src='/logo.png'
                         alt='logo'
                     />
                 </Link>
             </div>
 
-            <ul className='app__navbar_links'>
+            {
+                !toggle &&
+                <>
+                    <ul className={styles.app__navbar_menu}>
 
-                {
-                    menuItems.map((item) => (
-                        <li key={`link-${item}`}
-                            className={path == `#${item}` ? 'app__flex p-text active' : 'app__flex p-text'} >
-                            <div />
-                            <Link href={`/${item}`}>{item}</Link>
-                        </li>
-                    ))
-                }
+                        {
+                            menuItems.map((item) => (
+                                <li key={`link-${item}`}
+                                    className={
+                                        path == `#${item}` ?
+                                            `app__flex ${styles.active}` :
+                                            'app__flex'
+                                    }>
+                                    <div />
+                                    <Link href={`/${item}`}>{item}</Link>
+                                </li>
+                            ))
+                        }
 
-            </ul>
+                    </ul>
 
-            <div className='app__navbar_menu'>
+                    <div className={styles.app__navbar_login}>
 
-                <RiMenu3Fill onClick={() => setToggle(true)} />
+                        <Link href='/login' >
+                            <div className={`app__outlined_btn ${styles.navbar__login_btn}`}>Login</div>
+                        </Link>
 
-                <div className={toggle ? 'app__navbar_mobile app__navbar_mobile_active' : 'app__navbar_mobile'}>
-                    <div onClick={() => setToggle(false)}><HiX /></div>
+                    </div>
+                </>
+            }
+
+            {/* Mobile Menu Toggle */}
+
+            <div className={styles.app__navbar_toggle}>
+                <div className={styles.app__navbar_toggle_btn}>
+                    <RiMenu3Fill onClick={() => setToggle(true)} />
+                </div>
+            </div>
+
+
+            <div className={styles.app__navbar_mobile_menu} >
+
+                <div className={
+                    toggle ?
+                        `${styles.app__navbar_menu_items} ${styles.show}` :
+                        `${styles.app__navbar_menu_items}`
+                }>
+                    <div onClick={() => setToggle(false)}
+                        className={styles.app__navbar_mobile_menu_close}>
+                        <HiX />
+                    </div>
                     <ul>
                         {
                             menuItems.map((item) => (
                                 <li key={item}
-                                    className={path == `#${item}` ? 'active' : ''}
+                                    className={
+                                        path == `#${item}` ? `${styles.active}` : ''
+                                    }
                                     onClick={() => setToggle(false)}
                                 >
                                     <Link href={`/${item}`} >
@@ -69,6 +107,10 @@ const Navbar = () => {
                             ))
                         }
                     </ul>
+
+                    <Link href='/login' >
+                        <div className={`app__outlined_btn ${styles.navbar__login_btn}`}>Login</div>
+                    </Link>
                 </div>
 
             </div>

@@ -12,6 +12,10 @@ export default function Home() {
 
       <Hero />
 
+      <div className="app__content"
+        style={{ minHeight: '100vh' }}>
+      </div>
+
     </div>
   )
 }

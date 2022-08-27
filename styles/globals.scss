@@ -37,7 +37,12 @@ body {
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  background-color: var(--darkBgColor);
+  background: var(--darkBgColor);
+  background: linear-gradient(
+    90deg,
+    var(--darkBgColor) 0%,
+    var(--darkDialogColor) 100%
+  );
   color: var(--primaryTextColor);
   overflow-x: hidden;
 }
@@ -71,8 +76,6 @@ iframe {
 }
 
 .app {
-  background-color: var(--darkBgColor);
-  color: var(--primaryTextColor);
   font-family: var(--lato);
 }
 
@@ -203,8 +206,8 @@ h3 {
   border: 0.1rem solid var(--primaryColor);
   border-radius: 0.5rem;
   padding: 0.5rem 2rem;
-  font-size: 1.15rem;
-  text-transform: capitalize;
+  font-size: 1rem;
+  text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
@@ -219,7 +222,7 @@ h3 {
   }
 
   @media screen and (min-width: 1600px) {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
 
   @media screen and (max-width: 768px) {
@@ -240,8 +243,8 @@ h3 {
   border: 0.1rem solid var(--primaryColor);
   border-radius: 0.5rem;
   padding: 0.5rem 2rem;
-  font-size: 1.15rem;
-  text-transform: capitalize;
+  font-size: 1rem;
+  text-transform: uppercase;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
@@ -256,7 +259,7 @@ h3 {
   }
 
   @media screen and (min-width: 1600px) {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
 
   @media screen and (max-width: 768px) {

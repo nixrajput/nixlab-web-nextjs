@@ -1,5 +1,4 @@
 import '../styles/globals.scss';
-import '../styles/navbar.scss';
 import { wrapper } from '../redux/store';
 
 function MyApp({ Component, pageProps }) {
