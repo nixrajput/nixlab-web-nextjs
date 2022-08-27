@@ -20,6 +20,10 @@
   @media screen and (min-width: 1600px) {
     padding: 1rem 4rem;
   }
+
+  @media screen and (max-width: 768px) {
+    padding: 1rem 1.5rem;
+  }
 }
 
 .scrolled {
@@ -48,7 +52,7 @@
     }
 
     @media screen and (max-width: 768px) {
-      height: 4rem;
+      height: 3.5rem;
     }
   }
 }
@@ -124,12 +128,11 @@
   align-items: center;
   position: fixed;
   top: 1.5rem;
-  right: 2rem;
+  right: 1.5rem;
 
   .app__navbar_toggle_btn {
     padding: 0.5rem;
     border-radius: 50%;
-    background-color: var(--darkDialogColor);
 
     display: flex;
     justify-content: center;
@@ -143,12 +146,18 @@
       object-fit: cover;
       color: var(--whiteColor);
       cursor: pointer;
+
+      @media screen and (max-width: 768px) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
     }
 
     &:hover {
       background-color: var(--primaryColor);
     }
   }
+
   @media screen and (min-width: 768px) {
     display: none;
   }
@@ -184,7 +193,6 @@
     transition: all 0.5s ease-in-out;
 
     .app__navbar_mobile_menu_close {
-      background-color: var(--darkBgColor);
       position: relative;
       cursor: pointer;
       border-radius: 50%;
@@ -199,8 +207,8 @@
       right: 1rem;
 
       svg {
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
         aspect-ratio: 1;
         object-fit: cover;
         color: var(--darkPrimaryTextColor);
