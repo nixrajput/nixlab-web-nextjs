@@ -3,13 +3,14 @@ import AppWrap from "../../components/wrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { client } from "../../api/client";
 import Link from "next/link";
-import { useState } from 'react';
-import { userLoading, userLoaded, userAuthenticated } from '../../redux/slices/authSlice';
+import { useState, useEffect } from 'react';
+import { authenticating, authenticated, setUser } from '../../redux/slices/authSlice';
+import { useRouter } from "next/router";
 
 const Login = () => {
 
     const auth = useSelector((state) => state.auth);
-    console.log(auth);
+    const router = useRouter();
     const dispatch = useDispatch();
 
     const [emailUsername, setEmailUsername] = useState("");
@@ -22,10 +23,32 @@ const Login = () => {
             "password": password,
         };
 
-        dispatch(userLoading());
-        const response = await client.post('/login', body);
-        dispatch(userAuthenticated(response.token));
+        dispatch(authenticating());
+        let response = await client.post('/login', body);
+        const payload = {
+            token: response.token,
+            expiresAt: response.expiresAt,
+        }
+        dispatch(authenticated(payload));
+        const headers = { 'Authorization': `Bearer ${auth.token}` };
+        response = await client.get('/me', { headers });
+        console.log(response);
+        dispatch(setUser(response.user));
+        const returnUrl = router.query.returnUrl || '/';
+        router.replace(returnUrl);
     }
+
+    useEffect(() => {
+
+        const returnUrl = router.query.returnUrl || '/';
+
+        if (auth.token) {
+            router.replace(returnUrl);
+        }
+
+        return () => { }
+
+    }, [auth.token])
 
 
     return (
@@ -34,17 +57,10 @@ const Login = () => {
                 <title>Login - NixLab Technologies</title>
             </Head>
 
-            <form className="app__box_container" onSubmit={(e) => dispatch(loginUser(e))}>
+            <form className="app__box_container"
+                onSubmit={(e) => dispatch(loginUser(e))}>
 
-                {auth.status === 'pending' && <div>Please wait...</div>}
-
-
-                {
-                    auth.isAuthenticated ?
-                        <p className="title">You are logged in</p> :
-                        <p className="title">Login to account</p>
-                }
-
+                <p className="title">Login to account</p>
 
                 <div className="app__form_control">
                     <input

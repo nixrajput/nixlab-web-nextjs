@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Hero from '../components/hero';
 
 export default function Home() {
+
   return (
     <div className="app">
       <Head>
@@ -12,10 +13,7 @@ export default function Home() {
 
       <Hero />
 
-      <div className="app__content"
-        style={{ minHeight: '100vh' }}>
-      </div>
-
     </div>
-  )
+  );
+
 }

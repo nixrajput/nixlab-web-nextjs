@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { HiX } from 'react-icons/hi';
-import { RiMenu3Fill } from 'react-icons/ri';
+import { RiMenu3Fill, RiUser2Fill } from 'react-icons/ri';
 import { useState, useEffect } from 'react';
 import usePath from "../../hooks/usePath";
 import styles from '../../styles/navbar.module.scss';
+import { useSelector } from "react-redux";
 
 const menuItems = ['home', 'services', 'projects', 'about', 'contact'];
 
 const Navbar = () => {
+
+    const auth = useSelector((state) => state.auth);
 
     const [toggle, setToggle] = useState(false);
     const [scolled, setScolled] = useState(false);
@@ -63,9 +66,18 @@ const Navbar = () => {
 
                     <div className={styles.app__navbar_login}>
 
-                        <Link href='/login' >
-                            <div className={`app__outlined_btn ${styles.navbar__login_btn}`}>Login</div>
-                        </Link>
+                        {
+                            auth.token ?
+                                <Link href='/profile' >
+                                    <div className={styles.user__menu_btn}>
+                                        <RiUser2Fill />
+                                    </div>
+                                </Link>
+                                :
+                                <Link href='/login' >
+                                    <div className={`app__outlined_btn ${styles.navbar__login_btn}`}>Login</div>
+                                </Link>
+                        }
 
                     </div>
                 </>
@@ -74,6 +86,14 @@ const Navbar = () => {
             {/* Mobile Menu Toggle */}
 
             <div className={styles.app__navbar_toggle}>
+                {
+                    auth.token &&
+                    <Link href='/profile' >
+                        <div className={styles.app__navbar_toggle_btn}>
+                            <RiUser2Fill />
+                        </div>
+                    </Link>
+                }
                 <div className={styles.app__navbar_toggle_btn}>
                     <RiMenu3Fill onClick={() => setToggle(true)} />
                 </div>

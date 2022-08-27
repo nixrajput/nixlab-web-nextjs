@@ -1,4 +1,3 @@
-
 export async function client(endpoint, method, { body, ...options } = {}) {
     const headers = { 'Content-Type': 'application/json' };
 
