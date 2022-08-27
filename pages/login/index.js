@@ -91,7 +91,7 @@ const Login = () => {
 
                 <div className="app__form_control">
                     <span>
-                        Don't have an account?
+                        Don&apos;t have an account?
                     </span>
                     <Link href="/register">
                         <div className="app__text_btn">Register here</div>
