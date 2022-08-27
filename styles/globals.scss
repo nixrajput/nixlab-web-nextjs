@@ -48,7 +48,12 @@ body {
 }
 
 a {
+  text-decoration: none;
   color: var(--primaryLightColor);
+
+  &:hover {
+    color: var(--primaryColor);
+  }
 }
 
 input {
@@ -193,6 +198,75 @@ h3 {
   }
 }
 
+.app__box_container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 40rem;
+  background-color: var(--darkDialogColor);
+  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  overflow: hidden;
+
+  .title {
+    position: relative;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: inherit;
+    margin-bottom: 2rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
+}
+
+.app__form_control {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 40rem;
+  height: 3.75rem;
+  margin: 1rem auto;
+
+  span {
+    margin-right: 0.5rem;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: var(--darkDialogColor);
+    width: 100%;
+    height: 100%;
+    border: 0.12rem solid var(--darkGrayColor);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+
+    padding: 0.5rem 1rem;
+    color: var(--primaryTextColor);
+    outline: none;
+
+    &:focus {
+      border-color: var(--primaryColor);
+    }
+  }
+
+  textarea {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
 .app__outlined_btn {
   display: flex;
   flex-direction: row;
@@ -203,7 +277,7 @@ h3 {
   outline: none;
   background-color: transparent;
   color: var(--primaryColor);
-  border: 0.1rem solid var(--primaryColor);
+  border: 0.12rem solid var(--primaryColor);
   border-radius: 0.5rem;
   padding: 0.5rem 2rem;
   font-size: 1rem;
@@ -240,7 +314,7 @@ h3 {
   outline: none;
   background-color: var(--primaryColor);
   color: var(--whiteColor);
-  border: 0.1rem solid var(--primaryColor);
+  border: 0.12rem solid var(--primaryColor);
   border-radius: 0.5rem;
   padding: 0.5rem 2rem;
   font-size: 1rem;
@@ -255,7 +329,7 @@ h3 {
 
   &:hover {
     background-color: var(--primaryLightColor);
-    border: 0.1rem solid var(--primaryLightColor);
+    border-color: var(--primaryLightColor);
   }
 
   @media screen and (min-width: 1600px) {

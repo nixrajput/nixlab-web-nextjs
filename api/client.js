@@ -15,9 +15,11 @@ export async function client(endpoint, method, { body, ...options } = {}) {
         config.body = JSON.stringify(body);
     }
 
+    const baseUrl = process.env.API_URL || 'https://social-api.nixlab.co.in/api/v1';
+
     let data;
     try {
-        const response = await window.fetch(endpoint, config);
+        const response = await window.fetch(`${baseUrl}${endpoint}`, config);
         data = await response.json();
         if (response.ok) {
             return data;
