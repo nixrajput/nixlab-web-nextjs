@@ -3,7 +3,7 @@ import Head from 'next/head';
 import AppWrap from '../../components/app-wrap';
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { removeUser, authenticating } from "../../redux/slices/authSlice";
+import { logout, authenticating } from "../../redux/slices/authSlice";
 import Image from 'next/image';
 import styles from '../../styles/profile.module.scss';
 
@@ -17,7 +17,7 @@ const Profile = () => {
     const logoutUser = () => {
         dispatch(authenticating());
 
-        dispatch(removeUser());
+        dispatch(logout());
         const returnUrl = '/';
         router.replace(returnUrl);
     }

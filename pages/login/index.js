@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { client } from "../../api/client";
 import Link from "next/link";
 import { useState, useEffect } from 'react';
-import { authenticating, authenticated, setUser } from '../../redux/slices/authSlice';
+import {
+    authenticating, authenticated,
+    loadUser, loadingUser, unauthenticated,
+    setError
+} from '../../redux/slices/authSlice';
 import { useRouter } from "next/router";
 
 const Login = () => {
@@ -13,12 +17,10 @@ const Login = () => {
     const router = useRouter();
     const dispatch = useDispatch();
 
-    console.log(auth);
-
     const [emailUsername, setEmailUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const loginUser = async (e) => {
+    const onClickLoginEvent = (e) => async (dispatch) => {
         e.preventDefault();
         const body = {
             "emailUname": emailUsername.trimEnd(),
@@ -26,18 +28,40 @@ const Login = () => {
         };
 
         dispatch(authenticating());
-        let response = await client.post('/login', body);
-        const payload = {
-            token: response.token,
-            expiresAt: response.expiresAt,
+        try {
+            const response = await client.post('/login', body);
+            if (response.status === 200) {
+                const payload = {
+                    token: response.token,
+                    expiresAt: response.expiresAt,
+                }
+                dispatch(authenticated(payload));
+                if (auth.token) {
+                    dispatch(loadingUser());
+                    const headers = { 'Authorization': `Bearer ${auth.token}` };
+                    try {
+                        const response = await client.get('/me', { headers });
+                        if (response.status === 200) {
+                            dispatch(loadUser(response.user));
+                            const returnUrl = router.query.returnUrl || '/';
+                            router.replace(returnUrl);
+                        }
+                        else {
+                            console.log(response.message);
+                            dispatch(setError(response.message));
+                        }
+                    } catch (error) {
+                        dispatch(setError(error));
+                    }
+                }
+            }
+            else {
+                dispatch(setError(response.message));
+            }
         }
-        dispatch(authenticated(payload));
-        const headers = { 'Authorization': `Bearer ${auth.token}` };
-        response = await client.get('/me', { headers });
-        console.log(response);
-        dispatch(setUser(response.user));
-        const returnUrl = router.query.returnUrl || '/';
-        router.replace(returnUrl);
+        catch (error) {
+            dispatch(setError(error));
+        }
     }
 
     useEffect(() => {
@@ -60,7 +84,14 @@ const Login = () => {
             </Head>
 
             {
-                (auth.status === "pending" || auth.status === "userLoading") ?
+                auth.status === 'error' &&
+                <div className="app__error_box">
+                    <p>{auth.error}</p>
+                </div>
+            }
+
+            {
+                (auth.status === "authenticating" || auth.status === "loadingUser") ?
                     <div className="app__box__form_container">
                         <div className="app__loading_text">
                             Please wait...
@@ -68,7 +99,7 @@ const Login = () => {
                     </div>
                     :
                     <form className="app__box__form_container"
-                        onSubmit={loginUser}>
+                        onSubmit={(e) => dispatch(onClickLoginEvent(e))}>
 
                         <p className="title">Login to account</p>
 

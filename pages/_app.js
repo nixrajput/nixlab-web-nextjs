@@ -4,7 +4,11 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import storage from '../utils/storage';
 import { client } from '../api/client';
-import { authenticating, authenticated, setUser, unauthenticated } from '../redux/slices/authSlice';
+import {
+  authenticating, authenticated,
+  loadUser, loadingUser, unauthenticated,
+  setError
+} from '../redux/slices/authSlice';
 
 function App({ Component, pageProps }) {
 
@@ -12,27 +16,35 @@ function App({ Component, pageProps }) {
 
   const dispatch = useDispatch();
 
-  const loadUser = async () => {
+  const loadUserDetails = async () => {
     dispatch(authenticating());
     const data = storage.get('auth');
-
     if (!data) {
       dispatch(unauthenticated());
     }
     else {
       dispatch(authenticated(data));
-      if (auth.status === 'authenticated' && auth.token) {
+      if (auth.token) {
+        dispatch(loadingUser());
         const headers = { 'Authorization': `Bearer ${auth.token}` };
-        const response = await client.get('/me', { headers });
-        console.log(response);
-        dispatch(setUser(response.user));
+        try {
+          const response = await client.get('/me', { headers });
+          if (response.status === 200) {
+            dispatch(loadUser(response.user));
+          }
+          else {
+            dispatch(setError(response.message));
+          }
+        } catch (error) {
+          dispatch(setError(error));
+        }
       }
     }
   }
 
   useEffect(() => {
 
-    loadUser();
+    loadUserDetails();
 
     return () => { }
 

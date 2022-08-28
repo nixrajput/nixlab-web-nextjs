@@ -298,6 +298,28 @@ h3 {
   margin: 2rem 0;
 }
 
+.app__error_box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: 40rem;
+  background-color: var(--errorColor);
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  overflow: hidden;
+  margin: 2rem auto;
+  transition: all 0.5s ease-in-out;
+
+  p {
+    color: var(--whiteColor);
+    text-transform: capitalize;
+  }
+}
+
 .app__form_control {
   position: relative;
   display: flex;

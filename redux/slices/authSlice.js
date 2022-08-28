@@ -6,6 +6,7 @@ const initialState = {
     expiresAt: '',
     status: 'idle',
     user: {},
+    error: '',
 };
 
 
@@ -14,31 +15,41 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         authenticating(state, action) {
-            if (state.status === 'idle') {
-                state.status = 'pending';
-            }
+            state.status = 'authenticating';
         },
         authenticated: (state, action) => {
-            const data = action.payload;
-            storage.set('auth', data);
-            state.token = action.payload.token;
-            state.expiresAt = action.payload.expiresAt;
-            state.status = 'authenticated';
+            if (state.status === 'authenticating') {
+                state.token = action.payload.token;
+                state.expiresAt = action.payload.expiresAt;
+                storage.set('auth', action.payload);
+                state.status = 'authenticated';
+            }
         },
         unauthenticated: (state, action) => {
             state.status = 'unauthenticated';
         },
-        setUser: (state, action) => {
-            state.status = 'userLoading';
-            const user = action.payload;
-            storage.set('user', user);
-            state.user = user;
-            state.status = 'userLoaded';
+        loadingUser: (state, action) => {
+            if (state.status === 'authenticated') {
+                state.status = 'loadingUser';
+            }
         },
-        removeUser: (state, action) => {
+        loadUser: (state, action) => {
+            if (state.status === 'loadingUser') {
+                state.error = '';
+                state.user = action.payload;
+                storage.set('user', action.payload);
+                state.status = 'userLoaded';
+            }
+        },
+        setError: (state, action) => {
+            state.error = action.payload;
+            state.status = 'error';
+        },
+        logout: (state, action) => {
             state.token = '';
             state.expiresAt = '';
             state.user = {};
+            state.error = '';
             storage.remove('auth');
             storage.remove('user');
             state.status = 'idle';
@@ -50,8 +61,10 @@ export const {
     authenticating,
     authenticated,
     unauthenticated,
-    setUser,
-    removeUser
+    loadingUser,
+    loadUser,
+    logout,
+    setError,
 } = authSlice.actions;
 
 export default authSlice;

@@ -20,6 +20,7 @@ export async function client(endpoint, method, { body, ...options } = {}) {
     try {
         const response = await window.fetch(`${baseUrl}${endpoint}`, config);
         data = await response.json();
+        data.status = response.status;
         if (response.ok) {
             return data;
         }
