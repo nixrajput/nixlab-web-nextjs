@@ -32,35 +32,46 @@ const Profile = () => {
                 PROFILE
             </div>
 
-            <div className="app__box_container">
-
-                <div className={styles.profile__image}>
-                    <Image src={auth.user?.avatar?.url || '/avatar.png'}
-                        alt={auth.user.fname}
-                        layout='fill'
-                        priority
-                        placeholder='/avatar.png'
-                    />
-                </div>
-
-                <div className={styles.profile__info}>
-
-                    <div className={styles.profile__info__name}>
-                        <h3>{`${auth.user.fname} ${auth.user.lname}`}</h3>
+            {
+                (auth.status === "loadingUser") ?
+                    <div className="app__box__form_container">
+                        <div className="app__loading_text">
+                            Please wait...
+                        </div>
                     </div>
+                    :
+                    <div className="app__box_container">
 
-                    <div className={styles.profile__info__uname}>
-                        <p>{auth.user.uname}</p>
+                        <div className={styles.profile__image}>
+                            <Image src={auth.user?.avatar?.url || '/avatar.png'}
+                                alt={auth.user.fname}
+                                layout='fill'
+                                priority
+                                placeholder='/avatar.png'
+                            />
+                        </div>
+
+                        <div className={styles.profile__info}>
+
+                            <div className={styles.profile__info__name}>
+                                <h3>{`${auth.user.fname} ${auth.user.lname}`}</h3>
+                            </div>
+
+                            <div className={styles.profile__info__uname}>
+                                <p>{auth.user.uname}</p>
+                            </div>
+
+                        </div>
+
+                        <button className={`app__text_btn ${styles.logout_btn}`}
+                            onClick={logoutUser}>
+                            Logout
+                        </button>
+
                     </div>
+            }
 
-                </div>
 
-                <button className={`app__text_btn ${styles.logout_btn}`}
-                    onClick={logoutUser}>
-                    Logout
-                </button>
-
-            </div>
 
 
         </div >

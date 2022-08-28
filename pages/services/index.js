@@ -5,16 +5,22 @@ import styles from '../../styles/services.module.scss';
 
 const ServiceList = [
     {
-        image: '/MobileDev.svg',
+        image: '/mobile.png',
         title: 'iOS & ANDROID APP DEVELOPMENT',
-        shortDescription: 'iOS & Android mobile app development - Flutter, React Native, Java, Kotlin, Objective-C',
+        shortDescription: 'Flutter, React Native, Java, Kotlin, Objective-C',
         description: 'iOS and Android app development is a key part of our business. We have a team of iOS and Android developers who are capable of building apps for any platform.',
     },
     {
-        image: '/WebDev.svg',
-        title: 'CUSTOM WEB DEVELOPMENT',
-        shortDescription: 'Frontend & Backend web development - React.js, NodeJS, Angular, Python',
-        description: 'From simple websites to complex web applications, we can build your web application from scratch.',
+        image: '/coding.png',
+        title: 'FRONTEND WEB DEVELOPMENT',
+        shortDescription: 'React.js, Next.js, Angular, Vue.js, HTML, CSS, JavaScript, Python, Node.js',
+        description: 'We have a team of frontend web developers who are capable of building websites for any platform.',
+    },
+    {
+        image: '/coding.png',
+        title: 'BACKEND WEB DEVELOPMENT',
+        shortDescription: 'Node.js, C++, Dart, Python, Java, PHP, Ruby, Go, C#',
+        description: 'We have a team of backend web developers who are capable of building websites for any platform.',
     },
 ];
 

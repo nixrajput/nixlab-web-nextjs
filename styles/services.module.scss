@@ -10,6 +10,7 @@
 
 .service__heading {
   position: relative;
+  text-align: center;
 
   @media screen and (min-width: 1600px) {
     width: 25%;
@@ -69,6 +70,7 @@
   margin: 0 2rem 3rem;
   padding: 0.5rem;
   transition: all 0.5s ease-in-out;
+  overflow: hidden;
 
   .service__image {
     position: relative;
@@ -83,10 +85,9 @@
 
   .service__content {
     margin-top: 0.5rem;
-    width: 100%;
     z-index: 11;
     font-size: 1rem;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.5s ease-in-out;
 
     .service__title {
       font-weight: 700;
@@ -106,10 +107,10 @@
     height: 20rem;
     margin-bottom: 3rem;
 
-    .service__content {
-      .service__description {
-        display: none;
-      }
+    .service__description {
+      z-index: -1;
+      opacity: 0;
+      visibility: hidden;
     }
   }
 
@@ -123,9 +124,12 @@
   &::before {
     content: "";
     position: absolute;
-    bottom: 100%;
+    overflow: hidden;
+
+    bottom: -100%;
     left: 0;
     right: 0;
+
     width: 100%;
     height: 100%;
     background-color: var(--primaryColor);
@@ -138,9 +142,6 @@
   &:hover {
     &::before {
       bottom: 0;
-      top: 0;
-      left: 0;
-      right: 0;
       z-index: 10;
       opacity: 1;
       visibility: visible;
@@ -155,13 +156,32 @@
       img {
         width: 8rem;
         height: 8rem;
+
+        @media screen and (min-width: 1600px) {
+          width: 6rem;
+          height: 6rem;
+        }
       }
     }
 
-    .service__content {
-      .service__title {
-        color: var(--whiteColor);
+    .service__title {
+      color: var(--whiteColor);
+      position: absolute;
+      font-weight: 900;
+      bottom: 25%;
+      left: 0;
+      right: 0;
+      text-align: center;
+
+      @media screen and (min-width: 1600px) {
+        bottom: 10%;
       }
+    }
+
+    .service__description {
+      z-index: -1;
+      opacity: 0;
+      visibility: hidden;
     }
   }
 }
