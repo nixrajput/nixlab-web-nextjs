@@ -28,10 +28,14 @@ const Profile = () => {
                 <title>{`${auth.user.fname} - Profile`}</title>
             </Head>
 
+            <div className="app__page_heading">
+                PROFILE
+            </div>
+
             <div className="app__box_container">
 
                 <div className={styles.profile__image}>
-                    <Image src={auth.user?.avatar?.url}
+                    <Image src={auth.user?.avatar?.url || '/avatar.png'}
                         alt={auth.user.fname}
                         layout='fill'
                         priority

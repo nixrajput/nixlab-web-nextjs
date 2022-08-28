@@ -29,6 +29,7 @@ const authSlice = createSlice({
             state.status = 'unauthenticated';
         },
         setUser: (state, action) => {
+            state.status = 'userLoading';
             const user = action.payload;
             storage.set('user', user);
             state.user = user;
@@ -45,5 +46,12 @@ const authSlice = createSlice({
     }
 });
 
-export const { authenticating, authenticated, unauthenticated, setUser, removeUser } = authSlice.actions;
+export const {
+    authenticating,
+    authenticated,
+    unauthenticated,
+    setUser,
+    removeUser
+} = authSlice.actions;
+
 export default authSlice;

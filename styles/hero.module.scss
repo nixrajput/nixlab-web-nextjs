@@ -43,10 +43,9 @@
   background: url("../public/wave.svg") repeat-x;
   position: absolute;
   top: -12rem;
-  width: 200rem;
+  width: 400rem;
   height: 12rem;
   animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-  transform: translate3d(0, 0, 0);
 
   &:nth-of-type(2) {
     top: -11rem;

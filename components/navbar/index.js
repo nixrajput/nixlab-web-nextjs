@@ -30,7 +30,7 @@ const Navbar = () => {
 
     useEffect(() => {
         window.addEventListener("scroll", function () {
-            if (window.scrollY > 80) {
+            if (window.scrollY > 40) {
                 setScolled(true);
             } else {
                 setScolled(false);

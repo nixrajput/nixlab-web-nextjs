@@ -22,9 +22,12 @@ const Hero = () => {
                 <h1>Welcome to NixLab Technologies</h1>
                 <p>We are a team of pioneer developers and designers developing and designing cross-platform applications, websites, and games.</p>
 
-                <Link href="/login">
-                    <div className="app__filled_btn">Join Us</div>
-                </Link>
+                {
+                    !auth.token &&
+                    <Link href="/login">
+                        <div className="app__filled_btn">Sign Up</div>
+                    </Link>
+                }
 
             </div>
         </div>

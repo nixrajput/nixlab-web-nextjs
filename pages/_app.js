@@ -21,7 +21,7 @@ function App({ Component, pageProps }) {
     }
     else {
       dispatch(authenticated(data));
-      if (auth.token) {
+      if (auth.status === 'authenticated' && auth.token) {
         const headers = { 'Authorization': `Bearer ${auth.token}` };
         const response = await client.get('/me', { headers });
         console.log(response);
@@ -38,16 +38,7 @@ function App({ Component, pageProps }) {
 
   }, [auth.token]);
 
-  if (auth.status === 'pending') {
-    return (
-      <>
-        Loading...
-      </>
-    );
-  }
-  else {
-    return <Component {...pageProps} />
-  }
+  return <Component {...pageProps} />
 
 }
 
