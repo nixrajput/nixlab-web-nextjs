@@ -18,9 +18,15 @@ const ServiceList = [
     },
     {
         image: '/coding.png',
-        title: 'BACKEND WEB DEVELOPMENT',
-        shortDescription: 'Node.js, C++, Dart, Python, Java, PHP, Ruby, Go, C#',
-        description: 'We have a team of backend web developers who are capable of building websites for any platform.',
+        title: 'BACKEND DEVELOPMENT',
+        shortDescription: 'Node.js, C++, Dart, Python, Java, PHP, Ruby, Go',
+        description: 'We have a team of backend developers who are capable of building websites for any platform.',
+    },
+    {
+        image: '/coding.png',
+        title: 'SOFTWARE DEVELOPMENT',
+        shortDescription: 'C++, Java, Python, Dart',
+        description: 'We have a team of software developers who are capable of building websites for any platform.',
     },
 ];
 
