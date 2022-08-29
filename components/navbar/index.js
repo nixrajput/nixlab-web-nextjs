@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import usePath from "../../hooks/usePath";
 import styles from "../../styles/navbar.module.scss";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 
 const menuItems = ["home", "services", "projects", "about", "contact"];
 
@@ -52,7 +53,15 @@ const Navbar = () => {
         >
             <div className={styles.app__navbar_logo}>
                 <Link href="/">
-                    <img src="/logo.png" alt="logo" />
+                    <Image
+                        src="/logo.png"
+                        alt="logo"
+                        layout='responsive'
+                        width={284}
+                        height={144}
+                        priority
+                        objectFit='cover'
+                    />
                 </Link>
             </div>
 

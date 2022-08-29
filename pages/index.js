@@ -22,4 +22,4 @@ const Home = () => {
 
 }
 
-export default AppWrap(Home, 'home');
+export default AppWrap(Home, 'home', 'app__wrapper_flex_start');

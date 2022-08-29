@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import React from 'react';
 import { useSelector } from "react-redux";
 import styles from '../../styles/hero.module.scss';
+import Image from 'next/image';
 
 const Hero = () => {
 
@@ -20,19 +20,20 @@ const Hero = () => {
                         (auth.status === 'userLoaded' && auth.user) &&
                         <h3>Hello 👋 {auth.user.fname}</h3>
                     }
-                    <h1>Welcome to NixLab Technologies</h1>
-                    <p>We are a team of pioneer developers and designers developing and designing cross-platform applications, websites, and games.</p>
-
-                    {
-                        !auth.token &&
-                        <Link href="/register">
-                            <div className="app__filled_btn">Sign Up</div>
-                        </Link>
-                    }
+                    <h1>Welcome to <span>NixLab Technologies</span></h1>
+                    <p>Code to innovate</p>
                 </div>
 
                 <div className={styles.hero__image}>
-                    <img src="/hero.png" alt="hero" />
+                    <Image src="/hero.png"
+                        alt="hero"
+                        layout='responsive'
+                        width={400}
+                        height={400}
+                        priority
+                        sizes="(max-width: 992px) 300px, 400px"
+                        objectFit='cover'
+                    />
                 </div>
             </div>
 

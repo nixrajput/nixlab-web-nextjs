@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
-const nextConfig = {
+module.exports = {
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
@@ -9,7 +9,6 @@ const nextConfig = {
   },
   images: {
     domains: ['res.cloudinary.com'],
-  }
-}
-
-module.exports = nextConfig;
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768, 1024, 1536, 2048],
+  },
+};
