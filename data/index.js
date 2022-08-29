@@ -29,22 +29,22 @@ Data.services = [
 
 Data.projects = [
     {
-        image: '/mobdev_cover.png',
-        title: 'Rippl!',
+        image: '/mobdev.svg',
+        title: 'Rippl App',
         type: 'Mobile App',
         shortDescription: 'A social media app',
-        description: 'A social media app using Flutter, Dart, GetX, and REST API that allows users to share their photos and videos.',
+        description: "Rippl is a social media app for sharing and connecting with people around the world. It is a mobile app that allows users to share their photos and videos with other users.",
         technologies: ['Flutter', 'Node.js', 'Dart', 'GetX', 'Express'],
         githubLink: 'https://github.com/nixrajput/social-media-app-flutter',
         demoLink: 'https://github.com/nixrajput/social-media-app-flutter/releases',
         status: 'completed',
     },
     {
-        image: '/webdev_cover.png',
+        image: '/webdev.svg',
         title: 'NixLab Shop',
         type: 'Web App',
-        shortDescription: 'An E-commerce Web App',
-        description: 'An E-commerce Web App developed using MERN stack where user can buy and checkout product with ease and add their review and rating for the products.',
+        shortDescription: 'An e-commerce web app',
+        description: 'NixLab Shop is a e-commerce web app that allows users to do shopping online. It is a web app that allows users to check out their cart and checkout their orders with ease.',
         technologies: ['React.js', 'HTML', 'CSS', 'Node.js', 'Express', 'Mongo'],
         githubLink: 'https://github.com/nixrajput/ecommerce-mern',
         demoLink: 'https://nixlab-shop.herokuapp.com',

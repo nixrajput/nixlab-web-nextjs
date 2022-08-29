@@ -25,14 +25,14 @@
 
   h3 {
     margin-bottom: 1rem;
-    font-weight: 700;
+    font-weight: 400;
   }
 
   h1 {
     margin-bottom: 1rem;
-    font-weight: 900;
+    font-weight: 700;
     text-transform: uppercase;
-    word-spacing: 0.5rem;
+    word-spacing: 0.25rem;
 
     span {
       color: var(--primaryColor);
@@ -41,7 +41,7 @@
 
   p {
     margin-bottom: 2rem;
-    font-weight: 600;
+    font-weight: 400;
     font-style: oblique;
     text-transform: capitalize;
     color: var(--grayColor);

@@ -13,6 +13,9 @@ const Home = () => {
         <meta name="google-site-verification" content="j7ODdQNwjVQNYmNEX_5boI9PagNu3Uoiu2EL-yVpBI0" />
         <link rel="icon" href="/favicon.ico" />
         <link rel='apple-touch-icon' href='/logo_small.png' />
+
+        <meta name="robots" content="index,follow" />
+        <link rel="canonical" href="https://nixlab.co.in" />
       </Head>
 
       <Hero />

@@ -95,8 +95,8 @@
     transition: all 0.5s ease-in-out;
 
     .service__title {
-      font-weight: 700;
-      word-spacing: 0.3rem;
+      font-weight: 400;
+      word-spacing: 0.15rem;
       color: var(--primaryColor);
       margin-bottom: 0.25rem;
     }
@@ -182,10 +182,11 @@
     .service__title {
       color: var(--whiteColor);
       position: absolute;
-      font-weight: 900;
-      bottom: 25%;
-      left: 0;
-      right: 0;
+      font-weight: 700;
+      font-size: 1.2rem;
+      bottom: 20%;
+      left: 1rem;
+      right: 1rem;
       text-align: center;
 
       @media screen and (min-width: 1600px) {

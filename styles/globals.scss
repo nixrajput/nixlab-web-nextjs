@@ -1,8 +1,47 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../assets/fonts/Proxima-Nova-Thin.otf");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../assets/fonts/ProximaNova-Regular.otf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../assets/fonts/Proxima-Nova-Bold.otf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../assets/fonts/Proxima-Nova-Bold.otf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../assets/fonts/Proxima-Nova-Extrabold.otf");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("../assets/fonts/Proxima-Nova-Black.otf");
+  font-weight: 900;
+  font-style: normal;
+}
 
 :root {
-  --lato: "Lato", sans-serif;
-  --poppins: "Poppins", sans-serif;
+  --primaryFontFace: "Proxima Nova", sans-serif;
 
   --successColor: #4caf50;
   --errorColor: #f44336;
@@ -21,8 +60,9 @@
 
   --primaryTextColor: #dddddd;
   --primaryColor: #e3096f;
-  --secondaryColor: #2878f0;
   --primaryLightColor: #dd5896;
+
+  --linkColor: #1056be;
 
   --primaryGradient: linear-gradient(to right, #1c1d31, #203246);
   --boxGradient: linear-gradient(120deg, var(--darkDialogColor), #203246);
@@ -36,10 +76,12 @@
 }
 
 body {
-  font-family: var(--lato), -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--primaryFontFace), -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
+  font-weight: 400;
   background: var(--darkBgColor);
   color: var(--primaryTextColor);
   overflow-x: hidden;
@@ -79,7 +121,7 @@ iframe {
 }
 
 .app {
-  font-family: var(--lato);
+  font-family: var(--primaryFontFace);
 }
 
 .spacer {
@@ -249,7 +291,7 @@ h3 {
     position: relative;
     font-size: 2rem;
     font-weight: 700;
-    text-transform: inherit;
+    text-transform: capitalize;
     margin-bottom: 2rem;
   }
 
@@ -279,7 +321,7 @@ h3 {
     position: relative;
     font-size: 2rem;
     font-weight: 700;
-    text-transform: inherit;
+    text-transform: capitalize;
     margin-bottom: 2rem;
   }
 
@@ -364,6 +406,8 @@ h3 {
     border: 0.1rem solid var(--darkGrayColor);
     border-radius: 0.5rem;
     font-size: 1rem;
+    font-family: var(--primaryFontFace);
+    font-weight: 400;
 
     padding: 0.5rem 1rem;
     color: var(--primaryTextColor);
@@ -396,7 +440,8 @@ h3 {
   padding: 0.5rem 2rem;
   font-size: 1rem;
   text-transform: uppercase;
-  font-weight: 500;
+  font-family: var(--primaryFontFace);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 
@@ -433,7 +478,8 @@ h3 {
   padding: 0.5rem 2rem;
   font-size: 1rem;
   text-transform: uppercase;
-  font-weight: 500;
+  font-family: var(--primaryFontFace);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 
@@ -468,7 +514,8 @@ h3 {
   border: none;
   font-size: 1.15rem;
   text-transform: capitalize;
-  font-weight: 500;
+  font-family: var(--primaryFontFace);
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
 
