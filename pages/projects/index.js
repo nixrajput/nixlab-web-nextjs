@@ -2,6 +2,7 @@ import AppWrap from '../../components/app-wrap';
 import Head from 'next/head';
 import styles from '../../styles/projects.module.scss';
 import Data from '../../data';
+import Image from 'next/image';
 
 const Projects = () => {
     return (
@@ -22,7 +23,16 @@ const Projects = () => {
                             <div key={index} className={styles.project__item}>
 
                                 <div className={styles.project__image}>
-                                    <img src={project.image} alt={project.title} />
+                                    <div className={styles.image}>
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            layout='responsive'
+                                            width={400}
+                                            height={400}
+                                            objectFit='cover'
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className={styles.project__details}>
@@ -39,6 +49,10 @@ const Projects = () => {
 
                                 <div className={styles.project__short_description}>
                                     {project.shortDescription}
+                                </div>
+
+                                <div className={styles.project__description}>
+                                    {project.description}
                                 </div>
 
                             </div>

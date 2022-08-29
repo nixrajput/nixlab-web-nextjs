@@ -29,7 +29,7 @@ Data.services = [
 
 Data.projects = [
     {
-        image: '/bus.svg',
+        image: '/mobdev_cover.png',
         title: 'Rippl!',
         type: 'Mobile App',
         shortDescription: 'A social media app',
@@ -40,7 +40,7 @@ Data.projects = [
         status: 'completed',
     },
     {
-        image: '/ai.svg',
+        image: '/webdev_cover.png',
         title: 'NixLab Shop',
         type: 'Web App',
         shortDescription: 'An E-commerce Web App',
