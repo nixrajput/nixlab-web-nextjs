@@ -25,7 +25,7 @@ const Hero = () => {
 
                     {
                         !auth.token &&
-                        <Link href="/login">
+                        <Link href="/register">
                             <div className="app__filled_btn">Sign Up</div>
                         </Link>
                     }

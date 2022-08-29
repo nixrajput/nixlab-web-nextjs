@@ -53,7 +53,24 @@ const authSlice = createSlice({
             storage.remove('auth');
             storage.remove('user');
             state.status = 'idle';
-        }
+        },
+        registering: (state, action) => {
+            state.status = 'registering';
+        },
+        registered: (state, action) => {
+            if (state.status === 'registering') {
+                state.status = 'registered';
+            }
+        },
+        sendingEmail: (state, action) => {
+            state.status = 'sending';
+        },
+        pending: (state, action) => {
+            state.status = 'pending';
+        },
+        success: (state, action) => {
+            state.status = 'success';
+        },
     }
 });
 
@@ -65,6 +82,11 @@ export const {
     loadUser,
     logout,
     setError,
+    registering,
+    registered,
+    sendingEmail,
+    pending,
+    success,
 } = authSlice.actions;
 
 export default authSlice;

@@ -84,7 +84,7 @@ const Navbar = () => {
                         ) : (
                             <Link href="/login">
                                 <div
-                                    className={`app__outlined_btn ${styles.navbar__login_btn}`}
+                                    className={`app__filled_btn ${styles.navbar__login_btn}`}
                                 >
                                     Login
                                 </div>
@@ -137,7 +137,7 @@ const Navbar = () => {
 
                     {!auth.token && (
                         <Link href="/login">
-                            <div className={`app__outlined_btn ${styles.navbar__login_btn}`}>
+                            <div className={`app__filled_btn ${styles.navbar__login_btn}`}>
                                 Login
                             </div>
                         </Link>

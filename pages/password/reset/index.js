@@ -1,59 +1,38 @@
 import Head from "next/head";
-import AppWrap from "../../components/app-wrap";
+import AppWrap from "../../../components/app-wrap";
 import { useSelector, useDispatch } from "react-redux";
-import { client } from "../../api/client";
+import { client } from "../../../api/client";
 import Link from "next/link";
 import { useState, useEffect } from 'react';
-import {
-    authenticating, authenticated,
-    loadUser, loadingUser, unauthenticated,
-    setError
-} from '../../redux/slices/authSlice';
 import { useRouter } from "next/router";
+import {
+    pending, success, setError
+} from "../../../redux/slices/authSlice";
 
-const Login = () => {
+const ResetPassword = () => {
 
     const auth = useSelector((state) => state.auth);
     const router = useRouter();
     const dispatch = useDispatch();
 
-    const [emailUsername, setEmailUsername] = useState("");
+    const [otp, setOtp] = useState("");
     const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
 
-    const onClickLoginEvent = (e) => async (dispatch) => {
+    const onClickBtnEvent = (e) => async (dispatch) => {
         e.preventDefault();
         const body = {
-            "emailUname": emailUsername.trimEnd(),
-            "password": password,
+            "otp": otp.trim(),
+            "newPassword": password.trim(),
+            "confirmPassword": confirmPassword.trim(),
         };
 
-        dispatch(authenticating());
+        dispatch(pending());
         try {
-            const response = await client.post('/login', body);
+            const response = await client.post('/reset-password', body);
             if (response.status === 200) {
-                const payload = {
-                    token: response.token,
-                    expiresAt: response.expiresAt,
-                }
-                dispatch(authenticated(payload));
-                if (auth.token) {
-                    dispatch(loadingUser());
-                    const headers = { 'Authorization': `Bearer ${auth.token}` };
-                    try {
-                        const response = await client.get('/me', { headers });
-                        if (response.status === 200) {
-                            dispatch(loadUser(response.user));
-                            const returnUrl = router.query.returnUrl || '/';
-                            router.replace(returnUrl);
-                        }
-                        else {
-                            console.log(response.message);
-                            dispatch(setError(response.message));
-                        }
-                    } catch (error) {
-                        dispatch(setError(error));
-                    }
-                }
+                dispatch(success());
+                router.replace('/login');
             }
             else {
                 dispatch(setError(response.message));
@@ -80,7 +59,7 @@ const Login = () => {
     return (
         <>
             <Head>
-                <title>Login - NixLab Technologies</title>
+                <title>Forgot Password - NixLab Technologies</title>
             </Head>
 
             {
@@ -91,7 +70,7 @@ const Login = () => {
             }
 
             {
-                (auth.status === "authenticating" || auth.status === "loadingUser") ?
+                auth.status === "pending" ?
                     <div className="app__box__form_container">
                         <div className="app__loading_text">
                             Please wait...
@@ -99,31 +78,52 @@ const Login = () => {
                     </div>
                     :
                     <form className="app__box__form_container"
-                        onSubmit={(e) => dispatch(onClickLoginEvent(e))}>
+                        onSubmit={(e) => dispatch(onClickBtnEvent(e))}>
 
-                        <p className="title">Welcome, Login to continue</p>
+                        <p className="title">Reset your password</p>
+
+                        <p style={{
+                            marginBottom: "0.5rem",
+                            fontSize: "0.95rem",
+                        }}>
+                            An OTP has been sent to your email address,
+                            please enter it and reset your password
+                        </p>
 
                         <div className="app__form_control">
                             <input
                                 type="text"
-                                placeholder="Email or Username"
-                                name="emailUsername"
+                                placeholder="OTP"
+                                name="email"
                                 required
                                 disabled={auth.status === 'pending'}
-                                value={emailUsername}
-                                onChange={(e) => setEmailUsername(e.target.value)}
+                                value={otp}
+                                maxLength={6}
+                                onChange={(e) => setOtp(e.target.value)}
                             />
                         </div>
 
                         <div className="app__form_control">
                             <input
                                 type="password"
-                                placeholder="Password"
-                                name="password"
+                                placeholder="New Password"
+                                name="newPassword"
                                 required
                                 disabled={auth.status === 'pending'}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                            />
+                        </div>
+
+                        <div className="app__form_control">
+                            <input
+                                type="password"
+                                placeholder="Confirm Password"
+                                name="confirmPassword"
+                                required
+                                disabled={auth.status === 'pending'}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                             />
                         </div>
 
@@ -134,8 +134,8 @@ const Login = () => {
                             alignItems: 'center',
                             justifyContent: 'flex-start'
                         }}>
-                            <Link href="/password/forgot">
-                                <div className="app__text_btn">Forgot Password?</div>
+                            <Link href="/login">
+                                <div className="app__text_btn">Login to account</div>
                             </Link>
                         </div>
 
@@ -145,7 +145,7 @@ const Login = () => {
                         }}>
                             <input
                                 type="submit"
-                                value="Login"
+                                value="reset password"
                                 disabled={auth.status === 'pending'}
                                 className="app__filled_btn app__form_control"
                             />
@@ -153,10 +153,10 @@ const Login = () => {
 
                         <div className="app__form_control">
                             <span>
-                                Don&apos;t have an account?
+                                Don&apos;t have an OTP?
                             </span>
-                            <Link href="/register">
-                                <div className="app__text_btn">Sign up</div>
+                            <Link href="/password/forgot">
+                                <div className="app__text_btn">Get OTP</div>
                             </Link>
                         </div>
                     </form>
@@ -166,4 +166,4 @@ const Login = () => {
     )
 }
 
-export default AppWrap(Login, 'login');
+export default AppWrap(ResetPassword, 'resetPassword');

@@ -1,12 +1,6 @@
 .app__navbar {
   width: 100%;
-
-  background: var(--darkBgColor);
-  background: linear-gradient(
-    90deg,
-    var(--darkBgColor) 0%,
-    var(--darkDialogColor) 100%
-  );
+  background-color: transparent;
   position: fixed;
   z-index: 999;
 
@@ -27,7 +21,7 @@
 }
 
 .scrolled {
-  background: var(--darkDialogColor);
+  background-color: var(--darkDialogColor);
   box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.15);
 }
 
@@ -176,14 +170,11 @@
 
 .app__navbar_mobile_menu {
   z-index: 9999;
+
   .app__navbar_menu_items {
     position: absolute;
     background: var(--darkBgColor);
-    background: linear-gradient(
-      90deg,
-      var(--darkBgColor) 0%,
-      var(--darkDialogColor) 100%
-    );
+    background: var(--primaryGradient);
     top: calc(100% + 6rem);
     right: 0;
     left: 0;
