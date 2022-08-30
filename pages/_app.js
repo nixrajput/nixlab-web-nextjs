@@ -16,39 +16,40 @@ function App({ Component, pageProps }) {
 
   const dispatch = useDispatch();
 
-  const loadUserDetails = async () => {
-    dispatch(authenticating());
-    const data = storage.get('auth');
-    if (!data) {
-      dispatch(unauthenticated());
-    }
-    else {
-      dispatch(authenticated(data));
-      if (auth.token) {
-        dispatch(loadingUser());
-        const headers = { 'Authorization': `Bearer ${auth.token}` };
-        try {
-          const response = await client.get('/me', { headers });
-          if (response.status === 200) {
-            dispatch(loadUser(response.user));
+  useEffect(() => {
+
+    const loadUserDetails = async () => {
+      console.log('loading user details');
+      dispatch(authenticating());
+      const data = storage.get('auth');
+      if (!data) {
+        dispatch(unauthenticated());
+      }
+      else {
+        dispatch(authenticated(data));
+        if (auth.token) {
+          dispatch(loadingUser());
+          const headers = { 'Authorization': `Bearer ${auth.token}` };
+          try {
+            const response = await client.get('/me', { headers });
+            if (response.status === 200) {
+              dispatch(loadUser(response.user));
+            }
+            else {
+              dispatch(setError(response.message));
+            }
+          } catch (error) {
+            dispatch(setError(error));
           }
-          else {
-            dispatch(setError(response.message));
-          }
-        } catch (error) {
-          dispatch(setError(error));
         }
       }
     }
-  }
-
-  useEffect(() => {
 
     loadUserDetails();
 
     return () => { }
 
-  }, [auth.token]);
+  }, [auth.token, dispatch]);
 
   return <Component {...pageProps} />
 

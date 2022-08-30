@@ -52,4 +52,24 @@ Data.projects = [
     },
 ];
 
+Data.about = {};
+
+Data.about.description = "NixLab Technologies is a software development company based in the India. We are a team of passionate developers who are passionate about building high quality software. We are always looking for talented and creative people to join our team.";
+
+Data.about.services = [
+    'Mobile application development',
+    'Web application development',
+    'Desktop application development',
+    'Backend development',
+];
+
+Data.about.mission = [
+    'We understand needs and requirements of our customer and make technology to resolve the needs.',
+    'We believe to explore new opportunities that maximize the business value, consistent growth, and sustainability.',
+    'Empower our clients to respond faster and more intuitively to changing market dynamics.',
+    'Enable them to become more agile and competitive through leveraging new technologies.',
+    'Help our clients to bring great products to market in less time and at less cost.',
+    'Collaborate with our clients in their continued success.'
+];
+
 export default Data;

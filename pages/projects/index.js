@@ -3,7 +3,6 @@ import Head from 'next/head';
 import styles from '../../styles/projects.module.scss';
 import Data from '../../data';
 import Image from 'next/image';
-import { BsLink, BsEye } from 'react-icons/bs';
 
 const Projects = () => {
     return (

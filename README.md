@@ -2,6 +2,8 @@
 
 NixLab Technologies's website using [Next.js](https://nextjs.org/), REST API, Redux, and SCSS.
 
+NixLab Technologies is a software development company based in the India. We are a team of passionate developers who are passionate about building high quality software. We are always looking for talented and creative people to join our team.
+
 ## Getting Started
 
 First, run the development server:
