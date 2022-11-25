@@ -7,7 +7,40 @@ import styles from "../../styles/navbar.module.scss";
 import { useSelector } from "react-redux";
 import Image from "next/image";
 
-const menuItems = ["home", "services", "projects", "about", "contact"];
+const menuItems = [
+    {
+        title: "Home",
+        path: "/",
+    },
+    {
+        title: "Services",
+        path: "/services",
+    },
+    {
+        title: "Projects",
+        path: "/projects",
+    },
+    {
+        title: "About",
+        path: "/about",
+    },
+    {
+        title: "Privacy Policy",
+        path: "/privacy-policy",
+    },
+    {
+        title: "Terms of Service",
+        path: "/terms-of-service",
+    },
+    {
+        title: "Community Guidelines",
+        path: "/community-guidelines",
+    },
+    {
+        title: "Contact",
+        path: "/contact",
+    },
+];
 
 const Navbar = () => {
     const auth = useSelector((state) => state.auth);
@@ -70,15 +103,15 @@ const Navbar = () => {
                     <ul className={styles.app__navbar_menu}>
                         {menuItems.map((item) => (
                             <li
-                                key={`link-${item}`}
+                                key={`link-${item.title}`}
                                 className={
-                                    path == `/${item}`
+                                    path == item.path
                                         ? `app__flex ${styles.active}`
                                         : "app__flex"
                                 }
                             >
                                 <div />
-                                <Link href={handleNavClick(item)}>{item}</Link>
+                                <Link href={handleNavClick(item.path)}>{item.title}</Link>
                             </li>
                         ))}
                     </ul>
@@ -135,11 +168,11 @@ const Navbar = () => {
                     <ul>
                         {menuItems.map((item) => (
                             <li
-                                key={item}
-                                className={path == `/${item}` ? `${styles.active}` : ""}
+                                key={item.title}
+                                className={path == item.path ? `${styles.active}` : ""}
                                 onClick={() => setToggle(false)}
                             >
-                                <Link href={handleNavClick(item)}>{item}</Link>
+                                <Link href={handleNavClick(item.path)}>{item.title}</Link>
                             </li>
                         ))}
                     </ul>
