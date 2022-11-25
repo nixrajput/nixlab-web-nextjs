@@ -386,7 +386,7 @@ h3 {
   width: 100%;
   max-width: 40rem;
   height: 3.75rem;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
 
   span {
     margin-right: 0.5rem;
@@ -418,6 +418,12 @@ h3 {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
+  }
+
+  .password_toggle_btn {
+    position: absolute;
+    right: 0.75rem;
+    cursor: pointer;
   }
 }
 

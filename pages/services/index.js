@@ -1,8 +1,8 @@
 import React from 'react';
-import AppWrap from '../../components/app-wrap';
 import Head from 'next/head';
 import styles from '../../styles/services.module.scss';
 import Data from '../../data';
+import AppWrap from '../../components/AppWrap';
 
 const Services = () => {
     return (

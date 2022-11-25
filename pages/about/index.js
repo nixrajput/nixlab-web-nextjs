@@ -1,9 +1,9 @@
-import AppWrap from '../../components/app-wrap';
 import Head from 'next/head';
 import styles from '../../styles/about.module.scss';
 import { BsCheckCircleFill } from 'react-icons/bs';
 import Image from 'next/image';
 import Data from '../../data';
+import AppWrap from '../../components/AppWrap';
 
 const About = () => {
     return (

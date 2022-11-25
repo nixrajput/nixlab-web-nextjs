@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Hero from '../components/hero';
-import AppWrap from '../components/app-wrap';
+import AppWrap from '../components/AppWrap';
+import AppHero from '../components/AppHero';
 
 const Home = () => {
 
@@ -18,7 +18,7 @@ const Home = () => {
         <link rel="canonical" href="https://nixlab.co.in" />
       </Head>
 
-      <Hero />
+      <AppHero />
 
     </div>
   );

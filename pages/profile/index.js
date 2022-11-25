@@ -1,11 +1,11 @@
 import { } from 'react';
 import Head from 'next/head';
-import AppWrap from '../../components/app-wrap';
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, authenticating } from "../../redux/slices/authSlice";
 import Image from 'next/image';
 import styles from '../../styles/profile.module.scss';
+import AppWrap from '../../components/AppWrap';
 
 const Profile = () => {
 

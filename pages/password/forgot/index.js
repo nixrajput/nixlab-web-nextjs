@@ -1,13 +1,12 @@
 import Head from "next/head";
-import AppWrap from "../../../components/app-wrap";
 import { useSelector, useDispatch } from "react-redux";
-import { client } from "../../../api/client";
 import Link from "next/link";
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import {
     sendingEmail, success, setError
 } from "../../../redux/slices/authSlice";
+import AppWrap from '../../components/AppWrap';
 
 const ForgotPassword = () => {
 

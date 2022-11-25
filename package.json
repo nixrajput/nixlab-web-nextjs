@@ -1,6 +1,9 @@
 {
   "name": "nixlab-web",
-  "version": "0.1.0",
+  "description": "The Nixlab Web Application developed with Next.js and Redux.",
+  "version": "1.0.0",
+  "author": "Nikhil Rajput",
+  "license": "GPL-3.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,18 +12,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.5",
-    "next": "12.2.5",
-    "next-redux-wrapper": "^7.0.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.15",
+    "@mui/material": "^5.10.15",
+    "@reduxjs/toolkit": "^1.9.0",
+    "next": "13.0.5",
+    "next-redux-wrapper": "^8.0.0",
+    "notistack": "^2.0.8",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0",
-    "react-redux": "^8.0.2",
-    "typescript": "^4.8.2"
+    "react-icons": "^4.6.0",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
-    "eslint": "8.23.0",
-    "eslint-config-next": "12.2.5",
-    "sass": "^1.54.5"
+    "@babel/core": "^7.20.2",
+    "eslint": "8.28.0",
+    "eslint-config-next": "13.0.5",
+    "sass": "^1.56.1",
+    "typescript": "^4.9.3"
   }
 }

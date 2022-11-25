@@ -1,57 +1,85 @@
 import '../styles/globals.scss';
 import { wrapper } from '../redux/store';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from "@mui/material/IconButton";
+import { ColorModeContext, useMode } from '../theme/theme';
+import { SnackbarProvider } from 'notistack';
 import storage from '../utils/storage';
-import { client } from '../api/client';
 import {
-  authenticating, authenticated,
-  loadUser, loadingUser, unauthenticated,
-  setError
-} from '../redux/slices/authSlice';
+  loadAuthDetailsAction,
+  loadProfileDetailsAction,
+  getProfileDetailsAction,
+} from '../redux/actions';
 
 function App({ Component, pageProps }) {
+  const [theme, colorMode] = useMode();
 
   const auth = useSelector((state) => state.auth);
-
+  const profileDetails = useSelector((state) => state.profileDetails);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
+  const snackbarRef = useRef(null)
 
-  //   const loadUserDetails = async () => {
-  //     console.log('loading user details');
-  //     dispatch(authenticating());
-  //     const data = storage.get('auth');
-  //     if (!data) {
-  //       dispatch(unauthenticated());
-  //     }
-  //     else {
-  //       dispatch(authenticated(data));
-  //       if (auth.token) {
-  //         dispatch(loadingUser());
-  //         const headers = { 'Authorization': `Bearer ${auth.token}` };
-  //         try {
-  //           const response = await client.get('/me', { headers });
-  //           if (response.status === 200) {
-  //             dispatch(loadUser(response.user));
-  //           }
-  //           else {
-  //             dispatch(setError(response.message));
-  //           }
-  //         } catch (error) {
-  //           dispatch(setError(error));
-  //         }
-  //       }
-  //     }
-  //   }
+  useEffect(() => {
+    const loadUserDetails = async () => {
+      if (auth.status === 'idle' || auth.status === 'failed') {
+        const loadAuthDetailsPromise = loadAuthDetailsAction(dispatch);
+        await loadAuthDetailsPromise;
+      }
 
-  //   loadUserDetails();
+      if (auth.token && auth.status === 'authenticated') {
+        if (profileDetails.status === 'idle' || profileDetails.status === 'failed') {
+          const data = storage.get('user');
 
-  //   return () => { }
+          if (data) {
+            const loadProfileDetailsPromise = loadProfileDetailsAction(dispatch);
+            await loadProfileDetailsPromise;
+          }
+          else {
+            const getProfileDetailsPromise = getProfileDetailsAction(dispatch, auth.token);
+            await getProfileDetailsPromise;
+          }
+        }
+      }
+    }
 
-  // }, [auth.token, dispatch]);
+    loadUserDetails();
 
-  return <Component {...pageProps} />
+    return () => { }
+
+  }, [auth.token, auth.status, dispatch, profileDetails.status]);
+
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SnackbarProvider
+          ref={snackbarRef}
+          maxSnack={3}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          action={(key) => (
+            <IconButton
+              onClick={() => snackbarRef.current.closeSnackbar(key)}
+              color="inherit"
+              size="small"
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+          )}
+        >
+          <Component {...pageProps} />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
 
 }
 

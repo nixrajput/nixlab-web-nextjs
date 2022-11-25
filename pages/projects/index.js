@@ -1,8 +1,8 @@
-import AppWrap from '../../components/app-wrap';
 import Head from 'next/head';
 import styles from '../../styles/projects.module.scss';
 import Data from '../../data';
 import Image from 'next/image';
+import AppWrap from '../../components/AppWrap';
 
 const Projects = () => {
     return (

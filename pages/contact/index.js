@@ -1,7 +1,7 @@
-import AppWrap from '../../components/app-wrap';
 import Head from 'next/head';
 import styles from '../../styles/contact.module.scss';
 import { HiMail } from 'react-icons/hi';
+import AppWrap from '../../components/AppWrap';
 
 const Contact = () => {
     return (

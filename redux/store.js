@@ -1,12 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import authSlice from "./slices/authSlice";
+import rootReducer from "./rootReducer";
 
 const makeStore = () => {
     return configureStore({
-        reducer: {
-            [authSlice.name]: authSlice.reducer,
-        },
+        reducer: rootReducer,
         devTools: process.env.NODE_ENV !== "production",
     });
 }

@@ -1,7 +1,7 @@
-import AppWrap from '../../components/app-wrap';
 import Head from 'next/head';
 import styles from '../../styles/privacy.module.scss';
 import Link from 'next/link';
+import AppWrap from '../../components/AppWrap';
 
 const TermsOfService = () => {
     return (
