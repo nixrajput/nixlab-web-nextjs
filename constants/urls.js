@@ -5,6 +5,7 @@ ApiUrls.devBaseUrl = 'http://localhost:4000/api/v1';
 
 ApiUrls.loginEndpoint = '/login';
 ApiUrls.logoutEndpoint = '/logout';
+ApiUrls.registerEndpoint = '/register';
 ApiUrls.forgotPasswordEndpoint = '/forgot-password';
 ApiUrls.resetPasswordEndpoint = '/reset-password';
 ApiUrls.changePasswordEndpoint = '/change-password';

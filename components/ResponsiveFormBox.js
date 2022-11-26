@@ -26,10 +26,10 @@ const ResponsiveFormBox = ({ children, onSubmit, ...props }) => {
                 lg: colors.dialog,
             }}
             padding={{
-                xs: '20px',
-                sm: '20px 24px',
-                md: '20px 24px',
-                lg: "20px 24px",
+                xs: '1.5rem 1rem',
+                sm: '1.5rem 1.5rem',
+                md: '1.5rem 1.5rem',
+                lg: "1.5rem 2rem",
             }}
             overflow="hidden"
             borderRadius="0.5rem"

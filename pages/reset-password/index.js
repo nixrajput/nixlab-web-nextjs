@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Box, useTheme } from "@mui/material";
@@ -10,18 +10,16 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useSnackbar } from 'notistack';
 import AppWrap from "../../components/AppWrap";
-import { tokens } from '../../theme/theme';
-import ResponsiveFormBox from "../../components/ResponsiveFormBox";
 import ExpandedBox from "../../components/ExpandedBox";
+import ResponsiveFormBox from "../../components/ResponsiveFormBox";
 import InputBox from "../../components/InputBox";
+import { tokens } from '../../theme/theme';
 import {
-    loginAction,
-    getProfileDetailsAction,
+    resetPasswordAction,
     clearAuthErrorAction,
-    clearProfileErrorAction,
 } from '../../redux/actions';
 
-const Login = () => {
+const ResetPassword = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -30,10 +28,11 @@ const Login = () => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const [emailUsername, setEmailUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = useState(false);
+    const [otp, setOtp] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -45,19 +44,16 @@ const Login = () => {
         setOpen(true);
     };
 
-    const onClickLoginEvent = async (e) => {
+    const onClickResetPasswordEvent = async (e) => {
         e.preventDefault();
 
         openBackdrop();
 
-        await loginAction(dispatch, emailUsername.trim(), password.trim());
+        await resetPasswordAction(dispatch, otp.trim(), password.trim(), confirmPassword.trim());
 
-        if (auth.token && auth.status === 'authenticated') {
-            await getProfileDetailsAction(dispatch, auth.token);
-            if (profileDetails.status === 'success' && profileDetails.user) {
-                const returnUrl = location.state?.from?.pathname || '/';
-                router.replace(returnUrl);
-            }
+        if (auth.status === 'resetPassword') {
+            const returnUrl = location.state?.from?.pathname || '/login';
+            router.replace(returnUrl);
         }
         closeBackdrop();
     }
@@ -70,7 +66,7 @@ const Login = () => {
             router.replace(returnUrl);
         }
 
-        if (auth.status === 'authenticating' || profileDetails.status === 'loading') {
+        if (auth.status === 'authenticating' || auth.status === 'resettingPassword') {
             openBackdrop();
         }
         else {
@@ -82,24 +78,18 @@ const Login = () => {
             clearAuthErrorAction(dispatch);
         }
 
-        if (profileDetails.status === 'error') {
-            enqueueSnackbar(profileDetails.error, { variant: 'error' });
-            clearProfileErrorAction(dispatch);
-        }
-
         return () => { }
 
     }, [
         auth.token, router, auth.status, profileDetails.status,
-        profileDetails.user, enqueueSnackbar, auth.error,
-        profileDetails.error, dispatch
+        profileDetails.user, enqueueSnackbar, auth.error, dispatch
     ]);
 
 
     return (
         <ExpandedBox>
             <Head>
-                <title>Login - NixLab Technologies</title>
+                <title>Reset Password - NixLab Technologies</title>
             </Head>
 
             <Backdrop
@@ -109,47 +99,73 @@ const Login = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <ResponsiveFormBox onSubmit={(e) => onClickLoginEvent(e)}>
-                <p style={{
-                    fontSize: "2rem",
-                    fontWeight: 700,
-                    textTransform: "capitalize",
-                    marginBottom: "2rem",
-                    color: colors.primary[100]
-                }}
+            <ResponsiveFormBox onSubmit={(e) => onClickResetPasswordEvent(e)}>
+                <p
+                    style={{
+                        fontSize: "2rem",
+                        fontWeight: 700,
+                        textTransform: "capitalize",
+                        marginBottom: "1rem",
+                        color: colors.primary[100]
+                    }}
                 >
-                    Welcome, Login to continue
+                    Reset your password
+                </p>
+
+                <p style={{
+                    fontSize: "0.95rem",
+                    marginBottom: "1rem",
+                    color: colors.primary[200]
+                }}>
+                    Enter the OTP sent to your email and set a new password.
                 </p>
 
                 <InputBox>
                     <input
                         type="text"
-                        placeholder="Email or Username"
-                        name="emailUsername"
+                        placeholder="OTP"
+                        name="otp"
                         required
-                        disabled={
-                            auth.status === 'authenticating'
-                            ||
-                            profileDetails.status === 'loading'
-                        }
-                        value={emailUsername}
-                        onChange={(e) => setEmailUsername(e.target.value)}
+                        disabled={auth.status === 'resettingPassword'}
+                        value={otp}
+                        maxLength={6}
+                        onChange={(e) => setOtp(e.target.value)}
                     />
                 </InputBox>
 
                 <InputBox>
                     <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
-                        name="password"
+                        placeholder="New Password"
+                        name="newPassword"
                         required
-                        disabled={
-                            auth.status === 'authenticating'
-                            ||
-                            profileDetails.status === 'loading'
-                        }
+                        disabled={auth.status === 'resettingPassword'}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <div className="password_toggle_btn">
+                        {
+                            showPassword ?
+                                <VisibilityIcon
+                                    onClick={() => setShowPassword(false)}
+                                />
+                                :
+                                <VisibilityOffIcon
+                                    onClick={() => setShowPassword(true)}
+                                />
+                        }
+                    </div>
+                </InputBox>
+
+                <InputBox>
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Confirm Password"
+                        name="confirmPassword"
+                        required
+                        disabled={auth.status === 'resettingPassword'}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
                     />
                     <div className="password_toggle_btn">
                         {
@@ -171,20 +187,16 @@ const Login = () => {
                     justifyContent="flex-start"
                     m="2rem 0"
                 >
-                    <Link href="/forgot-password">
-                        <div className="app__text_btn">Forgot Password?</div>
+                    <Link href="/login">
+                        <div className="app__text_btn">Login to account</div>
                     </Link>
                 </Box>
 
                 <Box m="1.5rem 0">
                     <input
                         type="submit"
-                        value="Login"
-                        disabled={
-                            auth.status === 'authenticating'
-                            ||
-                            profileDetails.status === 'loading'
-                        }
+                        value="reset password"
+                        disabled={auth.status === 'resettingPassword'}
                         className="app__filled_btn app__form_control"
                     />
                 </Box>
@@ -201,10 +213,10 @@ const Login = () => {
                             color: colors.primary[100]
                         }}
                     >
-                        Don&apos;t have an account?
+                        Don&apos;t have an OTP?
                     </span>
-                    <Link href="/register">
-                        <div className="app__text_btn">Register</div>
+                    <Link href="/forgot-password">
+                        <div className="app__text_btn">Get OTP</div>
                     </Link>
                 </Box>
             </ResponsiveFormBox>
@@ -212,4 +224,4 @@ const Login = () => {
     )
 }
 
-export default AppWrap(Login);
+export default AppWrap(ResetPassword);

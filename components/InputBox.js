@@ -1,7 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import { tokens } from "../theme/theme";
 
-const InputBox = ({ children }) => {
+const InputBox = ({ children, ...props }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -64,6 +64,7 @@ const InputBox = ({ children }) => {
                     }
                 },
             }}
+            {...props}
         >
             {children}
         </Box>

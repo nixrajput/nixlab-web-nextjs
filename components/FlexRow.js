@@ -1,14 +1,20 @@
 import { Box, useTheme } from "@mui/material";
 import { tokens } from "../theme/theme";
 
-const ResponsiveBox = ({ children, ...props }) => {
+const FlexRow = ({ children, ...props }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     return (
         <Box
             display="flex"
-            flexDirection="column"
+            flexDirection={{
+                xs: "column",
+                sm: "column",
+                md: "column",
+                lg: "row",
+                xl: "row",
+            }}
             justifyContent="center"
             alignItems="center"
             width="100%"
@@ -21,4 +27,4 @@ const ResponsiveBox = ({ children, ...props }) => {
     )
 }
 
-export default ResponsiveBox;
+export default FlexRow;

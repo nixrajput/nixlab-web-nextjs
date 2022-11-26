@@ -13,6 +13,7 @@ import {
   loadProfileDetailsAction,
   getProfileDetailsAction,
 } from '../redux/actions';
+import Navbar from '../components/NavBar';
 
 function App({ Component, pageProps }) {
   const [theme, colorMode] = useMode();
@@ -75,6 +76,7 @@ function App({ Component, pageProps }) {
             </IconButton>
           )}
         >
+          <Navbar />
           <Component {...pageProps} />
         </SnackbarProvider>
       </ThemeProvider>

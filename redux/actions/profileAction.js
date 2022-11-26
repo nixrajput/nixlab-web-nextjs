@@ -6,6 +6,7 @@ import {
     getProfileDetails,
     getProfileDetailsSuccess,
     getProfileDetailsError,
+    clearError,
 } from '../slices/profileDetailsSlice';
 import ApiUrls from "../../constants/urls";
 import storage from "../../utils/storage";
@@ -17,6 +18,7 @@ export const loadProfileDetailsAction = async (dispatch) => {
     }
 
     dispatch(loadProfileDetails());
+
     try {
         const data = storage.get('user');
         if (data) {
@@ -43,6 +45,7 @@ export const getProfileDetailsAction = async (dispatch, token) => {
     }
 
     dispatch(getProfileDetails());
+
     const headers = { 'Authorization': `Bearer ${token}` };
     try {
         const response = await apiClient.get(ApiUrls.getProfileEndpoint, { headers });
@@ -55,4 +58,13 @@ export const getProfileDetailsAction = async (dispatch, token) => {
     } catch (error) {
         dispatch(getProfileDetailsError(error));
     }
+}
+
+export const clearProfileErrorAction = async (dispatch) => {
+    if (!dispatch) {
+        console.log("dispatch is null");
+        return;
+    }
+
+    dispatch(clearError());
 }

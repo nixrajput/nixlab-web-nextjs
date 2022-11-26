@@ -1,17 +1,107 @@
 import apiClient from '../../api/apiClient';
 import {
     authenticating, authenticated, unauthenticated,
-    sendingEmail, emailSent, resetPassword, passwordReset,
-    setError
+    sendingOtp, sentOtp, resettingPassword,
+    resetPassword, registering, registered,
+    setError, clearError
 } from '../slices/authSlice';
 import { clearProfileDetails } from '../slices/profileDetailsSlice';
 import ApiUrls from "../../constants/urls";
 import storage from "../../utils/storage";
 
-export const loginAction = async (dispatch, emailUname, password) => {
+export const registerAction = async (dispatch, details) => {
+    if (!dispatch) {
+        console.log("dispatch is null");
+        return;
+    }
+
+    if (!details) {
+        dispatch(setError("details is null"));
+        return;
+    }
+
+    const { fname, lname, uname, email, password, confirmPassword, isValidated } = details;
+
+    if (!fname) {
+        dispatch(setError("First name is required"));
+        return;
+    }
+
+    if (!lname) {
+        dispatch(setError("Last name is required"));
+        return;
+    }
+
+    if (!uname) {
+        dispatch(setError("Username is required"));
+        return;
+    }
+
+    if (!email) {
+        dispatch(setError("Email is required"));
+        return;
+    }
+
+    if (!password) {
+        dispatch(setError("Password is required"));
+        return;
+    }
+
+    if (!confirmPassword) {
+        dispatch(setError("Confirm Password is required"));
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        dispatch(setError("Passwords do not match"));
+        return;
+    }
+
     const body = {
-        "emailUname": emailUname.trim(),
-        "password": password.trim(),
+        "fname": fname,
+        "lname": lname,
+        "email": email,
+        "uname": uname,
+        "password": password,
+        "confirmPassword": confirmPassword,
+        "isValidated": `${isValidated}`,
+    };
+
+    dispatch(registering());
+
+    try {
+        const response = await apiClient.post(ApiUrls.registerEndpoint, body);
+        if (response.status === 201) {
+            dispatch(registered());
+        }
+        else {
+            dispatch(setError(response.message));
+        }
+    }
+    catch (error) {
+        dispatch(setError(error));
+    }
+}
+
+export const loginAction = async (dispatch, emailUname, password) => {
+    if (!dispatch) {
+        console.log("dispatch is null");
+        return;
+    }
+
+    if (!emailUname) {
+        dispatch(setError("Email or Username is required"));
+        return;
+    }
+
+    if (!password) {
+        dispatch(setError("Password is required"));
+        return;
+    }
+
+    const body = {
+        "emailUname": emailUname,
+        "password": password,
     };
 
     dispatch(authenticating());
@@ -40,16 +130,21 @@ export const forgotPasswordAction = async (dispatch, email) => {
         return;
     }
 
+    if (!email) {
+        dispatch(setError("Email is required"));
+        return;
+    }
+
     const body = {
-        "email": email.trim(),
+        "email": email,
     };
 
-    dispatch(sendingEmail());
+    dispatch(sendingOtp());
 
     try {
         const response = await apiClient.post(ApiUrls.forgotPasswordEndpoint, body);
         if (response.status === 200) {
-            dispatch(emailSent());
+            dispatch(sentOtp());
         }
         else {
             dispatch(setError(response.message));
@@ -66,18 +161,38 @@ export const resetPasswordAction = async (dispatch, otp, password, confirmPasswo
         return;
     }
 
+    if (!otp) {
+        dispatch(setError("OTP is required"));
+        return;
+    }
+
+    if (!password) {
+        dispatch(setError("Password is required"));
+        return;
+    }
+
+    if (!confirmPassword) {
+        dispatch(setError("Confirm Password is required"));
+        return;
+    }
+
+    if (password !== confirmPassword) {
+        dispatch(setError("Passwords do not match"));
+        return;
+    }
+
     const body = {
-        "otp": otp.trim(),
-        "newPassword": password.trim(),
-        "confirmPassword": confirmPassword.trim(),
+        "otp": otp,
+        "newPassword": password,
+        "confirmPassword": confirmPassword,
     };
 
-    dispatch(resetPassword());
+    dispatch(resettingPassword());
 
     try {
         const response = await apiClient.post(ApiUrls.resetPasswordEndpoint, body);
         if (response.status === 200) {
-            dispatch(passwordReset());
+            dispatch(resetPassword());
         }
         else {
             dispatch(setError(response.message));
@@ -112,4 +227,13 @@ export const logoutAction = async (dispatch) => {
 
     dispatch(clearProfileDetails());
     dispatch(unauthenticated());
+}
+
+export const clearAuthErrorAction = async (dispatch) => {
+    if (!dispatch) {
+        console.log("dispatch is null");
+        return;
+    }
+
+    dispatch(clearError());
 }

@@ -1,6 +1,6 @@
 import Head from "next/head";
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Box, useTheme } from "@mui/material";
@@ -10,10 +10,13 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useSnackbar } from 'notistack';
 import AppWrap from "../../components/AppWrap";
+import ExpandedBox from "../../components/ExpandedBox";
+import ResponsiveFormBox from "../../components/ResponsiveFormBox";
+import InputBox from "../../components/InputBox";
 import { tokens } from '../../theme/theme';
 import {
-    loginAction,
-    getProfileDetailsAction,
+    registerAction,
+    clearAuthErrorAction,
 } from '../../redux/actions';
 
 const Register = () => {
@@ -44,42 +47,38 @@ const Register = () => {
         setOpen(true);
     };
 
-    const onClickSignupEvent = (e) => async (dispatch) => {
+    const onClickRegisterEvent = async (e) => {
         e.preventDefault();
-        const body = {
-            "fname": firstName.trimEnd(),
-            "lname": lastName.trimEnd(),
-            "email": email.trim(),
-            "uname": uname.trim(),
-            "password": password.trim(),
-            "confirmPassword": confirmPassword.trim(),
-        };
 
-        e.preventDefault();
+        const details = {};
+        details.fname = firstName.trim();
+        details.lname = lastName.trim();
+        details.email = email.trim();
+        details.uname = uname.trim();
+        details.password = password.trim();
+        details.confirmPassword = confirmPassword.trim();
+        details.isValidated = true;
 
         openBackdrop();
 
-        await loginAction(dispatch, emailUsername, password);
+        await registerAction(dispatch, details);
 
-        if (auth.token && auth.status === 'authenticated') {
-            await getProfileDetailsAction(dispatch, auth.token);
-            if (profileDetails.status === 'success' && profileDetails.user) {
-                const returnUrl = location.state?.from?.pathname || '/';
-                navigate(returnUrl, { replace: true });
-            }
+        if (auth.status === 'registered') {
+            const returnUrl = location.state?.from?.pathname || '/login';
+            router.replace(returnUrl);
         }
         closeBackdrop();
     }
 
     useEffect(() => {
-
         const returnUrl = router.query.returnUrl || '/';
 
-        if (auth.token && profileDetails.status === 'success' && profileDetails.user) {
+        if (auth.status === 'authenticated' && auth.token &&
+            profileDetails.status === 'success' && profileDetails.user) {
             router.replace(returnUrl);
         }
 
-        if (auth.status === 'authenticating' || profileDetails.status === 'loading') {
+        if (auth.status === 'authenticating' || auth.status === 'registering') {
             openBackdrop();
         }
         else {
@@ -88,10 +87,7 @@ const Register = () => {
 
         if (auth.status === 'error') {
             enqueueSnackbar(auth.error, { variant: 'error' });
-        }
-
-        if (profileDetails.status === 'error') {
-            enqueueSnackbar(profileDetails.error, { variant: 'error' });
+            clearAuthErrorAction(dispatch);
         }
 
         return () => { }
@@ -99,14 +95,14 @@ const Register = () => {
     }, [
         auth.token, router, auth.status, profileDetails.status,
         profileDetails.user, enqueueSnackbar, auth.error,
-        profileDetails.error
+        dispatch
     ]);
 
 
     return (
-        <>
+        <ExpandedBox>
             <Head>
-                <title>Sign Up - NixLab Technologies</title>
+                <title>Register - NixLab Technologies</title>
             </Head>
 
             <Backdrop
@@ -116,19 +112,28 @@ const Register = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <form className="app__box__form_container"
-                onSubmit={(e) => dispatch(onClickSignupEvent(e))}>
+            <ResponsiveFormBox onSubmit={(e) => onClickRegisterEvent(e)}>
+                <p style={{
+                    fontSize: "2rem",
+                    fontWeight: 700,
+                    textTransform: "capitalize",
+                    marginBottom: "2rem",
+                    color: colors.primary[100]
+                }}
+                >
+                    Hello! Register to get started
+                </p>
 
-                <p className="title">Hello! Sign Up to get started</p>
-
-                <div style={{
-                    width: "100%",
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                }}>
-                    <div className="app__form_control">
+                <Box
+                    width="100%"
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    m="1.5rem 0"
+                    p="0"
+                    height="fit-content"
+                >
+                    <InputBox m="0">
                         <input
                             type="text"
                             placeholder="First Name"
@@ -138,13 +143,11 @@ const Register = () => {
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
                         />
-                    </div>
+                    </InputBox>
 
-                    <div style={{
-                        width: "2rem",
-                    }} />
+                    <div style={{ width: "2rem" }} />
 
-                    <div className="app__form_control">
+                    <InputBox m="0">
                         <input
                             type="text"
                             placeholder="Last Name"
@@ -154,10 +157,10 @@ const Register = () => {
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
                         />
-                    </div>
-                </div>
+                    </InputBox>
+                </Box>
 
-                <div className="app__form_control">
+                <InputBox>
                     <input
                         type="email"
                         placeholder="Email"
@@ -167,9 +170,9 @@ const Register = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                </div>
+                </InputBox>
 
-                <div className="app__form_control">
+                <InputBox>
                     <input
                         type="text"
                         placeholder="Username"
@@ -179,9 +182,9 @@ const Register = () => {
                         value={uname}
                         onChange={(e) => setUname(e.target.value)}
                     />
-                </div>
+                </InputBox>
 
-                <div className="app__form_control">
+                <InputBox>
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Password"
@@ -203,9 +206,9 @@ const Register = () => {
                                 />
                         }
                     </div>
-                </div>
+                </InputBox>
 
-                <div className="app__form_control">
+                <InputBox>
                     <input
                         type={showPassword ? "text" : "password"}
                         placeholder="Confirm Password"
@@ -227,32 +230,38 @@ const Register = () => {
                                 />
                         }
                     </div>
-                </div>
+                </InputBox>
 
-                <div style={{
-                    width: '100%',
-                    marginTop: '2rem',
-                }}>
+                <Box m="2.5rem 0" mb="1.5rem">
                     <input
                         type="submit"
-                        value="Sign Up"
+                        value="Register"
                         disabled={auth.status === 'registering'}
                         className="app__filled_btn app__form_control"
                     />
-                </div>
+                </Box>
 
-                <div className="app__form_control">
-                    <span>
+                <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    <span
+                        style={{
+                            fontSize: '1rem',
+                            marginRight: '0.5rem',
+                            color: colors.primary[100]
+                        }}
+                    >
                         Already have an account?
                     </span>
                     <Link href="/login">
                         <div className="app__text_btn">Login</div>
                     </Link>
-                </div>
-            </form>
-
-        </>
+                </Box>
+            </ResponsiveFormBox>
+        </ExpandedBox>
     )
 }
 
-export default AppWrap(Register, 'register');
+export default AppWrap(Register);

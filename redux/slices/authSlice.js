@@ -45,24 +45,32 @@ const authSlice = createSlice({
             state.status = 'idle';
         },
 
-        sendingEmail: (state, action) => {
-            state.status = 'sendingEmail';
+        registering: (state, action) => {
+            state.status = 'registering';
         },
 
-        emailSent: (state, action) => {
-            state.status = 'emailSent';
+        registered: (state, action) => {
+            state.status = 'registered';
+        },
+
+        sendingOtp: (state, action) => {
+            state.status = 'sendingOtp';
+        },
+
+        sentOtp: (state, action) => {
+            state.status = 'sentOtp';
+        },
+
+        resettingPassword: (state, action) => {
+            state.status = 'resettingPassword';
         },
 
         resetPassword: (state, action) => {
             state.status = 'resetPassword';
         },
 
-        passwordReset: (state, action) => {
-            state.status = 'passwordReset';
-        },
-
-        success: (state, action) => {
-            state.status = 'success';
+        clearError: (state, action) => {
+            state.error = null;
         },
     }
 });
@@ -73,11 +81,13 @@ export const {
     unauthenticated,
     logout,
     setError,
-    sendingEmail,
-    emailSent,
+    registering,
+    registered,
+    sendingOtp,
+    sentOtp,
+    resettingPassword,
     resetPassword,
-    passwordReset,
-    success,
+    clearError,
 } = authSlice.actions;
 
 export default authSlice;

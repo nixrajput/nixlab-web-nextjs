@@ -11,6 +11,7 @@ export const tokens = (mode) => ({
       success: "#1EB450",
       error: "#F44336",
       warning: "#F09C00",
+      accent: "#e3096f",
       grey: {
         100: "#e0e0e0",
         200: "#c2c2c2",
@@ -73,6 +74,7 @@ export const tokens = (mode) => ({
       success: "#1EB450",
       error: "#F44336",
       warning: "#F09C00",
+      accent: "#e3096f",
       grey: {
         100: "#141414",
         200: "#292929",
