@@ -10,8 +10,8 @@ const ProjectItem = ({ item, ...props }) => {
         <Box
             position="relative"
             width={{
-                xs: "calc(100% - 2rem)",
-                sm: "calc(50% - 2rem)",
+                xs: "100%",
+                sm: "calc(50% - 1rem)",
                 md: "calc(50% - 2rem)",
                 lg: "calc(33% - 2rem)",
                 xl: "calc(33% - 2rem)",
@@ -22,10 +22,16 @@ const ProjectItem = ({ item, ...props }) => {
             alignItems="stretch"
             justifyContent="space-between"
             borderRadius="8px"
-            m="1rem"
+            m={{
+                xs: "0 0 1rem 0",
+                sm: "0.5rem",
+                md: "1rem",
+                lg: "1rem",
+                xl: "1rem",
+            }}
             p="1rem"
             sx={{
-                backgroundColor: colors.background,
+                backgroundColor: colors.divider,
                 transition: "all 0.8s ease-in-out",
                 overflow: "hidden",
             }}

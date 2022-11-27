@@ -54,7 +54,8 @@ const Contact = () => {
                 <p
                     style={{
                         color: colors.primary[100],
-                        marginBottom: '1rem'
+                        marginBottom: '1rem',
+                        fontSize: '1.25rem',
                     }}
                 >
                     For any queries, please contact us at
@@ -69,7 +70,8 @@ const Contact = () => {
                 <p
                     style={{
                         color: colors.primary[100],
-                        marginBottom: '0.5rem'
+                        marginBottom: '0.5rem',
+                        fontSize: '1.25rem',
                     }}
                 >
                     Follow us on social media 👇
@@ -78,7 +80,7 @@ const Contact = () => {
                 <Box
                     display='flex'
                     flexDirection='row'
-                    alignItems='flex-start'
+                    alignItems='center'
                     justifyContent='flex-start'
                 >
                     {
@@ -89,14 +91,32 @@ const Contact = () => {
                                 flexDirection='row'
                                 alignItems='center'
                                 justifyContent='center'
-                                style={{
-                                    marginRight: '1rem'
+                                sx={{
+                                    marginRight: '1rem',
+                                    ':last-child': {
+                                        marginRight: '0'
+                                    },
+                                    '& a svg': {
+                                        color: colors.primary[100],
+                                        fontSize: '2rem',
+                                        transition: 'all 0.2s ease-in-out',
+                                        '&:hover': {
+                                            color: colors.accent,
+                                        }
+                                    }
                                 }}
                             >
                                 <a
                                     href={link.url}
                                     target="_blank"
                                     rel="noreferrer"
+                                    style={{
+                                        textDecoration: 'none',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    }}
                                 >
                                     {link.icon}
                                 </a>
@@ -109,4 +129,4 @@ const Contact = () => {
     )
 }
 
-export default AppWrap(Contact, 'contact');
+export default AppWrap(Contact);
