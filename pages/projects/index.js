@@ -4,7 +4,7 @@ import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
-import Data from '../../data';
+import { projects } from '../../data';
 import ProjectItem from '../../components/ProjectItem';
 
 const Projects = () => {
@@ -23,6 +23,8 @@ const Projects = () => {
 
             <ResponsiveBox
                 alignItems="center"
+                bgcolor="transparent"
+                p='0'
             >
                 <Box
                     width="100%"
@@ -52,7 +54,7 @@ const Projects = () => {
                     alignItems="center"
                 >
                     {
-                        Data.projects.map((project, index) => {
+                        projects.map((project, index) => {
                             return (
                                 <ProjectItem
                                     key={`service-${index}`}

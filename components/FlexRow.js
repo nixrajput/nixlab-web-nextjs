@@ -1,9 +1,6 @@
-import { Box, useTheme } from "@mui/material";
-import { tokens } from "../theme/theme";
+import { Box } from "@mui/material";
 
 const FlexRow = ({ children, ...props }) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
 
     return (
         <Box
@@ -15,11 +12,10 @@ const FlexRow = ({ children, ...props }) => {
                 lg: "row",
                 xl: "row",
             }}
-            justifyContent="center"
+            justifyContent="space-between"
             alignItems="center"
             width="100%"
             position="relative"
-            bgcolor={colors.background}
             {...props}
         >
             {children}

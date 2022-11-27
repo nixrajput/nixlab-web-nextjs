@@ -184,9 +184,9 @@ const Navbar = () => {
                     "none"
             }
             p={{
-                xs: "1rem 1rem",
-                sm: "1rem 1rem",
-                md: "1rem 1rem",
+                xs: "1rem",
+                sm: "1rem",
+                md: "1rem",
                 lg: "1rem 0",
                 xl: "1rem 0",
             }}

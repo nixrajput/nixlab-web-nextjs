@@ -30,8 +30,9 @@ const ProjectItem = ({ item, ...props }) => {
                 xl: "1rem",
             }}
             p="1rem"
+            boxShadow="0 0.1rem 0.5rem rgba(0, 0, 0, 0.08)"
             sx={{
-                backgroundColor: colors.divider,
+                backgroundColor: colors.dialog,
                 transition: "all 0.8s ease-in-out",
                 overflow: "hidden",
             }}
@@ -41,9 +42,9 @@ const ProjectItem = ({ item, ...props }) => {
                 className="service__image"
                 position='relative'
                 width="50%"
-                maxWidth="8rem"
+                maxWidth="10rem"
                 height="50%"
-                maxHeight="8rem"
+                maxHeight="10rem"
             >
                 <Image
                     src={item.image}
@@ -65,18 +66,26 @@ const ProjectItem = ({ item, ...props }) => {
                 alignItems="flex-start"
                 justifyContent="flex-start"
             >
-                <h2
+                <h3
                     style={{
                         color: colors.primary[100],
-                        fontFamily: 'Proxima Nova',
-                        fontSize: '1.5rem',
-                        fontWeight: 'bold',
-                        margin: '1rem 0',
-                        padding: '0',
+                        fontFamily: 'Proxima Nova, sans-serif',
+                        marginTop: '0.5rem',
                     }}
                 >
                     {item.title}
-                </h2>
+                </h3>
+
+                <p
+                    style={{
+                        color: colors.primary[100],
+                        fontFamily: 'Proxima Nova, sans-serif',
+                        fontSize: '1rem',
+                        marginBottom: '0.5rem',
+                    }}
+                >
+                    {item.shortDescription}
+                </p>
 
                 <Box
                     position="relative"
@@ -87,24 +96,21 @@ const ProjectItem = ({ item, ...props }) => {
                     justifyContent="flex-start"
                 >
                     {
-                        item.shortDescription ?
-                            item.shortDescription.split(',').map((item, index) => (
-                                <Box key={`short-description-${index}`}
+                        item.technologies ?
+                            item.technologies.map((item, index) => (
+                                <Box key={`technology-${index}`}
                                     sx={{
-                                        color: colors.primary[200],
-                                        fontFamily: 'Proxima Nova',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-                                        margin: '0.25rem',
-                                        padding: '0.25rem',
+                                        fontFamily: 'Proxima Nova, sans-serif',
+                                        fontSize: '0.85rem',
+                                        mr: '0.25rem',
+                                        mb: '0.25rem',
+                                        padding: '0.25rem 0.5rem',
                                         borderRadius: '4px',
-                                        backgroundColor: colors.grey[700],
-                                        ':first-child': {
-                                            marginLeft: '0'
-                                        },
+                                        backgroundColor: colors.grey[500],
+                                        color: colors.primary[100],
                                         ':last-child': {
-                                            marginRight: '0'
-                                        }
+                                            mr: '0'
+                                        },
                                     }}
                                 >
                                     {item}

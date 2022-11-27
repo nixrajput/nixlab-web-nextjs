@@ -22,6 +22,7 @@ const ServiceItem = ({ item, ...props }) => {
             alignItems="stretch"
             justifyContent="space-between"
             borderRadius="8px"
+            boxShadow="0 0.1rem 0.5rem rgba(0, 0, 0, 0.08)"
             m={{
                 xs: "0 0 1rem 0",
                 sm: "0.5rem",
@@ -31,7 +32,7 @@ const ServiceItem = ({ item, ...props }) => {
             }}
             p="1rem"
             sx={{
-                backgroundColor: colors.divider,
+                backgroundColor: colors.dialog,
                 transition: "all 0.8s ease-in-out",
                 overflow: "hidden",
             }}
@@ -40,20 +41,21 @@ const ServiceItem = ({ item, ...props }) => {
             <Box
                 position='relative'
                 width="50%"
-                maxWidth="8rem"
+                maxWidth="10rem"
                 height="50%"
-                maxHeight="8rem"
+                maxHeight="10rem"
             >
                 <Image
                     src={item.image}
                     alt={item.title}
                     fill
+                    priority
+                    placeholder="blur"
+                    blurDataURL={item.image}
                     style={{
                         aspectRatio: '1',
                         objectFit: 'contain'
                     }}
-                    placeholder="blur"
-                    blurDataURL={item.image}
                 />
             </Box>
 
@@ -64,18 +66,16 @@ const ServiceItem = ({ item, ...props }) => {
                 alignItems="flex-start"
                 justifyContent="flex-start"
             >
-                <h2
+                <h3
                     style={{
                         color: colors.primary[100],
-                        fontFamily: 'Proxima Nova',
-                        fontSize: '1.5rem',
-                        fontWeight: 'bold',
-                        margin: '1rem 0',
+                        fontFamily: 'Proxima Nova, sans-serif',
+                        margin: '0.5rem 0',
                         padding: '0',
                     }}
                 >
                     {item.title}
-                </h2>
+                </h3>
 
                 <Box
                     position="relative"
@@ -90,19 +90,16 @@ const ServiceItem = ({ item, ...props }) => {
                             item.shortDescription.split(',').map((item, index) => (
                                 <Box key={`short-description-${index}`}
                                     sx={{
-                                        color: colors.primary[200],
-                                        fontFamily: 'Proxima Nova',
-                                        fontSize: '1rem',
-                                        fontWeight: 'bold',
-                                        margin: '0.25rem',
-                                        padding: '0.25rem',
+                                        fontFamily: 'Proxima Nova, sans-serif',
+                                        fontSize: '0.85rem',
+                                        mr: '0.25rem',
+                                        mb: '0.25rem',
+                                        padding: '0.25rem 0.5rem',
                                         borderRadius: '4px',
-                                        backgroundColor: colors.grey[700],
-                                        ':first-child': {
-                                            marginLeft: '0'
-                                        },
+                                        backgroundColor: colors.grey[500],
+                                        color: colors.primary[100],
                                         ':last-child': {
-                                            marginRight: '0'
+                                            mr: '0'
                                         },
                                     }}
                                 >
