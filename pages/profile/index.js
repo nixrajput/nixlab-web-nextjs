@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
@@ -15,9 +14,7 @@ import CircleAvatar from "../../components/CircleAvatar";
 import { tokens } from '../../theme/theme';
 import {
     logoutAction,
-    getProfileDetailsAction,
 } from '../../redux/actions';
-import styles from '../../styles/profile.module.scss';
 
 const Profile = () => {
     const theme = useTheme();
@@ -40,19 +37,6 @@ const Profile = () => {
     const openBackdrop = () => {
         setOpen(true);
     };
-
-    const getProfileDetails = async (e) => {
-        e.preventDefault();
-
-        openBackdrop();
-
-        const profileDetailsPromise = getProfileDetailsAction(dispatch, auth.token);
-        await profileDetailsPromise;
-
-        if (profileDetails.status === 'success' && profileDetails.user) {
-            closeBackdrop();
-        }
-    }
 
     const logoutUser = async () => {
         const logoutPromise = logoutAction(dispatch);
@@ -83,7 +67,7 @@ const Profile = () => {
 
     }, [
         router, profileDetails.status, auth.status,
-        enqueueSnackbar, dispatch,
+        enqueueSnackbar, dispatch, auth.token,
         profileDetails.error,
     ]);
 
@@ -100,7 +84,7 @@ const Profile = () => {
                             profileDetails.status === 'success' &&
                             profileDetails.user
                         ) ?
-                            profileDetails.user.username
+                            profileDetails.user?.fname + ' ' + profileDetails.user?.lname + ' - Profile'
                             :
                             'Profile'
                     }
@@ -139,6 +123,9 @@ const Profile = () => {
                                 <h3
                                     style={{
                                         color: colors.primary[100],
+                                        fontSize: "1.25rem",
+                                        fontWeight: 500,
+                                        fontFamily: "Proxima Nova",
                                     }}
                                 >
                                     {`${profileDetails.user?.fname} ${profileDetails.user?.lname}`}
@@ -147,6 +134,9 @@ const Profile = () => {
                                 <p
                                     style={{
                                         color: colors.primary[200],
+                                        fontSize: "1rem",
+                                        fontWeight: 400,
+                                        fontFamily: "Proxima Nova",
                                     }}
                                 >
                                     {`@${profileDetails.user?.uname}`}

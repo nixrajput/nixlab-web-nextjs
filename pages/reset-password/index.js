@@ -89,7 +89,7 @@ const ResetPassword = () => {
     return (
         <ExpandedBox>
             <Head>
-                <title>Reset Password - NixLab Technologies</title>
+                <title>Reset Password</title>
             </Head>
 
             <Backdrop

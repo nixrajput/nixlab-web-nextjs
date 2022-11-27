@@ -3,7 +3,7 @@ import {
     authenticating, authenticated, unauthenticated,
     sendingOtp, sentOtp, resettingPassword,
     resetPassword, registering, registered,
-    setError, clearError
+    setError, clearError, clearAuth,
 } from '../slices/authSlice';
 import { clearProfileDetails } from '../slices/profileDetailsSlice';
 import ApiUrls from "../../constants/urls";
@@ -212,7 +212,7 @@ export const loadAuthDetailsAction = async (dispatch) => {
     dispatch(authenticating());
     const data = storage.get('auth');
     if (!data || !data.token) {
-        dispatch(unauthenticated());
+        dispatch(unauthenticated('No token found'));
     }
     else {
         dispatch(authenticated(data));
@@ -226,7 +226,7 @@ export const logoutAction = async (dispatch) => {
     }
 
     dispatch(clearProfileDetails());
-    dispatch(unauthenticated());
+    dispatch(clearAuth());
 }
 
 export const clearAuthErrorAction = async (dispatch) => {

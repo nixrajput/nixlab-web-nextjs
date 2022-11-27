@@ -1,7 +1,8 @@
-import React from 'react'
+import Image from "next/image"
 
 const CircleAvatar = ({ avatar, size = '40px', fit = 'cover' }) => {
     const style = {
+        position: "relative",
         width: size,
         height: size,
         borderRadius: '50%',
@@ -11,12 +12,17 @@ const CircleAvatar = ({ avatar, size = '40px', fit = 'cover' }) => {
     if (avatar && avatar.url) {
         return (
             <div style={style}>
-                <img
+                <Image
                     src={avatar.url}
-                    style={style}
                     alt="avatar"
-                    width={size}
-                    height={size}
+                    priority
+                    fill
+                    placeholder="blur"
+                    blurDataURL={avatar.url}
+                    style={{
+                        objectFit: fit,
+                        borderRadius: '50%',
+                    }}
                 />
             </div>
         )
@@ -24,12 +30,17 @@ const CircleAvatar = ({ avatar, size = '40px', fit = 'cover' }) => {
 
     return (
         <div style={style}>
-            <img
-                src='../../avatar.png'
-                style={style}
+            <Image
+                src={'../../avatar.png'}
                 alt="avatar"
-                width={size}
-                height={size}
+                priority
+                fill
+                placeholder="blur"
+                blurDataURL={'../../avatar.png'}
+                style={{
+                    objectFit: fit,
+                    borderRadius: '50%',
+                }}
             />
         </div>
     )

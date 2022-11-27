@@ -10,12 +10,14 @@ const ResponsiveBox = ({ children, ...props }) => {
             display="flex"
             flexDirection="column"
             justifyContent="flex-start"
-            alignItems="stretch"
+            alignItems="flex-start"
             width="100%"
+            maxWidth="1024px"
             borderRadius="8px"
             position="relative"
             bgcolor={colors.dialog}
             p="1rem"
+            m="0 auto"
             boxshadow="0 0.1rem 0.5rem rgba(0, 0, 0, 0.08)"
             {...props}
         >

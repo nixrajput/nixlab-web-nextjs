@@ -76,7 +76,7 @@ const VerifyOtp = () => {
     return (
         <ExpandedBox>
             <Head>
-                <title>Reset Password - NixLab Technologies</title>
+                <title>Verify OTP</title>
             </Head>
 
             <Backdrop

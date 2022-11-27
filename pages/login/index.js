@@ -99,7 +99,7 @@ const Login = () => {
     return (
         <ExpandedBox>
             <Head>
-                <title>Login - NixLab Technologies</title>
+                <title>Login</title>
             </Head>
 
             <Backdrop

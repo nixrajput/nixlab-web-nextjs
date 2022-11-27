@@ -47,6 +47,7 @@ const profileDetailsSlice = createSlice({
         clearProfileDetails: (state, action) => {
             state.user = null;
             state.error = null;
+            storage.remove('user');
             state.status = 'idle';
         },
 

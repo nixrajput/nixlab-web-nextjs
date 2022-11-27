@@ -1,87 +1,169 @@
 import Head from 'next/head';
-import styles from '../../styles/about.module.scss';
-import { BsCheckCircleFill } from 'react-icons/bs';
+import { Box, useTheme } from "@mui/material";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import AppWrap from "../../components/AppWrap";
+import ExpandedBox from "../../components/ExpandedBox";
+import ResponsiveBox from "../../components/ResponsiveBox";
+import PageTitle from "../../components/PageTitle";
+import { tokens } from "../../theme/theme";
 import Image from 'next/image';
 import Data from '../../data';
-import AppWrap from '../../components/AppWrap';
 
 const About = () => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+
     return (
-        <div className={styles.about}>
+        <ExpandedBox
+            justifyContent="flex-start"
+            alignItems="stretch"
+        >
             <Head>
-                <title>{`About`}</title>
+                <title>About</title>
             </Head>
 
-            <div className={`app__page_heading`}>
+            <PageTitle>
                 Who <span>We</span> Are
-            </div>
+            </PageTitle>
 
-            <div className={styles.about__content}>
-                <p>
+            <ResponsiveBox>
+                <p
+                    style={{
+                        color: colors.primary[100],
+                    }}
+                >
                     {Data.about.description}
                 </p>
 
                 {/* Services */}
 
-                <div className={styles.about__text_heading}>
-                    What services we provide
-                </div>
+                <h4
+                    style={{
+                        color: colors.primary[100],
+                        marginTop: '1rem'
+                    }}
+                >
+                    What services we provide?
+                </h4>
 
                 {
                     Data.about.services.map((service, index) => {
                         return (
-                            <div key={index} className={styles.about__text_tile}>
-                                <BsCheckCircleFill />
-                                <div className={styles.about__text_tile_content}>
+                            <Box
+                                key={`item-${index}`}
+                                display='flex'
+                                flexDirection='row'
+                                alignItems='flex-start'
+                                justifyContent='flex-start'
+                                m='0.5rem 0'
+                            >
+                                <CheckCircleIcon
+                                    style={{
+                                        fontSize: '1rem',
+                                        color: colors.primary[200]
+                                    }}
+                                />
+                                <p
+                                    style={{
+                                        color: colors.primary[200],
+                                        marginLeft: '0.5rem'
+                                    }}
+                                >
                                     {service}
-                                </div>
-                            </div>
+                                </p>
+                            </Box>
                         )
                     })
                 }
 
                 {/* Mission */}
 
-                <div className={styles.about__text_heading}>
+                <h4
+                    style={{
+                        color: colors.primary[100],
+                        marginTop: '1rem'
+                    }}
+                >
                     Our mission
-                </div>
+                </h4>
 
-                <p className={styles.about__desc}>
+                <p
+                    style={{
+                        color: colors.primary[100],
+                        marginTop: '0.5rem'
+                    }}
+                >
                     Our mission is to provide customer-centric, result-oriented, cost-competitive innovative & functional IT Solutions to our valuable global clients.
                 </p>
 
-                <p className={styles.about__desc}>
+                <p
+                    style={{
+                        color: colors.primary[100],
+                        marginTop: '0.25rem',
+                        marginBottom: '0.25rem'
+                    }}
+                >
                     We stick to the following principles in delivering our mission:
                 </p>
 
                 {
                     Data.about.mission.map((mission, index) => {
                         return (
-                            <div key={index} className={styles.about__text_tile}>
-                                <BsCheckCircleFill />
-                                <div className={styles.about__text_tile_content}>
+                            <Box
+                                key={`item-${index}`}
+                                display='flex'
+                                flexDirection='row'
+                                alignItems='flex-start'
+                                justifyContent='flex-start'
+                                m='0.5rem 0'
+                            >
+                                <CheckCircleIcon
+                                    style={{
+                                        fontSize: '1rem',
+                                        color: colors.primary[200]
+                                    }}
+                                />
+                                <p
+                                    style={{
+                                        color: colors.primary[200],
+                                        marginLeft: '0.5rem'
+                                    }}
+                                >
                                     {mission}
-                                </div>
-                            </div>
+                                </p>
+                            </Box>
                         )
                     })
                 }
 
-                <div className={styles.about__make_in_india_image}>
-                    <Image
-                        src="/mki.png"
-                        alt="Make in India"
-                        width={200}
-                        height={200}
-                        layout='responsive'
-                        objectFit='cover'
-                    />
-                </div>
-
-            </div>
-
-        </div>
+                <Box
+                    width='100%'
+                    mt='1rem'
+                    display='flex'
+                    alignItems='center'
+                    justifyContent='center'
+                >
+                    <Box
+                        position='relative'
+                        width='5rem'
+                        height='5rem'
+                        sx={{
+                            aspectRatio: '1',
+                            objectFit: 'cover'
+                        }}
+                    >
+                        <Image
+                            src="/mki.png"
+                            alt="Make in India"
+                            fill
+                            placeholder='blur'
+                            blurDataURL='/mki.png'
+                        />
+                    </Box>
+                </Box>
+            </ResponsiveBox>
+        </ExpandedBox>
     )
 }
 
-export default AppWrap(About, 'about');
+export default AppWrap(About);

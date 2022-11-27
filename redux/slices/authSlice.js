@@ -26,9 +26,16 @@ const authSlice = createSlice({
         unauthenticated: (state, action) => {
             state.token = null;
             state.expiresAt = null;
+            state.error = action.payload;
+            state.status = 'unauthenticated';
+        },
+
+        clearAuth: (state, action) => {
+            state.token = null;
+            state.expiresAt = null;
             state.error = null;
             storage.remove('auth');
-            state.status = 'unauthenticated';
+            state.status = 'idle';
         },
 
         setError: (state, action) => {
@@ -79,6 +86,7 @@ export const {
     authenticating,
     authenticated,
     unauthenticated,
+    clearAuth,
     logout,
     setError,
     registering,

@@ -1,57 +1,70 @@
-import React from 'react';
 import Head from 'next/head';
-import styles from '../../styles/services.module.scss';
+import { Box } from "@mui/material";
+import AppWrap from "../../components/AppWrap";
+import ExpandedBox from "../../components/ExpandedBox";
+import ResponsiveBox from "../../components/ResponsiveBox";
+import PageTitle from "../../components/PageTitle";
 import Data from '../../data';
-import AppWrap from '../../components/AppWrap';
+import ServiceItem from './ServiceItem';
 
 const Services = () => {
     return (
-        <div className={styles.services}>
+        <ExpandedBox
+            justifyContent="flex-start"
+            alignItems="stretch"
+        >
             <Head>
-                <title>{`Services - NixLab Technologies`}</title>
+                <title>{`Services`}</title>
             </Head>
 
-            <div className="flex__column">
+            <PageTitle>
+                LEARN MORE ABOUT OUR <span>SERVICES</span>
+            </PageTitle>
 
-                <div className={styles.service__heading}>
-                    <div className={`app__page_heading`}>
-                        LEARN MORE ABOUT OUR <span>SERVICES</span>
-                    </div>
-                </div>
-
-
-                <div className={styles.service__list}>
-                    <div className={`flex__row ${styles.service__list_row}`}>
-
-                        {
-                            Data.services.map((service, index) => {
-                                return (
-                                    <div key={index} className={styles.service__item}>
-                                        <div className={styles.service__image}>
-                                            <img src={service.image} alt={service.title} />
-                                        </div>
-
-                                        <div className={styles.service__content}>
-                                            <div className={styles.service__title}>
-                                                {service.title}
-                                            </div>
-
-                                            <div className={styles.service__description}>
-                                                {service.shortDescription}
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+            <ResponsiveBox
+                alignItems="center"
+            >
+                <Box
+                    width="100%"
+                    position="relative"
+                    display="flex"
+                    flexDirection={{
+                        xs: "column",
+                        sm: "row",
+                        md: "row",
+                        lg: "row",
+                        xl: "row",
+                    }}
+                    flexWrap={{
+                        xs: "nowrap",
+                        sm: "wrap",
+                        md: "wrap",
+                        lg: "wrap",
+                        xl: "wrap",
+                    }}
+                    justifyContent={{
+                        xs: "center",
+                        sm: "stretch",
+                        md: "stretch",
+                        lg: "stretch",
+                        xl: "stretch",
+                    }}
+                    alignItems="center"
+                >
+                    {
+                        Data.services.map((service, index) => {
+                            return (
+                                <ServiceItem
+                                    key={`service-${index}`}
+                                    item={service}
+                                />
+                            )
+                        })
+                    }
+                </Box>
+            </ResponsiveBox>
+        </ExpandedBox>
     )
 }
 
-export default AppWrap(Services, 'services');
+export default AppWrap(Services);

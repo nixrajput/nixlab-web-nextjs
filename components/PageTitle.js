@@ -17,6 +17,7 @@ const PageTitle = ({ children, ...props }) => {
                 marginBottom: "2rem",
                 wordSpacing: "0.25rem",
                 color: colors.primary[100],
+                transition: "all 0.25s ease-in-out",
                 "& span": {
                     color: colors.accent,
                 },

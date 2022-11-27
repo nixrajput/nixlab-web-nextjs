@@ -102,7 +102,7 @@ const Register = () => {
     return (
         <ExpandedBox>
             <Head>
-                <title>Register - NixLab Technologies</title>
+                <title>Register</title>
             </Head>
 
             <Backdrop

@@ -84,7 +84,7 @@ const ForgotPassword = () => {
     return (
         <ExpandedBox>
             <Head>
-                <title>Forgot Password - NixLab Technologies</title>
+                <title>Forgot Password</title>
             </Head>
 
             <Backdrop

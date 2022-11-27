@@ -69,8 +69,8 @@ export const tokens = (mode) => ({
       },
     }
     : {
-      background: "#F2F2F2",
-      dialog: "#FAFAFA",
+      background: "#F0F0F0",
+      dialog: "#FFFFFF",
       success: "#1EB450",
       error: "#F44336",
       warning: "#F09C00",

@@ -196,13 +196,14 @@ const Navbar = () => {
             top="0"
             left="0"
             right="0"
+            width="100%"
+            maxWidth="1024px"
             bgcolor={colors.background}
             display="flex"
             flexDirection="row"
-            justifyContent="space-between"
+            justifyContent="center"
             alignItems="center"
-            p={2}
-            m="0"
+            m="0 auto"
             zIndex="100"
             boxShadow={
                 scrolled ?
@@ -210,305 +211,332 @@ const Navbar = () => {
                     :
                     "none"
             }
+            p={{
+                xs: "1rem 1rem",
+                sm: "1rem 1rem",
+                md: "1rem 1rem",
+                lg: "1rem 0",
+                xl: "1rem 0",
+            }}
         >
-
-            {/* LOGO */}
             <Box
                 display="flex"
-                alignItems="center"
-                justifyContent="center"
-                width={{ xs: "auto", sm: "auto", md: "auto", lg: "auto" }}
-                height={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
-                maxHeight={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
-            >
-                <Link href="/">
-                    <Image
-                        src="/logo.png"
-                        alt="logo"
-                        layout='responsive'
-                        width={286}
-                        height={144}
-                        priority
-                        style={{
-                            width: "auto",
-                            height: "48px",
-                            maxWidth: "286px",
-                            maxHeight: "48px",
-                        }}
-                    />
-                </Link>
-            </Box>
-
-            {/* NAVBAR */}
-            <Box
-                display={{
-                    lg: "flex",
-                    xl: "flex",
-                    md: "flex",
-                    sm: "none",
-                    xs: "none",
-                }}
                 flexDirection="row"
+                justifyContent="space-between"
                 alignItems="center"
-                justifyContent="center"
+                width="100%"
+                m="0 auto"
             >
-                {
-                    menuItems.map((item, index) => (
-                        <Box
-                            key={`link-${item.title}${index}`}
-                            display="flex"
-                            flexDirection="row"
-                            alignItems="center"
-                            justifyContent="center"
-                            ml={2}
-                            mr={2}
-                            position="relative"
-                        >
-                            <div
-                                onClick={() => handleNavClick(item)}
-                                style={{
-                                    textDecoration: "none",
-                                    fontSize: "1rem",
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    cursor: "pointer",
-                                    color: (path == item.path ||
-                                        item.childrens?.find(e => e.path === path)) ?
-                                        colors.accent :
-                                        colors.grey[200],
-                                    fontWeight: (path == item.path ||
-                                        item.childrens?.find(e => e.path === path)) ?
-                                        "bold" :
-                                        "normal",
-                                    transition: "all 0.3s ease-in-out",
-                                }}
+
+                {/* LOGO */}
+                <Box
+                    display="flex"
+                    alignItems="flex-start"
+                    justifyContent="flex-start"
+                    sx={{ aspectRatio: "16/9" }}
+                    height={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
+                    maxHeight={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
+                    position="relative"
+                >
+                    <Link href="/">
+                        <Image
+                            src="/logo.png"
+                            alt="logo"
+                            fill
+                            priority
+                            placeholder="blur"
+                            blurDataURL="/logo.png"
+                            style={{
+                                objectFit: "contain",
+                            }}
+                        />
+                    </Link>
+                </Box>
+
+                {/* NAVBAR */}
+                <Box
+                    display={{
+                        lg: "flex",
+                        xl: "flex",
+                        md: "flex",
+                        sm: "none",
+                        xs: "none",
+                    }}
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="center"
+                >
+                    {
+                        menuItems.map((item, index) => (
+                            <Box
+                                key={`link-${item.title}${index}`}
+                                display="flex"
+                                flexDirection="row"
+                                alignItems="center"
+                                justifyContent="center"
+                                ml={2}
+                                mr={2}
+                                position="relative"
                             >
-                                {item.title}
+                                <div
+                                    onClick={() => handleNavClick(item)}
+                                    style={{
+                                        textDecoration: "none",
+                                        fontSize: "1rem",
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        cursor: "pointer",
+                                        color: (path == item.path ||
+                                            item.childrens?.find(e => e.path === path)) ?
+                                            colors.accent :
+                                            colors.grey[200],
+                                        fontWeight: (path == item.path ||
+                                            item.childrens?.find(e => e.path === path)) ?
+                                            "bold" :
+                                            "normal",
+                                        transition: "all 0.3s ease-in-out",
+                                    }}
+                                >
+                                    {item.title}
+                                    {
+                                        item.childrens ?
+                                            <ExpandMoreIcon
+                                                sx={{
+                                                    fontSize: "1.25rem",
+                                                    fontWeight: 700,
+                                                    marginLeft: "4px"
+                                                }} />
+                                            :
+                                            null
+                                    }
+                                </div>
+
                                 {
                                     item.childrens ?
-                                        <ExpandMoreIcon
-                                            sx={{
-                                                fontSize: "1.25rem",
-                                                fontWeight: 700,
-                                                marginLeft: "4px"
-                                            }} />
+                                        <DropdownMenu
+                                            items={item.childrens}
+                                            currentPath={item.path}
+                                            dropdown={dropdown}
+                                            closeDropdown={closeDropdown}
+                                            handleNavClick={handleNavClick}
+                                        />
                                         :
                                         null
                                 }
-                            </div>
 
-                            {
-                                item.childrens ?
-                                    <DropdownMenu
-                                        items={item.childrens}
-                                        currentPath={item.path}
-                                        dropdown={dropdown}
-                                        closeDropdown={closeDropdown}
-                                        handleNavClick={handleNavClick}
-                                    />
-                                    :
-                                    null
-                            }
+                            </Box>
+                        ))
+                    }
+                </Box>
 
-                        </Box>
-                    ))
-                }
-            </Box>
+                {/* ICONS */}
 
-            {/* ICONS */}
+                <Box display="flex">
+                    <IconButton onClick={colorMode.toggleColorMode}>
+                        {theme.palette.mode === "dark" ? (
+                            <DarkModeOutlinedIcon />
+                        ) : (
+                            <LightModeOutlinedIcon />
+                        )}
+                    </IconButton>
 
-            <Box display="flex">
-                <IconButton onClick={colorMode.toggleColorMode}>
-                    {theme.palette.mode === "dark" ? (
-                        <DarkModeOutlinedIcon />
-                    ) : (
-                        <LightModeOutlinedIcon />
-                    )}
-                </IconButton>
-
-                {
-                    auth.status === 'authenticated' ?
-                        <Box
-                            display="flex"
-                            flexDirection="row"
-                            alignItems="center"
-                            justifyContent="center"
-                        >
-                            <IconButton>
-                                <NotificationsOutlinedIcon />
-                            </IconButton>
-
-                            <IconButton>
-                                <SettingsOutlinedIcon />
-                            </IconButton>
-
-                            <Box>
-                                <IconButton
-                                    id="user-button"
-                                    aria-controls={open ? 'user-menu' : undefined}
-                                    aria-haspopup="true"
-                                    aria-expanded={open ? 'true' : undefined}
-                                    onClick={handleOpenUserMenu}
-                                >
-                                    <PersonOutlinedIcon />
+                    {
+                        auth.status === 'authenticated' ?
+                            <Box
+                                display="flex"
+                                flexDirection="row"
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <IconButton>
+                                    <NotificationsOutlinedIcon />
                                 </IconButton>
-                                <Menu
-                                    id="user-menu"
-                                    anchorEl={anchorEl}
-                                    open={open}
-                                    onClose={handleCloseUserMenu}
-                                    MenuListProps={{
-                                        'aria-labelledby': 'user-menu-btn',
-                                    }}
-                                >
-                                    <MenuItem
-                                        onClick={() => handleCloseUserMenu('/profile')}
-                                    >
-                                        Profile
-                                    </MenuItem>
 
-                                    <MenuItem
-                                        onClick={() => {
-                                            handleCloseUserMenu();
-                                            logoutUser();
+                                <IconButton>
+                                    <SettingsOutlinedIcon />
+                                </IconButton>
+
+                                <Box>
+                                    <IconButton
+                                        id="user-button"
+                                        aria-controls={open ? 'user-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                        onClick={handleOpenUserMenu}
+                                    >
+                                        <PersonOutlinedIcon />
+                                    </IconButton>
+                                    <Menu
+                                        id="user-menu"
+                                        anchorEl={anchorEl}
+                                        open={open}
+                                        onClose={handleCloseUserMenu}
+                                        MenuListProps={{
+                                            'aria-labelledby': 'user-menu-btn',
+                                        }}
+                                        sx={{
+                                            '& .MuiMenu-paper': {
+                                                width: '20ch',
+                                                bgcolor: colors.background,
+                                                color: colors.primary[100],
+                                                borderRadius: "4px",
+                                            },
+                                            '& .MuiMenuItem-root': {
+                                                '&:hover': {
+                                                    backgroundColor: colors.grey[800],
+                                                }
+                                            }
                                         }}
                                     >
-                                        Logout
-                                    </MenuItem>
-                                </Menu>
-                            </Box>
-                        </Box>
-                        :
-                        <IconButton
-                            onClick={() => handleNavClick({ path: '/login' })}
-                        >
-                            <LoginIcon />
-                        </IconButton>
-                }
+                                        <MenuItem
+                                            onClick={() => handleCloseUserMenu('/profile')}
+                                        >
+                                            Profile
+                                        </MenuItem>
 
-                {/* Mobile Nav Toggle */}
+                                        <MenuItem
+                                            onClick={() => {
+                                                handleCloseUserMenu();
+                                                logoutUser();
+                                            }}
+                                        >
+                                            Logout
+                                        </MenuItem>
+                                    </Menu>
+                                </Box>
+                            </Box>
+                            :
+                            <IconButton
+                                onClick={() => handleNavClick({ path: '/login' })}
+                            >
+                                <LoginIcon />
+                            </IconButton>
+                    }
+
+                    {/* Mobile Nav Toggle */}
+
+                    {
+                        mobileNav ?
+                            <IconButton
+                                onClick={() => setShowMobileMenu((prev) => !prev)}
+                            >
+                                <MenuOutlinedIcon />
+                            </IconButton>
+                            :
+                            null
+                    }
+                </Box>
+
+                {/* Mobile Nav */}
 
                 {
                     mobileNav ?
-                        <IconButton
-                            onClick={() => setShowMobileMenu((prev) => !prev)}
+                        <Box
+                            position="absolute"
+                            display={showMobileMenu ? "flex" : "none"}
+                            flexDirection="column"
+                            alignItems="flex-start"
+                            justifyContent="flex-start"
+                            zIndex={1000}
+                            top="0"
+                            right={showMobileMenu ? "0" : "calc(-100% + 20rem)"}
+                            bgcolor={colors.dialog}
+                            width="50%"
+                            minWidth="20rem"
+                            maxWidth="25rem"
+                            height="100vh"
+                            transition="all 1s ease-in-out"
+                            boxShadow={showMobileMenu ? "0 0 10px 0 rgba(0,0,0,0.1)" : "none"}
+                            p="1rem"
                         >
-                            <MenuOutlinedIcon />
-                        </IconButton>
+                            <IconButton
+                                onClick={() => setShowMobileMenu(false)}
+                            >
+                                <CloseIcon
+                                    sx={{
+                                        fontSize: "2rem",
+                                        color: colors.grey[200]
+                                    }}
+                                />
+                            </IconButton>
+
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                                alignItems="flex-start"
+                                justifyContent="flex-start"
+                            >
+                                {
+                                    menuItems.map((item, index) => (
+                                        <Box
+                                            key={`link-${item.title}${index}`}
+                                            display="flex"
+                                            flexDirection="row"
+                                            alignItems="center"
+                                            justifyContent="center"
+                                            mt={2}
+                                            mb={2}
+                                            position="relative"
+                                        >
+                                            <div
+                                                onClick={() => handleNavClick(item)}
+                                                style={{
+                                                    textDecoration: "none",
+                                                    fontSize: "1rem",
+                                                    display: "flex",
+                                                    flexDirection: "row",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    cursor: "pointer",
+                                                    color: (path == item.path ||
+                                                        item.childrens?.find(e => e.path === path)) ?
+                                                        colors.accent :
+                                                        colors.grey[200],
+                                                    fontWeight: (path == item.path ||
+                                                        item.childrens?.find(e => e.path === path)) ?
+                                                        "bold" :
+                                                        "normal",
+                                                    transition: "all 0.3s ease-in-out",
+                                                    borderBottom: path == item.path ?
+                                                        `2px solid ${colors.accent}` :
+                                                        "none",
+                                                }}
+                                            >
+                                                {item.title}
+                                                {
+                                                    item.childrens &&
+                                                    <ExpandMoreIcon
+                                                        sx={{
+                                                            fontSize: "1.25rem",
+                                                            fontWeight: 700,
+                                                            marginLeft: "4px"
+                                                        }} />
+                                                }
+                                            </div>
+
+                                            {
+                                                item.childrens ?
+                                                    <DropdownMenu
+                                                        items={item.childrens}
+                                                        currentPath={item.path}
+                                                        dropdown={dropdown}
+                                                        closeDropdown={closeDropdown}
+                                                        handleNavClick={handleNavClick}
+                                                    />
+                                                    :
+                                                    null
+                                            }
+                                        </Box>
+                                    ))
+                                }
+                            </Box>
+                        </Box>
                         :
                         null
                 }
             </Box>
-
-            {/* Mobile Nav */}
-
-            {
-                mobileNav ?
-                    <Box
-                        position="absolute"
-                        display={showMobileMenu ? "flex" : "none"}
-                        flexDirection="column"
-                        alignItems="flex-start"
-                        justifyContent="flex-start"
-                        zIndex={1000}
-                        top="0"
-                        right={showMobileMenu ? "0" : "calc(-100% + 20rem)"}
-                        bgcolor={colors.dialog}
-                        width="50%"
-                        minWidth="20rem"
-                        maxWidth="25rem"
-                        height="100vh"
-                        transition="all 1s ease-in-out"
-                        boxShadow={showMobileMenu ? "0 0 10px 0 rgba(0,0,0,0.1)" : "none"}
-                        p="1rem"
-                    >
-                        <IconButton
-                            onClick={() => setShowMobileMenu(false)}
-                        >
-                            <CloseIcon
-                                sx={{
-                                    fontSize: "2rem",
-                                    color: colors.grey[200]
-                                }}
-                            />
-                        </IconButton>
-
-                        <Box
-                            display="flex"
-                            flexDirection="column"
-                            alignItems="flex-start"
-                            justifyContent="flex-start"
-                        >
-                            {
-                                menuItems.map((item, index) => (
-                                    <Box
-                                        key={`link-${item.title}${index}`}
-                                        display="flex"
-                                        flexDirection="row"
-                                        alignItems="center"
-                                        justifyContent="center"
-                                        mt={2}
-                                        mb={2}
-                                        position="relative"
-                                    >
-                                        <div
-                                            onClick={() => handleNavClick(item)}
-                                            style={{
-                                                textDecoration: "none",
-                                                fontSize: "1rem",
-                                                display: "flex",
-                                                flexDirection: "row",
-                                                alignItems: "center",
-                                                justifyContent: "center",
-                                                cursor: "pointer",
-                                                color: (path == item.path ||
-                                                    item.childrens?.find(e => e.path === path)) ?
-                                                    colors.accent :
-                                                    colors.grey[200],
-                                                fontWeight: (path == item.path ||
-                                                    item.childrens?.find(e => e.path === path)) ?
-                                                    "bold" :
-                                                    "normal",
-                                                transition: "all 0.3s ease-in-out",
-                                                borderBottom: path == item.path ?
-                                                    `2px solid ${colors.accent}` :
-                                                    "none",
-                                            }}
-                                        >
-                                            {item.title}
-                                            {
-                                                item.childrens &&
-                                                <ExpandMoreIcon
-                                                    sx={{
-                                                        fontSize: "1.25rem",
-                                                        fontWeight: 700,
-                                                        marginLeft: "4px"
-                                                    }} />
-                                            }
-                                        </div>
-
-                                        {
-                                            item.childrens ?
-                                                <DropdownMenu
-                                                    items={item.childrens}
-                                                    currentPath={item.path}
-                                                    dropdown={dropdown}
-                                                    closeDropdown={closeDropdown}
-                                                    handleNavClick={handleNavClick}
-                                                />
-                                                :
-                                                null
-                                        }
-                                    </Box>
-                                ))
-                            }
-                        </Box>
-                    </Box>
-                    :
-                    null
-            }
         </Box>
     );
 };

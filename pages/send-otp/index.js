@@ -76,7 +76,7 @@ const SendOtp = () => {
     return (
         <ExpandedBox>
             <Head>
-                <title>Send OTP - NixLab Technologies</title>
+                <title>Send OTP</title>
             </Head>
 
             <Backdrop
