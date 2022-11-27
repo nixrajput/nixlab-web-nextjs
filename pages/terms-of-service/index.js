@@ -829,4 +829,4 @@ const TermsOfService = () => {
     )
 }
 
-export default AppWrap(TermsOfService, 'Privacy-Policy');
+export default AppWrap(TermsOfService);

@@ -1,67 +1,15 @@
 import styles from '../../styles/privacy.module.scss';
 import Head from 'next/head';
-import { Box, useTheme } from "@mui/material";
 import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
-import { tokens } from "../../theme/theme";
 import Intro from './Intro';
 import Scopes from './Scopes';
 import InfoWeCollect from './InfoWeCollect';
 import WhyWeCollectInfo from './WhyWeCollectInfo';
-
-
-
-const whyWeCollect = [
-    {
-        id: 1,
-        text: "To help us identify you when you log onto the Application and when you register an account with us, and, to validate, authorize and map a specific profile with an authorized user.",
-    },
-    {
-        id: 2,
-        text: "To enhance the quality of the Services that we provide and improve your experience during browsing.",
-    },
-    {
-        id: 3,
-        text: "For providing location-based services, as and where requested by you.",
-    },
-    {
-        id: 4,
-        text: "For the performance of legal obligations.",
-    },
-    {
-        id: 5,
-        text: "To communicate with you.",
-    },
-    {
-        id: 6,
-        text: "To provide you with news, special offers, general information about other products and services along with marketing information and surveys, as agreed to by you.",
-    },
-    {
-        id: 7,
-        text: "To provide and process service requests initiated by you.",
-    },
-];
-
-const WhenWeShare = [
-    {
-        id: 1,
-        text: "We may share any information with our trusted partners or third parties who provide us with infrastructure support services, for meeting the obligations agreed to between you and us. We may also share aggregated, non-personally identifiable information publicly and with our partners, like publishers, advertisers or connected sites to show trends about the general use of our Services. We will seek your consent prior to using or sharing your personal information for any other purpose, if so, identified at a later stage.",
-    },
-    {
-        id: 2,
-        text: "We may also use your information to perform analytics and conduct customer research, to determine your interest, for identifying content that generates sales and to analyse traffic patterns.",
-    },
-    {
-        id: 3,
-        text: "We also use your information to market to you as per the laws of your country, and to the extent permissible.",
-    },
-    {
-        id: 4,
-        text: "You have the ability to allow us to share your information to third parties so that you can avail their services. You may disable or limit such sharing at any time.",
-    },
-];
+import WhenWeShareInfo from './WhenWeShareInfo';
+import ChangeOfPolicy from './ChangeOfPolicy';
 
 const DiscloserOfInformation = [
     {
@@ -146,11 +94,8 @@ const Children = [
 
 const PersonalDataOfOthers = "In some situations, you may provide personal data of other individuals (family, friends, likewise) to us. If you provide us with such personal data, you represent and warrant that you have obtained their consent for their Personal Information to be collected, used and disclosed as set out in this Privacy Policy.";
 
-const ChangesToPolicy = "We Rippl make periodical changes to the Privacy Policy. Any significant changes we may make to our Privacy Policy in the future will be promptly notified to Users by posting the relevant terms in a prominent position on the webpage. The new terms may be displayed on the webpage, and you will be required to read and accept them to continue your use of the Services.";
 
 const PrivacyPolicy = () => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
 
     return (
         <ExpandedBox
@@ -181,27 +126,7 @@ const PrivacyPolicy = () => {
 
                 {/* When We Share Your Information */}
 
-                <div className={styles.privacy__text_heading}>
-                    4. When We Share Your Information
-                </div>
-
-                <div className={styles.privacy__content_list}>
-                    {
-                        WhenWeShare.map((scope, index) => (
-                            <div key={index} className={styles.privacy__text}>
-
-                                <p className={styles.privacy__text__title}>
-                                    {scope.id}.
-                                </p>
-
-                                <p className={styles.privacy__text__content}>
-                                    {scope.text}
-                                </p>
-
-                            </div>
-                        ))
-                    }
-                </div>
+                <WhenWeShareInfo />
 
                 {/* Disclosure Of Information */}
 
@@ -454,23 +379,7 @@ const PrivacyPolicy = () => {
 
                 {/* Changes to this Privacy Policy */}
 
-                <div className={styles.privacy__text_heading}>
-                    14. Changes to this Privacy Policy
-                </div>
-
-                <div className={styles.privacy__content_list}>
-                    <p>
-                        {ChangesToPolicy}
-                    </p>
-                </div>
-
-                <div className={styles.privacy__content_list}>
-                    <p>
-                        For queries regarding processing of personal data, users can write
-                        to us at <a href="mailto:nixlab.in@gmail.com">nixlab.in@gmail.com</a>.
-                    </p>
-                </div>
-
+                <ChangeOfPolicy />
 
                 {/* END */}
             </ResponsiveBox>
@@ -478,4 +387,4 @@ const PrivacyPolicy = () => {
     )
 }
 
-export default AppWrap(PrivacyPolicy, 'Privacy-Policy');
+export default AppWrap(PrivacyPolicy);
