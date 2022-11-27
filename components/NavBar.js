@@ -88,8 +88,11 @@ const Navbar = () => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleCloseUserMenu = () => {
+    const handleCloseUserMenu = (path) => {
         setAnchorEl(null);
+        if (path) {
+            router.push(path);
+        }
     };
 
     const logoutUser = async () => {
@@ -361,15 +364,9 @@ const Navbar = () => {
                                     }}
                                 >
                                     <MenuItem
-                                        onClick={handleCloseUserMenu}
+                                        onClick={() => handleCloseUserMenu('/profile')}
                                     >
                                         Profile
-                                    </MenuItem>
-
-                                    <MenuItem
-                                        onClick={handleCloseUserMenu}
-                                    >
-                                        My account
                                     </MenuItem>
 
                                     <MenuItem

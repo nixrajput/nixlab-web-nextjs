@@ -17,11 +17,11 @@ const ExpandedBox = ({ children, ...props }) => {
             position="relative"
             bgcolor={colors.background}
             p={{
-                xs: '4rem 1rem',
-                sm: '4rem 1.5rem',
-                md: '4rem 2rem',
-                lg: '6rem 2rem',
-                xl: '6rem 2rem'
+                xs: '2rem 1rem',
+                sm: '2rem 1rem',
+                md: '2rem 2rem',
+                lg: '3rem 2rem',
+                xl: '3rem 2rem'
             }}
             {...props}
         >
