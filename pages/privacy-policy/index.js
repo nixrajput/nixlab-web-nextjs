@@ -4,13 +4,13 @@ import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
-import Intro from './Intro';
-import Scopes from './Scopes';
-import InfoWeCollect from './InfoWeCollect';
-import WhyWeCollectInfo from './WhyWeCollectInfo';
-import WhenWeShareInfo from './WhenWeShareInfo';
-import ChangeOfPolicy from './ChangeOfPolicy';
-import PersonalDataOfOthers from './PersonalDataOfOthers.js';
+import Intro from '../../components/privacy-policy/Intro';
+import Scopes from '../../components/privacy-policy/Scopes';
+import InfoWeCollect from '../../components/privacy-policy/InfoWeCollect';
+import WhyWeCollectInfo from '../../components/privacy-policy/WhyWeCollectInfo';
+import WhenWeShareInfo from '../../components/privacy-policy/WhenWeShareInfo';
+import ChangeOfPolicy from '../../components/privacy-policy/ChangeOfPolicy';
+import PersonalDataOfOthers from '../../components/privacy-policy/PersonalDataOfOthers.js';
 
 const DiscloserOfInformation = [
     {
