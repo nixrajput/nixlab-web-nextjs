@@ -16,13 +16,7 @@ const ExpandedBox = ({ children, ...props }) => {
             minHeight="calc(100vh - 80px)"
             position="relative"
             bgcolor={colors.background}
-            p={{
-                xs: '2rem 1rem',
-                sm: '2rem 1rem',
-                md: '2rem 2rem',
-                lg: '3rem 2rem',
-                xl: '3rem 2rem'
-            }}
+            p="1rem"
             {...props}
         >
             {children}

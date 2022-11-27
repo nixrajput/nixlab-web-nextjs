@@ -10,11 +10,12 @@ const PageTitle = ({ children, ...props }) => {
         <Typography
             textAlign="center"
             sx={{
-                fontFamily: "Proxima Nova",
                 fontSize: "1.75rem",
+                lineHeight: "1",
                 fontWeight: "700",
                 textTransform: "uppercase",
-                marginBottom: "2rem",
+                mt: "1rem",
+                mb: "1.5rem",
                 wordSpacing: "0.25rem",
                 color: colors.primary[100],
                 transition: "all 0.25s ease-in-out",

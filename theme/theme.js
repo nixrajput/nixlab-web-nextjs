@@ -12,6 +12,8 @@ export const tokens = (mode) => ({
       error: "#F44336",
       warning: "#F09C00",
       accent: "#e3096f",
+      divider: "#2A3A5B",
+      shadow: "rgba(0, 0, 0, 0.1)",
       grey: {
         100: "#e0e0e0",
         200: "#c2c2c2",
@@ -75,6 +77,8 @@ export const tokens = (mode) => ({
       error: "#F44336",
       warning: "#F09C00",
       accent: "#e3096f",
+      divider: "#E0E0E0",
+      shadow: "rgba(0, 0, 0, 0.1)",
       grey: {
         100: "#141414",
         200: "#292929",
@@ -176,30 +180,30 @@ export const themeSettings = (mode) => {
         }),
     },
     typography: {
-      fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+      fontFamily: ["Proxima Nova", "sans-serif"].join(","),
       fontSize: 12,
       h1: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Proxima Nova", "sans-serif"].join(","),
         fontSize: 40,
       },
       h2: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Proxima Nova", "sans-serif"].join(","),
         fontSize: 32,
       },
       h3: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Proxima Nova", "sans-serif"].join(","),
         fontSize: 24,
       },
       h4: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Proxima Nova", "sans-serif"].join(","),
         fontSize: 20,
       },
       h5: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Proxima Nova", "sans-serif"].join(","),
         fontSize: 16,
       },
       h6: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Proxima Nova", "sans-serif"].join(","),
         fontSize: 14,
       },
     },

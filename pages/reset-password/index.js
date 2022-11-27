@@ -87,7 +87,15 @@ const ResetPassword = () => {
 
 
     return (
-        <ExpandedBox>
+        <ExpandedBox
+            justifyContent={{
+                xs: "flex-start",
+                sm: "center",
+                md: "center",
+                lg: "center",
+                xl: "center",
+            }}
+        >
             <Head>
                 <title>Reset Password</title>
             </Head>

@@ -97,7 +97,15 @@ const Login = () => {
 
 
     return (
-        <ExpandedBox>
+        <ExpandedBox
+            justifyContent={{
+                xs: "flex-start",
+                sm: "center",
+                md: "center",
+                lg: "center",
+                xl: "center",
+            }}
+        >
             <Head>
                 <title>Login</title>
             </Head>
@@ -185,7 +193,7 @@ const Login = () => {
                             ||
                             profileDetails.status === 'loading'
                         }
-                        className="app__filled_btn app__form_control"
+                        className="app__filled_btn"
                     />
                 </Box>
 

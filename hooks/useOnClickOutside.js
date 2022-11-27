@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 
-function useOnClickOutside(ref, handler) {
+function useOnClickOutside(ref, dropdown, handler) {
     useEffect(() => {
         const listener = (event) => {
-            if (ref.current && !ref.current.contains(event.target)) {
+            if (dropdown && ref.current &&
+                !ref.current.contains(event.target)) {
                 handler(event);
             }
         };
@@ -14,7 +15,7 @@ function useOnClickOutside(ref, handler) {
             document.removeEventListener("touchstart", listener);
         };
     },
-        [ref, handler]
+        [ref, handler, dropdown]
     );
 }
 

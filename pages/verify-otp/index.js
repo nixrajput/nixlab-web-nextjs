@@ -74,7 +74,15 @@ const VerifyOtp = () => {
 
 
     return (
-        <ExpandedBox>
+        <ExpandedBox
+            justifyContent={{
+                xs: "flex-start",
+                sm: "center",
+                md: "center",
+                lg: "center",
+                xl: "center",
+            }}
+        >
             <Head>
                 <title>Verify OTP</title>
             </Head>

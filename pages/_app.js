@@ -13,7 +13,7 @@ import {
   loadProfileDetailsAction,
   getProfileDetailsAction,
 } from '../redux/actions';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/navbar/NavBar';
 
 function App({ Component, pageProps }) {
   const [theme, colorMode] = useMode();
@@ -22,7 +22,7 @@ function App({ Component, pageProps }) {
   const profileDetails = useSelector((state) => state.profileDetails);
   const dispatch = useDispatch();
 
-  const snackbarRef = useRef(null)
+  const snackbarRef = useRef(null);
 
   useEffect(() => {
     const loadUserDetails = async () => {

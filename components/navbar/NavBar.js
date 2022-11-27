@@ -5,22 +5,19 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Box, IconButton, useTheme, } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
-import { ColorModeContext, tokens } from "../theme/theme";
-import usePath from "../hooks/usePath";
-import DropdownMenu from "./DropdownMenu";
+import { ColorModeContext, tokens } from "../../theme/theme";
 import {
     logoutAction
-} from '../redux/actions';
+} from '../../redux/actions';
+import MenuItems from "./MenuItems";
 
 const menuItems = [
     {
@@ -76,11 +73,8 @@ const Navbar = () => {
 
     const [mobileNav, setMobileNav] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
-    const [dropdown, setDropdown] = useState(null);
     const [scrolled, setScrolled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
-
-    const path = usePath();
 
     const open = Boolean(anchorEl);
 
@@ -99,30 +93,6 @@ const Navbar = () => {
         const logoutPromise = logoutAction(dispatch);
         await logoutPromise;
     }
-
-    const handleNavClick = (item) => {
-        if (item.childrens) {
-            if (dropdown) {
-                closeDropdown();
-            }
-            else {
-                setDropdown(item.path);
-            }
-            return;
-        }
-        if (dropdown) {
-            closeDropdown();
-        }
-
-        if (mobileNav && showMobileMenu) {
-            setShowMobileMenu(false);
-        }
-        router.push(item.path);
-    }
-
-    const closeDropdown = () => {
-        setDropdown(null);
-    };
 
     useEffect(() => {
         window.addEventListener("scroll", function () {
@@ -198,6 +168,8 @@ const Navbar = () => {
             right="0"
             width="100%"
             maxWidth="1024px"
+            height="80px"
+            maxHeight="80px"
             bgcolor={colors.background}
             display="flex"
             flexDirection="row"
@@ -268,65 +240,13 @@ const Navbar = () => {
                 >
                     {
                         menuItems.map((item, index) => (
-                            <Box
-                                key={`link-${item.title}${index}`}
-                                display="flex"
-                                flexDirection="row"
-                                alignItems="center"
-                                justifyContent="center"
-                                ml={2}
-                                mr={2}
-                                position="relative"
-                            >
-                                <div
-                                    onClick={() => handleNavClick(item)}
-                                    style={{
-                                        textDecoration: "none",
-                                        fontSize: "1rem",
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        cursor: "pointer",
-                                        color: (path == item.path ||
-                                            item.childrens?.find(e => e.path === path)) ?
-                                            colors.accent :
-                                            colors.grey[200],
-                                        fontWeight: (path == item.path ||
-                                            item.childrens?.find(e => e.path === path)) ?
-                                            "bold" :
-                                            "normal",
-                                        transition: "all 0.3s ease-in-out",
-                                    }}
-                                >
-                                    {item.title}
-                                    {
-                                        item.childrens ?
-                                            <ExpandMoreIcon
-                                                sx={{
-                                                    fontSize: "1.25rem",
-                                                    fontWeight: 700,
-                                                    marginLeft: "4px"
-                                                }} />
-                                            :
-                                            null
-                                    }
-                                </div>
-
-                                {
-                                    item.childrens ?
-                                        <DropdownMenu
-                                            items={item.childrens}
-                                            currentPath={item.path}
-                                            dropdown={dropdown}
-                                            closeDropdown={closeDropdown}
-                                            handleNavClick={handleNavClick}
-                                        />
-                                        :
-                                        null
-                                }
-
-                            </Box>
+                            <MenuItems
+                                key={`menu-item-${index}`}
+                                item={item}
+                                mobileNav={mobileNav}
+                                showMobileMenu={showMobileMenu}
+                                closeMobileMenu={() => setShowMobileMenu(false)}
+                            />
                         ))
                     }
                 </Box>
@@ -352,10 +272,6 @@ const Navbar = () => {
                             >
                                 <IconButton>
                                     <NotificationsOutlinedIcon />
-                                </IconButton>
-
-                                <IconButton>
-                                    <SettingsOutlinedIcon />
                                 </IconButton>
 
                                 <Box>
@@ -409,7 +325,12 @@ const Navbar = () => {
                             </Box>
                             :
                             <IconButton
-                                onClick={() => handleNavClick({ path: '/login' })}
+                                onClick={() => {
+                                    if (mobileNav && showMobileMenu) {
+                                        setShowMobileMenu(false);
+                                    }
+                                    router.push('/login');
+                                }}
                             >
                                 <LoginIcon />
                             </IconButton>
@@ -421,6 +342,10 @@ const Navbar = () => {
                         mobileNav ?
                             <IconButton
                                 onClick={() => setShowMobileMenu((prev) => !prev)}
+                                sx={{
+                                    mr: "0",
+                                    pr: "0",
+                                }}
                             >
                                 <MenuOutlinedIcon />
                             </IconButton>
@@ -470,65 +395,13 @@ const Navbar = () => {
                             >
                                 {
                                     menuItems.map((item, index) => (
-                                        <Box
-                                            key={`link-${item.title}${index}`}
-                                            display="flex"
-                                            flexDirection="row"
-                                            alignItems="center"
-                                            justifyContent="center"
-                                            mt={2}
-                                            mb={2}
-                                            position="relative"
-                                        >
-                                            <div
-                                                onClick={() => handleNavClick(item)}
-                                                style={{
-                                                    textDecoration: "none",
-                                                    fontSize: "1rem",
-                                                    display: "flex",
-                                                    flexDirection: "row",
-                                                    alignItems: "center",
-                                                    justifyContent: "center",
-                                                    cursor: "pointer",
-                                                    color: (path == item.path ||
-                                                        item.childrens?.find(e => e.path === path)) ?
-                                                        colors.accent :
-                                                        colors.grey[200],
-                                                    fontWeight: (path == item.path ||
-                                                        item.childrens?.find(e => e.path === path)) ?
-                                                        "bold" :
-                                                        "normal",
-                                                    transition: "all 0.3s ease-in-out",
-                                                    borderBottom: path == item.path ?
-                                                        `2px solid ${colors.accent}` :
-                                                        "none",
-                                                }}
-                                            >
-                                                {item.title}
-                                                {
-                                                    item.childrens &&
-                                                    <ExpandMoreIcon
-                                                        sx={{
-                                                            fontSize: "1.25rem",
-                                                            fontWeight: 700,
-                                                            marginLeft: "4px"
-                                                        }} />
-                                                }
-                                            </div>
-
-                                            {
-                                                item.childrens ?
-                                                    <DropdownMenu
-                                                        items={item.childrens}
-                                                        currentPath={item.path}
-                                                        dropdown={dropdown}
-                                                        closeDropdown={closeDropdown}
-                                                        handleNavClick={handleNavClick}
-                                                    />
-                                                    :
-                                                    null
-                                            }
-                                        </Box>
+                                        <MenuItems
+                                            key={`menu-item-${index}`}
+                                            item={item}
+                                            mobileNav={mobileNav}
+                                            showMobileMenu={showMobileMenu}
+                                            closeMobileMenu={() => setShowMobileMenu(false)}
+                                        />
                                     ))
                                 }
                             </Box>
