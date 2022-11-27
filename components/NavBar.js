@@ -207,7 +207,7 @@ const Navbar = () => {
             zIndex="100"
             boxShadow={
                 scrolled ?
-                    "10px 0 10px 20px rgba(0,0,0,0.1)"
+                    "0 0.5rem 0.5rem rgba(0, 0, 0, 0.08)"
                     :
                     "none"
             }
