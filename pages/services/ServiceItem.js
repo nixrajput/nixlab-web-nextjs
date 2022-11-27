@@ -32,7 +32,6 @@ const ServiceItem = ({ item, ...props }) => {
             {...props}
         >
             <Box
-                className="service__image"
                 position='relative'
                 width="50%"
                 maxWidth="8rem"
@@ -47,6 +46,8 @@ const ServiceItem = ({ item, ...props }) => {
                         aspectRatio: '1',
                         objectFit: 'contain'
                     }}
+                    placeholder="blur"
+                    blurDataURL={item.image}
                 />
             </Box>
 

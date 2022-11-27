@@ -10,6 +10,7 @@ import InfoWeCollect from './InfoWeCollect';
 import WhyWeCollectInfo from './WhyWeCollectInfo';
 import WhenWeShareInfo from './WhenWeShareInfo';
 import ChangeOfPolicy from './ChangeOfPolicy';
+import PersonalDataOfOthers from './PersonalDataOfOthers.js';
 
 const DiscloserOfInformation = [
     {
@@ -91,8 +92,6 @@ const Children = [
     "You must have attained the age of majority to be able to use and access our Services. If you are a minor in your jurisdiction, your registration and use of our Services must be with the supervision of an adult.",
     "As a parent or legal guardian, please do not allow your minors under your care to submit Personal Information to us. In the event that such personal data of a minor is disclosed to us, you hereby consent to the processing of the minor’s personal data and accept and agree to be bound by this Privacy Policy and take responsibility for his or her actions."
 ];
-
-const PersonalDataOfOthers = "In some situations, you may provide personal data of other individuals (family, friends, likewise) to us. If you provide us with such personal data, you represent and warrant that you have obtained their consent for their Personal Information to be collected, used and disclosed as set out in this Privacy Policy.";
 
 
 const PrivacyPolicy = () => {
@@ -367,15 +366,7 @@ const PrivacyPolicy = () => {
 
                 {/* Personal Data Of Others */}
 
-                <div className={styles.privacy__text_heading}>
-                    13. Personal Data Of Others
-                </div>
-
-                <div className={styles.privacy__content_list}>
-                    <p>
-                        {PersonalDataOfOthers}
-                    </p>
-                </div>
+                <PersonalDataOfOthers />
 
                 {/* Changes to this Privacy Policy */}
 

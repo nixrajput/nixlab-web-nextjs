@@ -47,6 +47,8 @@ const ProjectItem = ({ item, ...props }) => {
                         aspectRatio: '1',
                         objectFit: 'contain'
                     }}
+                    placeholder="blur"
+                    blurDataURL={item.image}
                 />
             </Box>
 
