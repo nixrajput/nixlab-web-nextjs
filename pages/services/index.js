@@ -5,7 +5,7 @@ import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
 import Data from '../../data';
-import ServiceItem from './ServiceItem';
+import ServiceItem from '../../components/ServiceItem';
 
 const Services = () => {
     return (

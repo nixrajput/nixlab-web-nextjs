@@ -1,8 +1,8 @@
 import { Box, useTheme } from "@mui/material";
-import { tokens } from "../../theme/theme";
+import { tokens } from "../theme/theme";
 import Image from "next/image";
 
-const ProjectItem = ({ item, ...props }) => {
+const ServiceItem = ({ item, ...props }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -32,7 +32,6 @@ const ProjectItem = ({ item, ...props }) => {
             {...props}
         >
             <Box
-                className="service__image"
                 position='relative'
                 width="50%"
                 maxWidth="8rem"
@@ -98,7 +97,7 @@ const ProjectItem = ({ item, ...props }) => {
                                         },
                                         ':last-child': {
                                             marginRight: '0'
-                                        }
+                                        },
                                     }}
                                 >
                                     {item}
@@ -109,20 +108,9 @@ const ProjectItem = ({ item, ...props }) => {
                             null
                     }
                 </Box>
-
-                <a
-                    href={item.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                        marginTop: '0.5rem'
-                    }}
-                >
-                    GitHub
-                </a>
             </Box>
         </Box>
     )
 }
 
-export default ProjectItem;
+export default ServiceItem;

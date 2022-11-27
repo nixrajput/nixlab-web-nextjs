@@ -5,7 +5,7 @@ import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
 import Data from '../../data';
-import ProjectItem from './ProjectItem';
+import ProjectItem from '../../components/ProjectItem';
 
 const Projects = () => {
     return (
