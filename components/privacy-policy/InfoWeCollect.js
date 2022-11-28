@@ -102,7 +102,7 @@ const InfoWeCollect = () => {
                                 marginRight: '0.5rem',
                             }}
                         >
-                            1.
+                            •
                         </p>
 
                         <p style={{
@@ -129,7 +129,7 @@ const InfoWeCollect = () => {
                                 marginRight: '0.5rem',
                             }}
                         >
-                            2.
+                            •
                         </p>
 
                         <p style={{
@@ -213,7 +213,7 @@ const InfoWeCollect = () => {
                                         marginRight: '0.5rem',
                                     }}
                                 >
-                                    {index + 1}.
+                                    •
                                 </p>
 
                                 <p style={{
@@ -285,7 +285,7 @@ const InfoWeCollect = () => {
                                         marginRight: '0.5rem',
                                     }}
                                 >
-                                    {index + 1}.
+                                    •
                                 </p>
 
                                 <p style={{
@@ -401,7 +401,7 @@ const InfoWeCollect = () => {
                                         marginRight: '0.5rem',
                                     }}
                                 >
-                                    {index + 1}.
+                                    •
                                 </p>
 
                                 <p style={{
@@ -476,8 +476,6 @@ const InfoWeCollect = () => {
                         personal data we have collected from users.`}
                     </p>
                 </Box>
-
-
             </Box>
         </Box>
     )
