@@ -4,7 +4,7 @@ import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
-import { services } from '../../data';
+import { serviceDetailsList } from '../../data';
 import ServiceItem from '../../components/ServiceItem';
 
 const Services = () => {
@@ -54,7 +54,7 @@ const Services = () => {
                     alignItems="center"
                 >
                     {
-                        services.map((service, index) => {
+                        serviceDetailsList.map((service, index) => {
                             return (
                                 <ServiceItem
                                     key={`service-${index}`}

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import ExpandedBox from './ExpandedBox';
 import ResponsiveBox from './ResponsiveBox';
 import FlexRow from './FlexRow';
-import { description, services } from '../data';
+import { description, serviceDetailsList } from '../data';
 
 const Hero = () => {
     const theme = useTheme();
@@ -132,7 +132,7 @@ const Hero = () => {
                     flexDirection="column"
                 >
                     {
-                        services.map((item, index) => (
+                        serviceDetailsList.map((item, index) => (
                             <FlexRow
                                 key={`service-${index}`}
                                 position="relative"

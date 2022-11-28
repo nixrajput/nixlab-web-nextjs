@@ -1,37 +1,11 @@
 import Head from 'next/head';
 import { Box, useTheme } from "@mui/material";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
 import { tokens } from "../../theme/theme";
-
-const socialLinks = [
-    {
-        id: 1,
-        url: 'https://www.instagram.com/nixrajput/',
-        icon: <InstagramIcon />
-    },
-    {
-        id: 2,
-        url: 'https://www.facebook.com/nixrajput07/',
-        icon: <FacebookIcon />
-    },
-    {
-        id: 3,
-        url: 'https://twitter.com/nixrajput07/',
-        icon: <TwitterIcon />
-    },
-    {
-        id: 4,
-        url: 'https://www.linkedin.com/in/nixrajput/',
-        icon: <LinkedInIcon />
-    },
-];
+import { socialLinks } from '../../data';
 
 const Contact = () => {
     const theme = useTheme();

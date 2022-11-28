@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { Box, useTheme } from "@mui/material";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import AppWrap from "../../components/AppWrap";
@@ -6,8 +7,7 @@ import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
 import PageTitle from "../../components/PageTitle";
 import { tokens } from "../../theme/theme";
-import Image from 'next/image';
-import Data from '../../data';
+import { description, missionList, serviceList } from '../../data';
 
 const About = () => {
     const theme = useTheme();
@@ -32,7 +32,7 @@ const About = () => {
                         color: colors.primary[100],
                     }}
                 >
-                    {Data.about.description}
+                    {description}
                 </p>
 
                 {/* Services */}
@@ -47,7 +47,7 @@ const About = () => {
                 </h4>
 
                 {
-                    Data.about.services.map((service, index) => {
+                    serviceList.map((service, index) => {
                         return (
                             <Box
                                 key={`item-${index}`}
@@ -107,7 +107,7 @@ const About = () => {
                 </p>
 
                 {
-                    Data.about.mission.map((mission, index) => {
+                    missionList.map((mission, index) => {
                         return (
                             <Box
                                 key={`item-${index}`}

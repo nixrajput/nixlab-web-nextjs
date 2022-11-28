@@ -14,6 +14,7 @@ import {
   getProfileDetailsAction,
 } from '../redux/actions';
 import Navbar from '../components/navbar/NavBar';
+import Footer from '../components/footer/Footer';
 
 function App({ Component, pageProps }) {
   const [theme, colorMode] = useMode();
@@ -78,6 +79,7 @@ function App({ Component, pageProps }) {
         >
           <Navbar />
           <Component {...pageProps} />
+          <Footer />
         </SnackbarProvider>
       </ThemeProvider>
     </ColorModeContext.Provider>

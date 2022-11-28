@@ -1,6 +1,9 @@
-const Data = {};
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-export const services = [
+export const serviceDetailsList = [
     {
         image: '/mobile-app-dev.png',
         title: 'iOS & ANDROID APP DEVELOPMENT',
@@ -27,7 +30,7 @@ export const services = [
     },
 ];
 
-export const projects = [
+export const projectList = [
     {
         image: '/mobdev.svg',
         title: 'Rippl App',
@@ -65,18 +68,14 @@ export const projects = [
 
 export const description = "NixLab Technologies is a software development company based in the India. We are a team of passionate developers who are passionate about building high quality software. We are always looking for talented and creative people to join our team.";
 
-Data.about = {};
-
-Data.about.description = "NixLab Technologies is a software development company based in the India. We are a team of passionate developers who are passionate about building high quality software. We are always looking for talented and creative people to join our team.";
-
-Data.about.services = [
+export const serviceList = [
     'Mobile application development',
     'Web application development',
     'Desktop application development',
     'Backend development',
 ];
 
-Data.about.mission = [
+export const missionList = [
     'We understand needs and requirements of our customer and make technology to resolve the needs.',
     'We believe to explore new opportunities that maximize the business value, consistent growth, and sustainability.',
     'Empower our clients to respond faster and more intuitively to changing market dynamics.',
@@ -85,4 +84,25 @@ Data.about.mission = [
     'Collaborate with our clients in their continued success.'
 ];
 
-export default Data;
+export const socialLinks = [
+    {
+        id: 1,
+        url: 'https://www.instagram.com/nixrajput/',
+        icon: <InstagramIcon />
+    },
+    {
+        id: 2,
+        url: 'https://www.facebook.com/nixrajput07/',
+        icon: <FacebookIcon />
+    },
+    {
+        id: 3,
+        url: 'https://twitter.com/nixrajput07/',
+        icon: <TwitterIcon />
+    },
+    {
+        id: 4,
+        url: 'https://www.linkedin.com/in/nixrajput/',
+        icon: <LinkedInIcon />
+    },
+];

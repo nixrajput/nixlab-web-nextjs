@@ -170,7 +170,11 @@ const Navbar = () => {
             maxWidth="1024px"
             height="80px"
             maxHeight="80px"
-            bgcolor={colors.background}
+            bgcolor={
+                scrolled ?
+                    colors.dialog :
+                    colors.background
+            }
             display="flex"
             flexDirection="row"
             justifyContent="center"
@@ -179,10 +183,13 @@ const Navbar = () => {
             zIndex="100"
             boxShadow={
                 scrolled ?
-                    "0 0.5rem 0.5rem rgba(0, 0, 0, 0.08)"
+                    "0 0.1rem 0.5rem rgba(0, 0, 0, 0.1)"
                     :
                     "none"
             }
+            sx={{
+                transition: "all 0.5s ease-in-out",
+            }}
             p={{
                 xs: "1rem",
                 sm: "1rem",
@@ -201,6 +208,7 @@ const Navbar = () => {
             >
 
                 {/* LOGO */}
+
                 <Box
                     display="flex"
                     alignItems="flex-start"
@@ -209,6 +217,13 @@ const Navbar = () => {
                     height={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
                     maxHeight={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
                     position="relative"
+                    ml={{
+                        xs: "0",
+                        sm: "0",
+                        md: "0",
+                        lg: "0.5rem",
+                        xl: "0.5rem",
+                    }}
                 >
                     <Link href="/">
                         <Image
@@ -226,6 +241,7 @@ const Navbar = () => {
                 </Box>
 
                 {/* NAVBAR */}
+
                 <Box
                     display={{
                         lg: "flex",
