@@ -11,13 +11,14 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
 import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
 import { ColorModeContext, tokens } from "../../theme/theme";
 import {
     logoutAction
 } from '../../redux/actions';
-import MenuItems from "./MenuItems";
+import MenuItemButton from "./MenuItemButton";
 import CircleAvatar from "../CircleAvatar";
 
 const menuItems = [
@@ -258,7 +259,7 @@ const Navbar = () => {
                 >
                     {
                         menuItems.map((item, index) => (
-                            <MenuItems
+                            <MenuItemButton
                                 key={`menu-item-${index}`}
                                 item={item}
                                 mobileNav={mobileNav}
@@ -342,6 +343,12 @@ const Navbar = () => {
                                         </MenuItem>
 
                                         <MenuItem
+                                        // onClick={() => handleCloseUserMenu('/settings')}
+                                        >
+                                            Settings
+                                        </MenuItem>
+
+                                        <MenuItem
                                             onClick={() => {
                                                 handleCloseUserMenu();
                                                 logoutUser();
@@ -417,14 +424,16 @@ const Navbar = () => {
                             </IconButton>
 
                             <Box
+                                width="100%"
                                 display="flex"
                                 flexDirection="column"
                                 alignItems="flex-start"
                                 justifyContent="flex-start"
+                                mt="1rem"
                             >
                                 {
                                     menuItems.map((item, index) => (
-                                        <MenuItems
+                                        <MenuItemButton
                                             key={`menu-item-${index}`}
                                             item={item}
                                             mobileNav={mobileNav}

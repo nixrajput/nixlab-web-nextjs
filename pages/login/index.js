@@ -48,18 +48,17 @@ const Login = () => {
     const onClickLoginEvent = async (e) => {
         e.preventDefault();
 
-        openBackdrop();
+        const loginPromise = loginAction(dispatch, emailUsername.trim(), password.trim());
+        await loginPromise;
 
-        await loginAction(dispatch, emailUsername.trim(), password.trim());
-
-        if (auth.token && auth.status === 'authenticated') {
-            await getProfileDetailsAction(dispatch, auth.token);
+        if (auth.status === 'authenticated' && auth.token) {
+            const getProfileDetailsPromise = getProfileDetailsAction(dispatch, auth.token);
+            await getProfileDetailsPromise;
             if (profileDetails.status === 'success' && profileDetails.user) {
                 const returnUrl = location.state?.from?.pathname || '/';
                 router.replace(returnUrl);
             }
         }
-        closeBackdrop();
     }
 
     useEffect(() => {
@@ -67,6 +66,7 @@ const Login = () => {
 
         if (auth.status === 'authenticated' && auth.token &&
             profileDetails.status === 'success' && profileDetails.user) {
+            enqueueSnackbar('Login successful', { variant: 'success' });
             router.replace(returnUrl);
         }
 
@@ -211,9 +211,12 @@ const Login = () => {
                     >
                         Don&apos;t have an account?
                     </span>
-                    <Link href="/register">
-                        <div className="app__text_btn">Register</div>
-                    </Link>
+                    <div className="app__text_btn"
+                        onClick={() => router.push({
+                            pathname: '/send-otp',
+                            query: { returnUrl: '/register' },
+                        })}
+                    >Register</div>
                 </Box>
             </ResponsiveFormBox>
         </ExpandedBox>

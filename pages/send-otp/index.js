@@ -41,15 +41,8 @@ const SendOtp = () => {
     const onClickSendOtpEvent = async (e) => {
         e.preventDefault();
 
-        openBackdrop();
-
-        await sendOtpToEmailAction(dispatch, email.trim());
-
-        if (otpState.status === 'sentOtp') {
-            const returnUrl = '/verify-otp';
-            router.replace(returnUrl);
-        }
-        closeBackdrop();
+        const sendOtpPromise = sendOtpToEmailAction(dispatch, email.trim());
+        await sendOtpPromise;
     }
 
     useEffect(() => {
@@ -58,6 +51,19 @@ const SendOtp = () => {
         }
         else {
             closeBackdrop();
+        }
+
+        if (otpState.status === 'sentOtp') {
+            enqueueSnackbar('OTP sent successfully', { variant: 'success' });
+            const returnUrl = router.query.returnUrl;
+            if (returnUrl) {
+                router.push({
+                    pathname: '/verify-otp',
+                    query: { returnUrl: router.query.returnUrl },
+                });
+            } else {
+                router.push('/verify-otp');
+            }
         }
 
         if (otpState.status === 'error') {
@@ -69,7 +75,7 @@ const SendOtp = () => {
 
     }, [
         otpState.status, enqueueSnackbar, otpState.error,
-        dispatch
+        dispatch, router
     ]);
 
 

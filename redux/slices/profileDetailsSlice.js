@@ -42,6 +42,7 @@ const profileDetailsSlice = createSlice({
 
         clearError: (state, action) => {
             state.error = null;
+            state.status = 'noError';
         },
 
         clearProfileDetails: (state, action) => {

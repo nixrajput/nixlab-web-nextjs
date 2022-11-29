@@ -42,22 +42,19 @@ const ForgotPassword = () => {
     const onClickSendOtpEvent = async (e) => {
         e.preventDefault();
 
-        openBackdrop();
-
-        await forgotPasswordAction(dispatch, email.trim());
-
-        if (auth.status === 'sentOtp') {
-            const returnUrl = '/reset-password';
-            router.replace(returnUrl);
-        }
-        closeBackdrop();
+        const forgotPasswordPromise = forgotPasswordAction(dispatch, email.trim());
+        await forgotPasswordPromise;
     }
 
     useEffect(() => {
-        const returnUrl = router.query.returnUrl || '/';
+        if (auth.status === 'sentOtp') {
+            enqueueSnackbar('OTP sent successfully', { variant: 'success' });
+            router.push('/reset-password');
+        }
 
         if (auth.status === 'authenticated' && auth.token &&
             profileDetails.status === 'success' && profileDetails.user) {
+            const returnUrl = router.query.returnUrl || '/';
             router.replace(returnUrl);
         }
 

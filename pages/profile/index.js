@@ -155,19 +155,9 @@ const Profile = () => {
                                     }
                                 </p>
                             </Box>
-
-                            <button className="app__text_btn"
-                                style={{
-                                    marginTop: '1.5rem',
-                                }}
-                                onClick={logoutUser}
-                            >
-                                Logout
-                            </button>
                         </Box>
                         :
-                        <Box>
-                        </Box>
+                        null
                 }
             </ResponsiveBox>
         </ExpandedBox>

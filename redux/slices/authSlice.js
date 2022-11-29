@@ -78,6 +78,7 @@ const authSlice = createSlice({
 
         clearError: (state, action) => {
             state.error = null;
+            state.status = 'noError';
         },
     }
 });

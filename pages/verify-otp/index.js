@@ -41,15 +41,8 @@ const VerifyOtp = () => {
     const onClickResetPasswordEvent = async (e) => {
         e.preventDefault();
 
-        openBackdrop();
-
-        await verifyOtpFromEmailAction(dispatch, otp.trim(), otpState.email);
-
-        if (otpState.status === 'verifiedOtp') {
-            const returnUrl = location.state?.from?.pathname || '/';
-            router.replace(returnUrl);
-        }
-        closeBackdrop();
+        const veryOtpPromise = verifyOtpFromEmailAction(dispatch, otp.trim(), otpState.email);
+        await veryOtpPromise;
     }
 
     useEffect(() => {
@@ -58,6 +51,14 @@ const VerifyOtp = () => {
         }
         else {
             closeBackdrop();
+        }
+
+        if (otpState.status === 'verifiedOtp') {
+            enqueueSnackbar('OTP verified successfully', { variant: 'success' });
+            const returnUrl = router.query.returnUrl;
+            if (returnUrl) {
+                router.replace(returnUrl);
+            }
         }
 
         if (otpState.status === 'error') {
@@ -69,7 +70,7 @@ const VerifyOtp = () => {
 
     }, [
         otpState.status, enqueueSnackbar, otpState.error,
-        dispatch
+        dispatch, router
     ]);
 
 

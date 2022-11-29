@@ -7,7 +7,7 @@ import DropdownMenu from './DropdownMenu';
 import usePath from '../../hooks/usePath';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 
-const MenuItems = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) => {
+const MenuItemButton = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -60,15 +60,16 @@ const MenuItems = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) => {
             ref={dropdownRef}
             sx={{
                 position: "relative",
-                m: mobileNav ? "0.5rem 0" : "0 0.5rem",
+                width: 'fit-content',
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 cursor: "pointer",
                 textTransform: "capitalize",
                 textDecoration: "none",
                 fontSize: "1rem",
+                mr: "0.5rem",
                 color: (path == item.path ||
                     item.childrens?.find(e => e.path === path)) ?
                     colors.accent :
@@ -80,23 +81,33 @@ const MenuItems = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) => {
                 transition: "all 0.3s ease-in-out",
                 "&:hover": {
                     color: colors.accent
+                },
+                "@media (max-width: 900px)": {
+                    width: "100%",
+                    justifyContent: "center",
+                    mb: "0.5rem",
+                },
+                "&:last-child": {
+                    mr: 0,
+                    mb: 0,
                 }
             }}
         >
             <Box
+                width="100%"
                 display="flex"
                 flexDirection="row"
                 alignItems="center"
-                justifyContent="center"
+                justifyContent="flex-start"
             >
                 {item.title}
                 {
                     item.childrens ?
                         <ExpandMoreIcon
                             sx={{
-                                fontSize: "1.25rem",
+                                fontSize: "1.2rem",
                                 fontWeight: 700,
-                                marginLeft: "4px"
+                                marginLeft: "2px"
                             }} />
                         :
                         null
@@ -119,4 +130,4 @@ const MenuItems = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) => {
     )
 }
 
-export default MenuItems;
+export default MenuItemButton;

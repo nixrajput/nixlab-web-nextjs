@@ -23,7 +23,7 @@ async function apiClient(endpoint, method, { body, ...options } = {}) {
         const response = await axios(`${baseUrl}${endpoint}`, config);
         let data = response.data;
         data.status = response.status;
-        if (process.env.NODE_ENV === 'development') {
+        if (process.env.NODE_ENV !== 'production') {
             console.table({
                 endpoint,
                 status: response.status,
@@ -34,12 +34,12 @@ async function apiClient(endpoint, method, { body, ...options } = {}) {
             return data;
         }
         else {
-            throw new Error(data.message);
+            throw new Error(data.message || 'Something went wrong');
         }
     }
     catch (error) {
         console.log('apiClientError:', error);
-        return Promise.reject(error.message ? error.message : error);
+        return Promise.reject(error.response.data.message || error.message);
     }
 }
 

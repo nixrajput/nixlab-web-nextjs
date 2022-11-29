@@ -47,22 +47,20 @@ const ResetPassword = () => {
     const onClickResetPasswordEvent = async (e) => {
         e.preventDefault();
 
-        openBackdrop();
-
-        await resetPasswordAction(dispatch, otp.trim(), password.trim(), confirmPassword.trim());
-
-        if (auth.status === 'resetPassword') {
-            const returnUrl = location.state?.from?.pathname || '/login';
-            router.replace(returnUrl);
-        }
-        closeBackdrop();
+        const resetPasswordPromise = resetPasswordAction(dispatch, otp.trim(), password.trim(), confirmPassword.trim());
+        await resetPasswordPromise;
     }
 
     useEffect(() => {
-        const returnUrl = router.query.returnUrl || '/';
+        if (auth.status === 'resetPassword') {
+            enqueueSnackbar('Password reset successfully', { variant: 'success' });
+            const returnUrl = location.state?.from?.pathname || '/login';
+            router.replace(returnUrl);
+        }
 
         if (auth.status === 'authenticated' && auth.token &&
             profileDetails.status === 'success' && profileDetails.user) {
+            const returnUrl = router.query.returnUrl || '/';
             router.replace(returnUrl);
         }
 

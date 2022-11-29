@@ -35,7 +35,14 @@ const otpSlice = createSlice({
 
         clearError: (state, action) => {
             state.error = null;
+            state.status = 'noError';
         },
+
+        resetOtp: (state, action) => {
+            state.email = null;
+            state.error = null;
+            state.status = 'idle';
+        }
     }
 });
 

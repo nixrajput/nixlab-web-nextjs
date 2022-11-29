@@ -59,22 +59,19 @@ const Register = () => {
         details.confirmPassword = confirmPassword.trim();
         details.isValidated = true;
 
-        openBackdrop();
-
         await registerAction(dispatch, details);
-
-        if (auth.status === 'registered') {
-            const returnUrl = location.state?.from?.pathname || '/login';
-            router.replace(returnUrl);
-        }
-        closeBackdrop();
     }
 
     useEffect(() => {
-        const returnUrl = router.query.returnUrl || '/';
+        if (auth.status === 'registered') {
+            enqueueSnackbar('Registration successful. Please login to continue.', { variant: 'success' });
+            const returnUrl = location.state?.from?.pathname || '/login';
+            router.replace(returnUrl);
+        }
 
         if (auth.status === 'authenticated' && auth.token &&
             profileDetails.status === 'success' && profileDetails.user) {
+            const returnUrl = router.query.returnUrl || '/';
             router.replace(returnUrl);
         }
 
