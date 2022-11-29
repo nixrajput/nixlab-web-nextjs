@@ -50,6 +50,8 @@ const ProjectItem = ({ item, ...props }) => {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="100%"
+                    priority
                     style={{
                         aspectRatio: '1',
                         objectFit: 'contain'

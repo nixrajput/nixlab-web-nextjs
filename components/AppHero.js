@@ -49,11 +49,12 @@ const Hero = () => {
                                 <h3
                                     style={{
                                         margin: "1rem auto",
+                                        marginBottom: "0.5rem",
                                         fontWeight: 500,
                                         color: colors.primary[100],
                                     }}
                                 >
-                                    Hello 👋 {profileDetails.user.fname}
+                                    Hi 👋 {profileDetails.user?.fname} {profileDetails.user?.lname}
                                 </h3>
                                 :
                                 null
@@ -61,9 +62,10 @@ const Hero = () => {
 
                         <h1 style={{
                             margin: "1rem auto",
+                            marginTop: "0.5rem",
                             fontWeight: 700,
                             textTransform: "uppercase",
-                            wordSpacing: "0.25rem",
+                            wordSpacing: "0.5rem",
                             color: colors.primary[100],
                             "& span": {
                                 color: colors.accent,
@@ -113,6 +115,7 @@ const Hero = () => {
                             src="/hero.png"
                             alt="hero"
                             fill
+                            sizes="100%"
                             priority
                             placeholder="blur"
                             blurDataURL='/hero.png'
@@ -189,6 +192,7 @@ const Hero = () => {
                                         src={item.image}
                                         alt={item.title}
                                         fill
+                                        sizes="100%"
                                         priority
                                         placeholder="blur"
                                         blurDataURL={item.image}

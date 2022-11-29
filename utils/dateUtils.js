@@ -1,4 +1,4 @@
-export const isSameDate = (date, date2, compareWithToday = false) => {
+const isSameDate = (date, date2, compareWithToday = false) => {
     date = new Date(date);
 
     if (date2 !== undefined && date2 !== null && date2 !== '' && date2 !== 'Invalid Date') {
@@ -18,7 +18,7 @@ export const isSameDate = (date, date2, compareWithToday = false) => {
         date.getDate() === date2.getDate();
 };
 
-export const toDateString = function (date, { format = 'dd-MM-yyyy', separator = '-' } = {}) {
+const toDateString = function (date, { format = 'dd-MM-yyyy', separator = '-' } = {}) {
     const dateObj = new Date(date);
     const year = dateObj.getFullYear();
     const month = dateObj.getMonth() + 1;
@@ -35,7 +35,7 @@ export const toDateString = function (date, { format = 'dd-MM-yyyy', separator =
     return yearString + separator + monthString + separator + dayString;
 }
 
-export const toTimeString = function (date, { is24HourFormat = false, showSeconds = false } = {}) {
+const toTimeString = function (date, { is24HourFormat = false, showSeconds = false } = {}) {
     const dateObj = new Date(date);
     const hours = dateObj.getHours();
     const minutes = dateObj.getMinutes();
@@ -70,7 +70,7 @@ export const toTimeString = function (date, { is24HourFormat = false, showSecond
     return timeString;
 }
 
-export const toDateTimeString = function (date,
+const toDateTimeString = function (date,
     { format = "dd-mm-yyyy", is24HourFormat = false, showSeconds = false } = {}) {
     return toDateString(date, { format })
         + ' '
@@ -80,7 +80,7 @@ export const toDateTimeString = function (date,
         });
 }
 
-export const toTimeAgo = (date) => {
+const toTimeAgo = (date) => {
     const dateObj = new Date(date);
     const now = new Date();
     const seconds = Math.floor((now - dateObj) / 1000);
@@ -114,8 +114,26 @@ export const toTimeAgo = (date) => {
     return Math.floor(seconds) + ' seconds ago';
 }
 
-Date.prototype.isSameDate = isSameDate;
-Date.prototype.toDateString = toDateString;
-Date.prototype.toTimeString = toTimeString;
-Date.prototype.toDateTimeString = toDateTimeString;
-Date.prototype.toTimeAgo = toTimeAgo;
+class DateFormater extends Date {
+    isSameDate(date2, compareWithToday = false) {
+        return isSameDate(this, date2, compareWithToday);
+    }
+
+    toDateString({ format = 'dd-MM-yyyy', separator = '-' } = {}) {
+        return toDateString(this, { format, separator });
+    }
+
+    toTimeString({ is24HourFormat = false, showSeconds = false } = {}) {
+        return toTimeString(this, { is24HourFormat, showSeconds });
+    }
+
+    toDateTimeString({ format = 'dd-mm-yyyy', is24HourFormat = false, showSeconds = false } = {}) {
+        return toDateTimeString(this, { format, is24HourFormat, showSeconds });
+    }
+
+    toTimeAgo() {
+        return toTimeAgo(this);
+    }
+}
+
+export default DateFormater;

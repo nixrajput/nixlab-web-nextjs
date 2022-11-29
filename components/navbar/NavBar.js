@@ -18,6 +18,7 @@ import {
     logoutAction
 } from '../../redux/actions';
 import MenuItems from "./MenuItems";
+import CircleAvatar from "../CircleAvatar";
 
 const menuItems = [
     {
@@ -67,7 +68,7 @@ const Navbar = () => {
     const colorMode = useContext(ColorModeContext);
 
     const auth = useSelector((state) => state.auth);
-    // const profileDetails = useSelector((state) => state.profileDetails);
+    const profileDetails = useSelector((state) => state.profileDetails);
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -183,7 +184,7 @@ const Navbar = () => {
             zIndex="100"
             boxShadow={
                 scrolled ?
-                    "0 0.1rem 0.5rem rgba(0, 0, 0, 0.1)"
+                    `0px 0px 10px ${colors.shadow}`
                     :
                     "none"
             }
@@ -210,13 +211,13 @@ const Navbar = () => {
                 {/* LOGO */}
 
                 <Box
+                    position="relative"
                     display="flex"
                     alignItems="flex-start"
                     justifyContent="flex-start"
                     sx={{ aspectRatio: "16/9" }}
                     height={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
                     maxHeight={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
-                    position="relative"
                     ml={{
                         xs: "0",
                         sm: "0",
@@ -225,19 +226,20 @@ const Navbar = () => {
                         xl: "0.5rem",
                     }}
                 >
-                    <Link href="/">
-                        <Image
-                            src="/logo.png"
-                            alt="logo"
-                            fill
-                            priority
-                            placeholder="blur"
-                            blurDataURL="/logo.png"
-                            style={{
-                                objectFit: "contain",
-                            }}
-                        />
-                    </Link>
+                    <Image
+                        src="/logo.png"
+                        alt="logo"
+                        fill
+                        sizes="100%"
+                        priority
+                        placeholder="blur"
+                        blurDataURL="/logo.png"
+                        style={{
+                            objectFit: "contain",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => router.push("/")}
+                    />
                 </Box>
 
                 {/* NAVBAR */}
@@ -298,7 +300,18 @@ const Navbar = () => {
                                         aria-expanded={open ? 'true' : undefined}
                                         onClick={handleOpenUserMenu}
                                     >
-                                        <PersonOutlinedIcon />
+                                        {
+                                            profileDetails.status === 'success' ?
+                                                profileDetails.user.avatar ?
+                                                    <CircleAvatar
+                                                        avatar={profileDetails.user.avatar}
+                                                        size="32px"
+                                                    />
+                                                    :
+                                                    <PersonOutlinedIcon />
+                                                :
+                                                null
+                                        }
                                     </IconButton>
                                     <Menu
                                         id="user-menu"

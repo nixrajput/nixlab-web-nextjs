@@ -1,4 +1,5 @@
 import ApiUrls from "../constants/urls";
+import axios from 'axios';
 
 async function apiClient(endpoint, method, { body, ...options } = {}) {
     const headers = { 'Content-Type': 'application/json' };
@@ -13,17 +14,22 @@ async function apiClient(endpoint, method, { body, ...options } = {}) {
     }
 
     if (body) {
-        config.body = JSON.stringify(body);
+        config.data = JSON.stringify(body);
     }
 
     const baseUrl = process.env.API_URL || ApiUrls.baseUrl;
 
-    let data;
     try {
-        const response = await window.fetch(`${baseUrl}${endpoint}`, config);
-        data = await response.json();
+        const response = await axios(`${baseUrl}${endpoint}`, config);
+        let data = response.data;
         data.status = response.status;
-        console.log('apiClientData:', data);
+        if (process.env.NODE_ENV === 'development') {
+            console.table({
+                endpoint,
+                status: response.status,
+                data: data,
+            });
+        }
         if (response.status === 200 || response.status === 201) {
             return data;
         }
@@ -33,7 +39,7 @@ async function apiClient(endpoint, method, { body, ...options } = {}) {
     }
     catch (error) {
         console.log('apiClientError:', error);
-        return Promise.reject(error.message ? error.message : data.message);
+        return Promise.reject(error.message ? error.message : error);
     }
 }
 

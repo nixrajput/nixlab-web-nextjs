@@ -6,7 +6,7 @@
   "license": "GPL-3.0",
   "private": true,
   "scripts": {
-    "dev": "next lint && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

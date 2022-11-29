@@ -15,6 +15,7 @@ import { tokens } from '../../theme/theme';
 import {
     logoutAction,
 } from '../../redux/actions';
+import DateFormater from "../../utils/dateUtils";
 
 const Profile = () => {
     const theme = useTheme();
@@ -125,7 +126,6 @@ const Profile = () => {
                                         color: colors.primary[100],
                                         fontSize: "1.25rem",
                                         fontWeight: 500,
-                                        fontFamily: "Proxima Nova",
                                     }}
                                 >
                                     {`${profileDetails.user?.fname} ${profileDetails.user?.lname}`}
@@ -136,10 +136,23 @@ const Profile = () => {
                                         color: colors.primary[200],
                                         fontSize: "1rem",
                                         fontWeight: 400,
-                                        fontFamily: "Proxima Nova",
                                     }}
                                 >
                                     {`@${profileDetails.user?.uname}`}
+                                </p>
+
+                                <p
+                                    style={{
+                                        color: colors.primary[200],
+                                        fontSize: "0.8rem",
+                                        fontWeight: 400,
+                                        marginTop: "1rem",
+                                    }}
+                                >
+                                    Joined on {
+                                        profileDetails.user?.createdAt &&
+                                        new DateFormater(profileDetails.user?.createdAt).toDateTimeString()
+                                    }
                                 </p>
                             </Box>
 

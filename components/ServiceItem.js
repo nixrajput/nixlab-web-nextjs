@@ -49,6 +49,7 @@ const ServiceItem = ({ item, ...props }) => {
                     src={item.image}
                     alt={item.title}
                     fill
+                    sizes="100%"
                     priority
                     placeholder="blur"
                     blurDataURL={item.image}

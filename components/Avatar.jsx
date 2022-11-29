@@ -16,6 +16,7 @@ const Avatar = ({ avatar, width = "40px", height = '40px', fit = 'cover' }) => {
                     alt="avatar"
                     priority
                     fill
+                    sizes="100%"
                     placeholder="blur"
                     blurDataURL={avatar.url}
                     style={{
@@ -33,6 +34,7 @@ const Avatar = ({ avatar, width = "40px", height = '40px', fit = 'cover' }) => {
                 alt="avatar"
                 priority
                 fill
+                sizes="100%"
                 placeholder="blur"
                 blurDataURL={'../../avatar.png'}
                 style={{
