@@ -13,7 +13,7 @@ export const tokens = (mode) => ({
       warning: "#F09C00",
       accent: "#e3096f",
       divider: "#2A3A5B",
-      shadow: "rgba(0, 0, 0, 0.1)",
+      shadow: "rgba(0, 0, 0, 0.5)",
       grey: {
         100: "#e0e0e0",
         200: "#c2c2c2",
@@ -78,7 +78,7 @@ export const tokens = (mode) => ({
       warning: "#F09C00",
       accent: "#e3096f",
       divider: "#E0E0E0",
-      shadow: "rgba(0, 0, 0, 0.1)",
+      shadow: "rgba(0, 0, 0, 0.25)",
       grey: {
         100: "#141414",
         200: "#292929",

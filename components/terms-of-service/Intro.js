@@ -16,7 +16,8 @@ const Intro = () => {
             <h4
                 style={{
                     color: colors.primary[100],
-                    fontSize: '1.15rem',
+                    fontSize: '1.2rem',
+                    marginBottom: '0.5rem',
                 }}
             >
                 These Terms of Service were last updated on 25 November 2022.

@@ -33,6 +33,8 @@ const TermsOfService = () => {
             {/* START */}
 
             <ResponsiveBox>
+                {/* INTRO */}
+
                 <Intro />
 
                 {/* ACCESS TO AND CONTINUED USE OF SERVICES */}

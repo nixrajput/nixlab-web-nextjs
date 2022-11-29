@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Image from 'next/image';
 import Link from "next/link";
 import { Box, useTheme } from "@mui/material";
 import { tokens } from "../../theme/theme";
@@ -23,15 +22,33 @@ const Footer = () => {
             justifyContent="center"
             alignItems="center"
             width="100%"
-            bgcolor={colors.dialog}
+            bgcolor={colors.background}
             mt="1rem"
         >
             <Box
                 position="relative"
                 display="flex"
-                flexDirection="row"
-                justifyContent="space-between"
-                alignItems="center"
+                flexDirection={{
+                    xs: "column",
+                    sm: "column",
+                    md: "column",
+                    lg: "row",
+                    xl: "row",
+                }}
+                justifyContent={{
+                    xs: "center",
+                    sm: "center",
+                    md: "center",
+                    lg: "space-between",
+                    xl: "space-between",
+                }}
+                alignItems={{
+                    xs: "center",
+                    sm: "center",
+                    md: "center",
+                    lg: "flex-end",
+                    xl: "flex-end",
+                }}
                 width="100%"
                 maxWidth="1024px"
                 p={{
@@ -49,36 +66,21 @@ const Footer = () => {
                     position="relative"
                     display="flex"
                     flexDirection="column"
-                    justifyContent="flex-start"
-                    alignItems="flex-start"
+                    justifyContent={{
+                        xs: "center",
+                        sm: "center",
+                        md: "center",
+                        lg: "flex-start",
+                        xl: "flex-start",
+                    }}
+                    alignItems={{
+                        xs: "center",
+                        sm: "center",
+                        md: "center",
+                        lg: "flex-start",
+                        xl: "flex-start",
+                    }}
                 >
-
-                    {/* LOGO */}
-
-                    <Box
-                        display="flex"
-                        alignItems="flex-start"
-                        justifyContent="flex-start"
-                        sx={{ aspectRatio: "16/9" }}
-                        height={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
-                        maxHeight={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
-                        position="relative"
-                    >
-                        <Link href="/">
-                            <Image
-                                src="/logo.png"
-                                alt="logo"
-                                fill
-                                priority
-                                placeholder="blur"
-                                blurDataURL="/logo.png"
-                                style={{
-                                    objectFit: "contain",
-                                }}
-                            />
-                        </Link>
-                    </Box>
-
                     {/* Copyright */}
 
                     <p
@@ -99,10 +101,23 @@ const Footer = () => {
                 <Box
                     position="relative"
                     display="flex"
-                    flexDirection="column"
+                    flexDirection="row"
                     justifyContent="space-between"
                     alignItems="center"
-                    ml='1rem'
+                    ml={{
+                        xs: "0",
+                        sm: "0",
+                        md: "0",
+                        lg: "1rem",
+                        xl: "1rem",
+                    }}
+                    mt={{
+                        xs: "0.5rem",
+                        sm: "0.5rem",
+                        md: "0.5rem",
+                        lg: "0",
+                        xl: "0",
+                    }}
                 >
                     {
                         socialLinks.map((link) => (
@@ -113,9 +128,9 @@ const Footer = () => {
                                 alignItems='center'
                                 justifyContent='center'
                                 sx={{
-                                    mb: '1rem',
+                                    mr: '0.5rem',
                                     ':last-child': {
-                                        mb: '0'
+                                        mr: '0'
                                     },
                                     '& a svg': {
                                         color: colors.primary[100],

@@ -17,8 +17,8 @@ const DropdownMenu = ({
             left="0"
             width="200px"
             bgcolor={{
-                xs: colors.divider,
-                sm: colors.divider,
+                xs: colors.dialog,
+                sm: colors.dialog,
                 md: colors.dialog,
                 lg: colors.dialog,
                 xl: colors.dialog
@@ -28,7 +28,7 @@ const DropdownMenu = ({
             alignItems="flex-start"
             justifyContent="center"
             borderRadius="4px"
-            boxShadow={`0 0.1rem 0.5rem ${colors.shadow}`}
+            boxShadow={`0 0.15rem 0.5rem 0 ${colors.shadow}`}
             zIndex="1001"
             p='0.5rem 0'
         >
@@ -57,7 +57,7 @@ const DropdownMenu = ({
                                 700 :
                                 400,
                             ":hover": {
-                                backgroundColor: colors.grey[800],
+                                backgroundColor: colors.grey[500],
                             }
                         }}
                     >

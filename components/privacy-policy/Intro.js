@@ -16,7 +16,8 @@ const Intro = () => {
             <h4
                 style={{
                     color: colors.primary[100],
-                    fontSize: '1.15rem',
+                    fontSize: '1.2rem',
+                    marginBottom: '0.5rem',
                 }}
             >
                 This Privacy Policy was last updated on 24th November 2022.

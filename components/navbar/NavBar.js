@@ -158,7 +158,7 @@ const Navbar = () => {
                 }
             });
         };
-    }, [showMobileMenu]);
+    }, [showMobileMenu, mobileNav]);
 
     return (
         <Box
@@ -385,11 +385,11 @@ const Navbar = () => {
                             right={showMobileMenu ? "0" : "calc(-100% + 20rem)"}
                             bgcolor={colors.dialog}
                             width="50%"
-                            minWidth="20rem"
-                            maxWidth="25rem"
+                            minWidth="15rem"
+                            maxWidth="15rem"
                             height="100vh"
                             transition="all 1s ease-in-out"
-                            boxShadow={showMobileMenu ? "0 0 10px 0 rgba(0,0,0,0.1)" : "none"}
+                            boxShadow={showMobileMenu ? `0 0 10px 0 ${colors.shadow}` : 'none'}
                             p="1rem"
                         >
                             <IconButton
