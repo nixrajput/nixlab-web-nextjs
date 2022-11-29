@@ -151,7 +151,7 @@ const Profile = () => {
                                 >
                                     Joined on {
                                         profileDetails.user?.createdAt &&
-                                        new DateFormater(profileDetails.user?.createdAt).toDateTimeString()
+                                        new DateFormater(profileDetails.user?.createdAt).toDateString()
                                     }
                                 </p>
                             </Box>
