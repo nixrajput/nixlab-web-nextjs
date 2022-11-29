@@ -113,3 +113,9 @@ export const toTimeAgo = (date) => {
 
     return Math.floor(seconds) + ' seconds ago';
 }
+
+Date.prototype.isSameDate = isSameDate;
+Date.prototype.toDateString = toDateString;
+Date.prototype.toTimeString = toTimeString;
+Date.prototype.toDateTimeString = toDateTimeString;
+Date.prototype.toTimeAgo = toTimeAgo;

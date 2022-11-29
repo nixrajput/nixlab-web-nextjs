@@ -32,7 +32,7 @@ function App({ Component, pageProps }) {
         await loadAuthDetailsPromise;
       }
 
-      if (auth.token && auth.status === 'authenticated') {
+      if (auth.status === 'authenticated' && auth.token) {
         if (profileDetails.status === 'idle' || profileDetails.status === 'failed') {
           const data = storage.get('user');
 
