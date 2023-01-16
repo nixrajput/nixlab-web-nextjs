@@ -350,8 +350,17 @@ const Navbar = () => {
                                 sx={{
                                     backgroundColor: colors.accent,
                                     color: '#f0f0f0',
-                                    borderRadius: "4px",
-                                    fontWeight: "bold",
+                                    borderRadius: "0.5rem",
+                                    transition: "all 0.5 ease-in-out",
+                                    padding: {
+                                        xs: "0.25rem 1rem",
+                                        sm: "0.25rem 1rem",
+                                        md: "0.5rem 1.5rem",
+                                        lg: "0.5rem 1.5rem",
+                                        xl: "0.5rem 2rem",
+                                    },
+                                    fontFamily: "Proxima Nova, sans-serif",
+                                    fontWeight: "600",
                                 }}
                                 onClick={() => {
                                     if (mobileNav && showMobileMenu) {

@@ -1,108 +1,146 @@
-import { useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
+import { Box, useTheme } from "@mui/material";
+import { tokens } from '../theme/theme';
 
-const CarouselSlideItem = ({ item, idx, activeIdx }) => {
+const CarouselSlideItem = ({ item, idx }) => {
 
     return (
-        <li className="carousel__slide-item"
-            style={{
-                transform: `translateX(${idx * 30}rem)`,
-            }}>
-            <div className="carousel__slide-item-img-link">
-                <img
-                    src={item}
-                    alt={`slide-${idx}`}
-                />
-            </div>
-        </li>
+        <img className='carousel__img'
+            src={item}
+            alt={`slide-${idx}`}
+        />
     );
 };
 
-const CarouselSlider = ({ items, showIndicator = false }) => {
+const CarouselSlider = ({ items }) => {
     if (!items) {
         throw new Error('items is required');
     }
 
-    const [isTicking, setIsTicking] = useState(false);
-    const [activeIdx, setActiveIdx] = useState(0);
-    const length = items.length;
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
 
-    const sleep = (ms = 0) => {
-        return new Promise((resolve) => setTimeout(resolve, ms));
+    const carouselRef = useRef();
+
+    const [leftScroll, setLeftScroll] = useState(false);
+    const [rightScroll, setRightScroll] = useState(false);
+
+    const prevClick = (scrollOffset) => {
+        carouselRef.current.scrollLeft -= scrollOffset;
     };
 
-    const prevClick = (jump = 1) => {
-        if (!isTicking) {
-            setIsTicking(true);
-            setActiveIdx((prev) => (prev - jump + length) % length);
-        }
-    };
-
-    const nextClick = (jump = 1) => {
-        if (!isTicking) {
-            setIsTicking(true);
-            setActiveIdx((prev) => (prev + jump) % length);
-        }
-    };
-
-    const handleDotClick = (idx) => {
-        if (idx < activeIdx) prevClick(activeIdx - idx);
-        if (idx > activeIdx) nextClick(idx - activeIdx);
+    const nextClick = (scrollOffset) => {
+        carouselRef.current.scrollLeft += scrollOffset;
     };
 
     useEffect(() => {
-        if (isTicking) sleep(300).then(() => setIsTicking(false));
-    }, [isTicking]);
+        const calculateScroll = () => {
+            const carousel = carouselRef.current;
+            const carouselOffsetWidth = carousel.offsetWidth;
+            const carouselScrollWidth = carousel.scrollWidth;
+            const carouselScrollLeft = carousel.scrollLeft;
+            const carouselScrollRight = carouselScrollWidth - carouselOffsetWidth - carouselScrollLeft;
 
-    // useEffect(() => {
-    //     setActiveIdx((length - (items % length)) % length);
-    // }, [items]);
+            console.log('carouselScrollLeft', carouselScrollLeft);
+            console.log('carouselScrollRight', carouselScrollRight);
+
+            if (carouselScrollLeft > 0) {
+                setLeftScroll(true);
+            }
+            else {
+                setLeftScroll(false);
+            }
+
+            if (carouselScrollRight > 0) {
+                setRightScroll(true);
+            }
+            else {
+                setRightScroll(false);
+            }
+        };
+
+        //window.addEventListener('DOMContentLoaded', calculateScroll);
+        carouselRef.current?.addEventListener('srcoll', calculateScroll);
+
+        return () => {
+            // carouselRef.current.removeEventListener('scroll', () => { });
+        }
+
+    }, [carouselRef]);
 
     return (
-        <div className="carousel__wrap">
-            <div className="carousel__inner">
-                <button className="carousel__btn carousel__btn--prev"
-                    onClick={() => prevClick()}
+        <Box
+            position="relative"
+            width="100%"
+            m="0"
+            p="0"
+        >
+            <Box
+                position="relative"
+                width="100%"
+                m="0"
+                p="0"
+                sx={{
+                    overflow: "hidden",
+                    overflowX: "scroll",
+                    scrollBehavior: "smooth",
+                    '::-webkit-scrollbar': {
+                        display: 'none'
+                    }
+                }}
+                ref={carouselRef}
+            >
+                <Box
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="flex-start"
                 >
-                    <ArrowBackIos />
-                </button>
+                    {
+                        items.map((slide, i) => (
+                            <CarouselSlideItem
+                                key={`slide-${i}`}
+                                item={slide}
+                                idx={i}
+                            />
+                        ))
+                    }
+                </Box>
+            </Box>
 
-                <div className="carousel__container">
-                    <ul className="carousel__slide-list">
-                        {
-                            items.map((slide, i) => (
-                                <CarouselSlideItem
-                                    key={`slide-${i}`}
-                                    item={slide}
-                                    idx={i}
-                                    activeIdx={activeIdx}
-                                />
-                            ))
-                        }
-                    </ul>
-                </div>
+            {
+                (leftScroll) ?
+                    <button className='carousel__btn carousel__btn_prev'
+                        style={{
+                            backgroundColor: colors.dialog,
+                        }}
+                        onClick={() => prevClick(200)}
+                    >
+                        <ArrowBackIos
+                            style={{
+                                color: colors.primary[100],
+                            }}
+                        />
+                    </button>
+                    : null
+            }
 
-                <button className="carousel__btn carousel__btn--next"
-                    onClick={() => nextClick()}>
-                    <ArrowForwardIos />
-                </button>
+            {
+                (rightScroll) ?
+                    <button className='carousel__btn carousel__btn_next'
+                        style={{
+                            backgroundColor: colors.dialog,
+                        }}
+                        onClick={() => nextClick(200)}>
+                        <ArrowForwardIos style={{
+                            color: colors.primary[100],
+                        }} />
+                    </button>
+                    : null
+            }
 
-                {
-                    showIndicator ?
-                        <div className="carousel__dots">
-                            {items.slice(0, length).map((pos, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => handleDotClick(i)}
-                                    className={i === activeIdx ? 'dot active' : 'dot'}
-                                />
-                            ))}
-                        </div>
-                        : null
-                }
-
-            </div>
-        </div>
+        </Box>
     );
 };
 

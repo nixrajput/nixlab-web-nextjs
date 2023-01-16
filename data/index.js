@@ -32,11 +32,11 @@ export const serviceDetailsList = [
 
 export const projectList = [
     {
-        _id: 'project-1',
+        _id: 'rippl-app',
         image: '/rippl_screenshots/icon.png',
         icon: '/rippl_screenshots/icon.png',
         title: 'Rippl App',
-        type: 'Mobile App',
+        type: 'Mobile Application',
         projectType: 'mobileApp',
         shortDescription: 'A social media app.',
         description: "Rippl is a social media app for sharing and connecting with people around the world. It is a mobile app that allows users to share their photos and videos with other users.",
@@ -59,11 +59,11 @@ export const projectList = [
         totalDownloads: 1000,
     },
     {
-        _id: 'project-2',
+        _id: 'livebox-app',
         image: '/livebox_screenshots/icon.png',
         icon: '/livebox_screenshots/icon.png',
         title: 'LiveBox App',
-        type: 'Mobile App',
+        type: 'Mobile Application',
         projectType: 'mobileApp',
         shortDescription: 'A video calling and video streaming app.',
         description: "LiveBox is a video calling and video streaming app for sharing and connecting with people around the world. It is a mobile app that allows users to share their photos and videos with other users.",
@@ -74,11 +74,11 @@ export const projectList = [
         totalDownloads: 200,
     },
     {
-        _id: 'project-3',
+        _id: 'nixlab-website',
         image: '/nixlab_shop_screenshots/icon.png',
         icon: '/nixlab_shop_screenshots/icon.png',
         title: 'NixLab Shop',
-        type: 'Web App',
+        type: 'Web Application',
         projectType: 'webApp',
         shortDescription: 'An e-commerce web app.',
         description: 'NixLab Shop is a e-commerce web app that allows users to do shopping online. It is a web app that allows users to check out their cart and checkout their orders with ease.',

@@ -7,7 +7,6 @@ import { useSnackbar } from 'notistack';
 import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
-import PageTitle from "../../components/PageTitle";
 import { projectList } from '../../data';
 import { tokens } from '../../theme/theme';
 import CarouselSlider from '../../components/CarouselSlider';
@@ -94,10 +93,20 @@ const ProjectDetails = () => {
                             >
                                 <Box
                                     position='relative'
-                                    width="10rem"
-                                    maxWidth="10rem"
-                                    height="10rem"
-                                    maxHeight="10rem"
+                                    width={{
+                                        xs: '8rem',
+                                        sm: '10rem',
+                                        md: '12rem',
+                                        lg: '15rem',
+                                        xl: '15rem',
+                                    }}
+                                    height={{
+                                        xs: '8rem',
+                                        sm: '10rem',
+                                        md: '12rem',
+                                        lg: '15rem',
+                                        xl: '15rem',
+                                    }}
                                     border={`1px solid ${colors.primary[800]}`}
                                     borderRadius="50%"
                                     overflow={'hidden'}
@@ -108,7 +117,6 @@ const ProjectDetails = () => {
                                         alt={project.title}
                                         fill
                                         sizes="80%"
-                                        priority
                                         style={{
                                             aspectRatio: '1',
                                             objectFit: 'contain',
@@ -146,48 +154,8 @@ const ProjectDetails = () => {
                                     >
                                         {project.type}
                                     </p>
-
-                                    {
-                                        project.projectType === 'mobileApp' ?
-                                            <Button
-                                                variant="contained"
-                                                sx={{
-                                                    backgroundColor: colors.accent,
-                                                    color: '#f0f0f0',
-                                                    borderRadius: "4px",
-                                                    fontWeight: "bold",
-                                                    marginTop: "1.5rem"
-                                                }}
-                                                onClick={() => {
-                                                    window.open(project.downloadUrl, '_blank');
-                                                }}
-                                            >
-                                                Download
-                                            </Button>
-                                            : null
-                                    }
-
-                                    {
-                                        project.projectType === 'webApp' ?
-                                            <Button
-                                                variant="contained"
-                                                sx={{
-                                                    backgroundColor: colors.accent,
-                                                    color: '#f0f0f0',
-                                                    borderRadius: "4px",
-                                                    fontWeight: "bold",
-                                                    marginTop: "1.5rem"
-                                                }}
-                                                onClick={() => {
-                                                    window.open(project.websiteUrl, '_blank');
-                                                }}
-                                            >
-                                                Visit Website
-                                            </Button>
-                                            : null
-                                    }
-
                                 </Box>
+
                             </Box>
                             : null
                     }
@@ -200,7 +168,74 @@ const ProjectDetails = () => {
                                 flexDirection="column"
                                 alignprojects="flex-start"
                                 justifyContent="flex-start"
-                                mt='2rem'
+                                mt='1.5rem'
+                                width="100%"
+                            >
+                                {
+                                    project.projectType === 'mobileApp' ?
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+
+                                                backgroundColor: colors.accent,
+                                                color: '#f0f0f0',
+                                                borderRadius: "0.5rem",
+                                                fontWeight: "bold",
+                                                width: {
+                                                    xs: '100%',
+                                                    sm: '30%',
+                                                    md: '25%',
+                                                    lg: '25%',
+                                                    xl: '25%',
+                                                }
+                                            }}
+                                            onClick={() => {
+                                                window.open(project.downloadUrl, '_blank');
+                                            }}
+                                        >
+                                            Download
+                                        </Button>
+                                        : null
+                                }
+
+                                {
+                                    project.projectType === 'webApp' ?
+                                        <Button
+                                            variant="contained"
+                                            sx={{
+                                                backgroundColor: colors.accent,
+                                                color: '#f0f0f0',
+                                                borderRadius: "0.5rem",
+                                                fontWeight: "bold",
+                                                width: {
+                                                    xs: '100%',
+                                                    sm: '30%',
+                                                    md: '25%',
+                                                    lg: '25%',
+                                                    xl: '25%',
+                                                }
+                                            }}
+                                            onClick={() => {
+                                                window.open(project.websiteUrl, '_blank');
+                                            }}
+                                        >
+                                            Visit
+                                        </Button>
+                                        : null
+                                }
+                            </Box>
+                            : null
+                    }
+
+                    {
+                        project ?
+                            <Box
+                                position="relative"
+                                display="flex"
+                                flexDirection="column"
+                                alignprojects="flex-start"
+                                justifyContent="flex-start"
+                                mt='1.5rem'
                                 width="100%"
                                 bgcolor={{
                                     xs: 'transparent',
@@ -211,15 +246,15 @@ const ProjectDetails = () => {
                                 }}
                                 padding={{
                                     xs: '1rem 0',
-                                    sm: '1rem',
-                                    md: '1.5rem',
-                                    lg: "2rem",
-                                    xl: "2rem",
+                                    sm: '1rem 0',
+                                    md: '1rem',
+                                    lg: "1.5rem",
+                                    xl: "1.5rem",
                                 }}
                                 overflow="hidden"
                                 borderRadius={{
                                     xs: '0',
-                                    sm: '0.5rem',
+                                    sm: '0',
                                     md: '0.5rem',
                                     lg: '0.5rem',
                                     xl: "0.5rem"
@@ -242,15 +277,58 @@ const ProjectDetails = () => {
                                         : null
                                 }
 
-                                <p
-                                    style={{
-                                        color: colors.primary[200],
-                                        fontFamily: 'Proxima Nova, sans-serif',
-                                        marginBottom: '0.5rem',
-                                    }}
+                                <h4 style={{
+                                    color: colors.primary[100],
+                                    fontFamily: 'Proxima Nova, sans-serif',
+                                    marginTop: project.screenshots && project.screenshots.length > 0 ? '1.5rem' : '0',
+                                }}>
+                                    About
+                                </h4>
+
+                                <p style={{
+                                    color: colors.primary[200],
+                                    fontFamily: 'Proxima Nova, sans-serif',
+                                    marginTop: '0.5rem',
+                                }}
                                 >
                                     {project.description}
                                 </p>
+
+                                <Box
+                                    position="relative"
+                                    display="flex"
+                                    flexDirection="row"
+                                    flexWrap="wrap"
+                                    alignItems="center"
+                                    justifyContent="flex-start"
+                                    mt='1rem'
+                                >
+                                    {
+                                        project.technologies ?
+                                            project.technologies.map((item, index) => (
+                                                <Box key={`technology-${index}`}
+                                                    sx={{
+                                                        fontFamily: 'Proxima Nova, sans-serif',
+                                                        fontSize: '0.85rem',
+                                                        m: '0.25rem 0.5rem',
+                                                        ml: '0',
+                                                        padding: '0.25rem 0.5rem',
+                                                        borderRadius: '0.5rem',
+                                                        border: `1px solid ${colors.grey[500]}`,
+                                                        color: colors.primary[100],
+                                                        ':last-child': {
+                                                            mr: '0'
+                                                        },
+                                                    }}
+                                                >
+                                                    {item}
+                                                    <br />
+                                                </Box>
+                                            ))
+                                            :
+                                            null
+                                    }
+                                </Box>
 
                             </Box>
                             : null
