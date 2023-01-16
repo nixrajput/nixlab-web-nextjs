@@ -37,14 +37,14 @@ const About = () => {
 
                 {/* Services */}
 
-                <h4
+                <h3
                     style={{
                         color: colors.primary[100],
                         marginTop: '1rem'
                     }}
                 >
                     What services we provide?
-                </h4>
+                </h3>
 
                 {
                     serviceList.map((service, index) => {
@@ -57,16 +57,13 @@ const About = () => {
                                 justifyContent='flex-start'
                                 m='0.5rem 0'
                             >
-                                <CheckCircleIcon
-                                    style={{
-                                        fontSize: '1rem',
-                                        color: colors.primary[200]
-                                    }}
-                                />
+                                <p>
+                                    •
+                                </p>
                                 <p
                                     style={{
                                         color: colors.primary[200],
-                                        marginLeft: '0.5rem'
+                                        marginLeft: '1rem'
                                     }}
                                 >
                                     {service}
@@ -78,14 +75,14 @@ const About = () => {
 
                 {/* Mission */}
 
-                <h4
+                <h3
                     style={{
                         color: colors.primary[100],
                         marginTop: '1rem'
                     }}
                 >
                     Our mission
-                </h4>
+                </h3>
 
                 <p
                     style={{
@@ -117,16 +114,13 @@ const About = () => {
                                 justifyContent='flex-start'
                                 m='0.5rem 0'
                             >
-                                <CheckCircleIcon
-                                    style={{
-                                        fontSize: '1rem',
-                                        color: colors.primary[200]
-                                    }}
-                                />
+                                <p>
+                                    •
+                                </p>
                                 <p
                                     style={{
-                                        color: colors.primary[200],
-                                        marginLeft: '0.5rem'
+                                        color: colors.primary[100],
+                                        marginLeft: '1rem'
                                     }}
                                 >
                                     {mission}
@@ -143,23 +137,12 @@ const About = () => {
                     alignItems='center'
                     justifyContent='center'
                 >
-                    <Box
-                        position='relative'
-                        width='5rem'
-                        height='5rem'
-                        sx={{
-                            aspectRatio: '1',
-                            objectFit: 'cover'
-                        }}
-                    >
-                        <Image
-                            src="/mki.png"
-                            alt="Make in India"
-                            fill
-                            placeholder='blur'
-                            blurDataURL='/mki.png'
-                        />
-                    </Box>
+                    <h4 style={{
+                        color: colors.primary[300],
+                    }}>
+                        Made with ❤️ in India 🇮🇳
+                    </h4>
+
                 </Box>
             </ResponsiveBox>
         </ExpandedBox>

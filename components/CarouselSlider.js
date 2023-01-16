@@ -60,11 +60,10 @@ const CarouselSlider = ({ items }) => {
             }
         };
 
-        //window.addEventListener('DOMContentLoaded', calculateScroll);
         carouselRef.current?.addEventListener('srcoll', calculateScroll);
 
         return () => {
-            // carouselRef.current.removeEventListener('scroll', () => { });
+            carouselRef.current?.removeEventListener('scroll', () => { });
         }
 
     }, [carouselRef]);
