@@ -114,10 +114,10 @@ const ForgotPassword = () => {
 
                 <p style={{
                     fontSize: "0.95rem",
-                    marginBottom: "1rem",
+                    marginBottom: "0.5rem",
                     color: colors.primary[200]
                 }}>
-                    {`Enter your email address and we'll send you a link to reset your password.`}
+                    Please enter your email address. You will receive an OTP to reset your password.
                 </p>
 
                 <InputBox>

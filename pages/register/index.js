@@ -15,18 +15,24 @@ import ResponsiveFormBox from "../../components/ResponsiveFormBox";
 import InputBox from "../../components/InputBox";
 import { tokens } from '../../theme/theme';
 import {
-    registerAction,
-    clearAuthErrorAction,
-} from '../../redux/actions';
+    sendOtpToEmailAction,
+    verifyOtpFromEmailAction,
+    registerUserAction,
+    clearregisterErrorAction,
+} from '../../redux/actions/registerAction';
 
 const Register = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
     const auth = useSelector((state) => state.auth);
+    const register = useSelector((state) => state.register);
     const profileDetails = useSelector((state) => state.profileDetails);
+
     const dispatch = useDispatch();
     const router = useRouter();
+
+    const [otp, setOtp] = useState("");
 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -36,6 +42,7 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = useState(false);
+    const [isValidated, setIsValidated] = useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -51,22 +58,46 @@ const Register = () => {
         e.preventDefault();
 
         const details = {};
+
         details.fname = firstName.trim();
         details.lname = lastName.trim();
         details.email = email.trim();
         details.uname = uname.trim();
         details.password = password.trim();
         details.confirmPassword = confirmPassword.trim();
-        details.isValidated = true;
+        details.isValidated = register.isValidated;
 
-        await registerAction(dispatch, details);
+        await registerUserAction(dispatch, details);
+    }
+
+    const onClickSendOtpEvent = async (e) => {
+        e.preventDefault();
+
+        const sendOtpPromise = sendOtpToEmailAction(dispatch, email.trim());
+        await sendOtpPromise;
+    }
+
+    const onClickVerifyOtpEvent = async (e) => {
+        e.preventDefault();
+
+        const veryOtpPromise = verifyOtpFromEmailAction(dispatch, otp.trim(), email.trim());
+        await veryOtpPromise;
     }
 
     useEffect(() => {
-        if (auth.status === 'registered') {
+        if (register.status === 'registered') {
             enqueueSnackbar('Registration successful. Please login to continue.', { variant: 'success' });
             const returnUrl = location.state?.from?.pathname || '/login';
             router.replace(returnUrl);
+        }
+
+        if (register.status === 'sentOtp') {
+            enqueueSnackbar('OTP sent to your email.', { variant: 'success' });
+        }
+
+        if (register.status === 'verifiedOtp' && register.isValidated === true) {
+            enqueueSnackbar('OTP verified successfully.', { variant: 'success' });
+            setIsValidated(true);
         }
 
         if (auth.status === 'authenticated' && auth.token &&
@@ -75,24 +106,24 @@ const Register = () => {
             router.replace(returnUrl);
         }
 
-        if (auth.status === 'authenticating' || auth.status === 'registering') {
+        if (register.status === 'registering' || register.status === 'sendingOtp' || register.status === 'verifyingOtp') {
             openBackdrop();
         }
         else {
             closeBackdrop();
         }
 
-        if (auth.status === 'error') {
-            enqueueSnackbar(auth.error, { variant: 'error' });
-            clearAuthErrorAction(dispatch);
+        if (register.error) {
+            enqueueSnackbar(register.error, { variant: 'error' });
+            clearregisterErrorAction(dispatch);
         }
 
         return () => { }
 
     }, [
-        auth.token, router, auth.status, profileDetails.status,
-        profileDetails.user, enqueueSnackbar, auth.error,
-        dispatch
+        auth.token, router, register.status, profileDetails.status,
+        profileDetails.user, enqueueSnackbar, register.error,
+        dispatch, auth.status, register.isValidated
     ]);
 
 
@@ -117,7 +148,17 @@ const Register = () => {
                 <CircularProgress color="inherit" />
             </Backdrop>
 
-            <ResponsiveFormBox onSubmit={(e) => onClickRegisterEvent(e)}>
+            <ResponsiveFormBox onSubmit={(e) => {
+                if (isValidated === true) {
+                    onClickRegisterEvent(e);
+                }
+                else if (register.status === 'sentOtp' || register.status === 'verifyingOtpFailed') {
+                    onClickVerifyOtpEvent(e);
+                }
+                else {
+                    onClickSendOtpEvent(e);
+                }
+            }}>
                 <p style={{
                     fontSize: "2rem",
                     fontWeight: 700,
@@ -129,119 +170,187 @@ const Register = () => {
                     Hello! Register to get started
                 </p>
 
-                <Box
-                    width="100%"
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    m="1.5rem 0"
-                    p="0"
-                    height="fit-content"
-                >
-                    <InputBox m="0">
-                        <input
-                            type="text"
-                            placeholder="First Name"
-                            name="fname"
-                            required
-                            disabled={auth.status === 'registering'}
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                    </InputBox>
+                {
+                    isValidated === false ?
+                        <p style={{
+                            fontSize: "0.95rem",
+                            marginBottom: "0.5rem",
+                            color: colors.primary[200]
+                        }}>
+                            {
+                                (register.status === 'sentOtp' || register.status === 'verifyingOtpFailed') ?
+                                    `Please enter the OTP sent to ${email}` :
+                                    'Please enter your email address to get started'
+                            }
+                        </p>
+                        :
+                        <p style={{
+                            fontSize: "0.95rem",
+                            marginBottom: "0.5rem",
+                            color: colors.primary[200]
+                        }}>
+                            Please enter your details to get started
+                        </p>
+                }
 
-                    <div style={{ width: "2rem" }} />
+                {
+                    (register.status === 'sentOtp' || register.status === 'verifyingOtpFailed') ?
+                        null :
+                        <InputBox>
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                required
+                                disabled={isValidated || register.status === 'registering'}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </InputBox>
+                }
 
-                    <InputBox m="0">
-                        <input
-                            type="text"
-                            placeholder="Last Name"
-                            name="lname"
-                            required
-                            disabled={auth.status === 'registering'}
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
-                    </InputBox>
-                </Box>
+                {
+                    (register.status === 'sentOtp' || register.status === 'verifyingOtpFailed') ?
+                        <InputBox>
+                            <input
+                                type="text"
+                                placeholder="OTP"
+                                name="otp"
+                                required
+                                disabled={register.status === 'verifyingOtp'}
+                                value={otp}
+                                maxLength={6}
+                                onChange={(e) => setOtp(e.target.value)}
+                            />
+                        </InputBox>
+                        : null
+                }
 
-                <InputBox>
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        name="email"
-                        required
-                        disabled={auth.status === 'registering'}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </InputBox>
+                {
+                    isValidated ?
+                        <Box
+                            width="100%"
+                            display="flex"
+                            flexDirection="column"
+                            justifyContent="flex-start"
+                            alignItems="center"
+                            height="fit-content"
+                        >
+                            <Box
+                                width="100%"
+                                display="flex"
+                                justifyContent="space-between"
+                                alignItems="center"
+                                m="0"
+                                p="0"
+                                height="fit-content"
+                            >
+                                <InputBox m="0">
+                                    <input
+                                        type="text"
+                                        placeholder="First Name"
+                                        name="fname"
+                                        required
+                                        disabled={register.status === 'registering'}
+                                        value={firstName}
+                                        onChange={(e) => setFirstName(e.target.value)}
+                                    />
+                                </InputBox>
 
-                <InputBox>
-                    <input
-                        type="text"
-                        placeholder="Username"
-                        name="uname"
-                        required
-                        disabled={auth.status === 'registering'}
-                        value={uname}
-                        onChange={(e) => setUname(e.target.value)}
-                    />
-                </InputBox>
+                                <div style={{ width: "2rem" }} />
 
-                <InputBox>
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Password"
-                        name="password"
-                        required
-                        disabled={auth.status === 'registering'}
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <div className="password_toggle_btn">
-                        {
-                            showPassword ?
-                                <VisibilityIcon
-                                    onClick={() => setShowPassword(false)}
+                                <InputBox m="0">
+                                    <input
+                                        type="text"
+                                        placeholder="Last Name"
+                                        name="lname"
+                                        required
+                                        disabled={register.status === 'registering'}
+                                        value={lastName}
+                                        onChange={(e) => setLastName(e.target.value)}
+                                    />
+                                </InputBox>
+                            </Box>
+
+                            <InputBox>
+                                <input
+                                    type="text"
+                                    placeholder="Username"
+                                    name="uname"
+                                    required
+                                    disabled={register.status === 'registering'}
+                                    value={uname}
+                                    onChange={(e) => setUname(e.target.value)}
                                 />
-                                :
-                                <VisibilityOffIcon
-                                    onClick={() => setShowPassword(true)}
-                                />
-                        }
-                    </div>
-                </InputBox>
+                            </InputBox>
 
-                <InputBox>
-                    <input
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Confirm Password"
-                        name="confirmPassword"
-                        required
-                        disabled={auth.status === 'registering'}
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                    <div className="password_toggle_btn">
-                        {
-                            showPassword ?
-                                <VisibilityIcon
-                                    onClick={() => setShowPassword(false)}
+                            <InputBox m="0">
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Password"
+                                    name="password"
+                                    required
+                                    disabled={register.status === 'registering'}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
-                                :
-                                <VisibilityOffIcon
-                                    onClick={() => setShowPassword(true)}
+                                <div className="password_toggle_btn">
+                                    {
+                                        showPassword ?
+                                            <VisibilityIcon
+                                                onClick={() => setShowPassword(false)}
+                                            />
+                                            :
+                                            <VisibilityOffIcon
+                                                onClick={() => setShowPassword(true)}
+                                            />
+                                    }
+                                </div>
+                            </InputBox>
+
+                            <InputBox>
+                                <input
+                                    type={showPassword ? "text" : "password"}
+                                    placeholder="Confirm Password"
+                                    name="confirmPassword"
+                                    required
+                                    disabled={register.status === 'registering'}
+                                    value={confirmPassword}
+                                    onChange={(e) => setConfirmPassword(e.target.value)}
                                 />
-                        }
-                    </div>
-                </InputBox>
+                                <div className="password_toggle_btn">
+                                    {
+                                        showPassword ?
+                                            <VisibilityIcon
+                                                onClick={() => setShowPassword(false)}
+                                            />
+                                            :
+                                            <VisibilityOffIcon
+                                                onClick={() => setShowPassword(true)}
+                                            />
+                                    }
+                                </div>
+                            </InputBox>
+                        </Box>
+                        :
+                        null
+                }
 
                 <Box m="2.5rem 0" mb="1.5rem">
                     <input
                         type="submit"
-                        value="Register"
-                        disabled={auth.status === 'registering'}
+                        value={
+                            isValidated === true ?
+                                "Register" :
+                                (register.status === 'sentOtp' ||
+                                    register.status === 'verifyingOtpFailed') ?
+                                    "Verify OTP" : "Send OTP"
+                        }
+                        disabled={
+                            auth.status === 'registering' ||
+                            register.status === 'verifyingOtp' ||
+                            register.status === 'sendingOtp'
+                        }
                         className="app__filled_btn app__form_control"
                     />
                 </Box>

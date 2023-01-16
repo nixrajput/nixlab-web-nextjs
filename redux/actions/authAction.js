@@ -2,88 +2,14 @@ import apiClient from '../../api/apiClient';
 import {
     authenticating, authenticated, unauthenticated,
     sendingOtp, sentOtp, resettingPassword,
-    resetPassword, registering, registered,
-    setError, clearError, clearAuth,
+    resetPassword, setError, clearError, clearAuth,
 } from '../slices/authSlice';
 import { clearProfileDetails } from '../slices/profileDetailsSlice';
 import ApiUrls from "../../constants/urls";
 import storage from "../../utils/storage";
 
-export const registerAction = async (dispatch, details) => {
-    if (!dispatch) {
-        console.log("dispatch is null");
-        return;
-    }
 
-    if (!details) {
-        dispatch(setError("details is null"));
-        return;
-    }
-
-    const { fname, lname, uname, email, password, confirmPassword, isValidated } = details;
-
-    if (!fname) {
-        dispatch(setError("First name is required"));
-        return;
-    }
-
-    if (!lname) {
-        dispatch(setError("Last name is required"));
-        return;
-    }
-
-    if (!uname) {
-        dispatch(setError("Username is required"));
-        return;
-    }
-
-    if (!email) {
-        dispatch(setError("Email is required"));
-        return;
-    }
-
-    if (!password) {
-        dispatch(setError("Password is required"));
-        return;
-    }
-
-    if (!confirmPassword) {
-        dispatch(setError("Confirm Password is required"));
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        dispatch(setError("Passwords do not match"));
-        return;
-    }
-
-    const body = {
-        "fname": fname,
-        "lname": lname,
-        "email": email,
-        "uname": uname,
-        "password": password,
-        "confirmPassword": confirmPassword,
-        "isValidated": `${isValidated}`,
-    };
-
-    dispatch(registering());
-
-    try {
-        const response = await apiClient.post(ApiUrls.registerEndpoint, body);
-        if (response.status === 201) {
-            dispatch(registered());
-        }
-        else {
-            dispatch(setError(response.message));
-        }
-    }
-    catch (error) {
-        dispatch(setError(error));
-    }
-}
-
-export const loginAction = async (dispatch, emailUname, password) => {
+export const loginUserAction = async (dispatch, emailUname, password) => {
     if (!dispatch) {
         console.log("dispatch is null");
         return;
@@ -215,7 +141,14 @@ export const loadAuthDetailsAction = async (dispatch) => {
         dispatch(unauthenticated('No token found'));
     }
     else {
-        dispatch(authenticated(data));
+        let expiresAt = new Date(data.expiresAt);
+
+        if (expiresAt < new Date().getTime() / 1000) {
+            dispatch(unauthenticated('Token expired'));
+        }
+        else {
+            dispatch(authenticated(data));
+        }
     }
 }
 

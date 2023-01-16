@@ -120,10 +120,10 @@ const ResetPassword = () => {
 
                 <p style={{
                     fontSize: "0.95rem",
-                    marginBottom: "1rem",
+                    marginBottom: "0.5rem",
                     color: colors.primary[200]
                 }}>
-                    Enter the OTP sent to your email and set a new password.
+                    Please enter the OTP sent to your registered email address and your new password.
                 </p>
 
                 <InputBox>

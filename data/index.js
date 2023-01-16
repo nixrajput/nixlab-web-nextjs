@@ -32,37 +32,60 @@ export const serviceDetailsList = [
 
 export const projectList = [
     {
-        image: '/mobdev.svg',
+        _id: 'project-1',
+        image: '/rippl_screenshots/icon.png',
+        icon: '/rippl_screenshots/icon.png',
         title: 'Rippl App',
         type: 'Mobile App',
+        projectType: 'mobileApp',
         shortDescription: 'A social media app.',
         description: "Rippl is a social media app for sharing and connecting with people around the world. It is a mobile app that allows users to share their photos and videos with other users.",
-        technologies: ['Flutter', 'Node.js', 'Dart', 'GetX', 'Express'],
+        technologies: ['Flutter', 'Dart', 'GetX', 'Rive'],
+        screenshots: [
+            '/rippl_screenshots/1.png',
+            '/rippl_screenshots/2.png',
+            '/rippl_screenshots/3.png',
+            '/rippl_screenshots/4.png',
+            '/rippl_screenshots/5.png',
+            '/rippl_screenshots/6.png',
+            '/rippl_screenshots/7.png',
+            '/rippl_screenshots/8.png',
+            '/rippl_screenshots/9.png',
+            '/rippl_screenshots/10.png',
+        ],
         githubLink: 'https://github.com/nixrajput/social-media-app-flutter',
         demoLink: 'https://github.com/nixrajput/social-media-app-flutter/releases/latest',
-        status: 'In Progress',
+        downloadUrl: 'https://github.com/nixrajput/social-media-app-flutter/releases/download/v1.0.1%2B29/app-release.apk',
+        totalDownloads: 1000,
     },
     {
-        image: '/mobdev.svg',
+        _id: 'project-2',
+        image: '/livebox_screenshots/icon.png',
+        icon: '/livebox_screenshots/icon.png',
         title: 'LiveBox App',
         type: 'Mobile App',
+        projectType: 'mobileApp',
         shortDescription: 'A video calling and video streaming app.',
         description: "LiveBox is a video calling and video streaming app for sharing and connecting with people around the world. It is a mobile app that allows users to share their photos and videos with other users.",
         technologies: ['Flutter', 'Dart', 'Agora SDK', 'GetX'],
         githubLink: 'https://github.com/nixrajput/video-calling-app-flutter',
         demoLink: 'https://github.com/nixrajput/video-calling-app-flutter/releases/latest',
-        status: 'In Progress',
+        downloadUrl: 'https://github.com/nixrajput/video-calling-app-flutter/releases/download/v1.0.1%2B03/app-release.apk',
+        totalDownloads: 200,
     },
     {
-        image: '/webdev.svg',
+        _id: 'project-3',
+        image: '/nixlab_shop_screenshots/icon.png',
+        icon: '/nixlab_shop_screenshots/icon.png',
         title: 'NixLab Shop',
         type: 'Web App',
+        projectType: 'webApp',
         shortDescription: 'An e-commerce web app.',
         description: 'NixLab Shop is a e-commerce web app that allows users to do shopping online. It is a web app that allows users to check out their cart and checkout their orders with ease.',
         technologies: ['React.js', 'HTML', 'CSS', 'Node.js', 'Express', 'Mongo'],
         githubLink: 'https://github.com/nixrajput/ecommerce-mern',
-        demoLink: 'https://nixlab-shop.herokuapp.com',
-        status: 'Completed',
+        demoLink: 'https://nixlab-shop.cyclic.com',
+        websiteUrl: 'https://nixlab-shop.cyclic.com',
     },
 ];
 
@@ -87,12 +110,12 @@ export const missionList = [
 export const socialLinks = [
     {
         id: 1,
-        url: 'https://www.instagram.com/nixrajput/',
+        url: 'https://instagram.com/nixrajput/',
         icon: <InstagramIcon />
     },
     {
         id: 2,
-        url: 'https://www.facebook.com/nixrajput07/',
+        url: 'https://facebook.com/nixrajput07/',
         icon: <FacebookIcon />
     },
     {
@@ -102,7 +125,7 @@ export const socialLinks = [
     },
     {
         id: 4,
-        url: 'https://www.linkedin.com/in/nixrajput/',
+        url: 'https://linkedin.com/in/nixrajput/',
         icon: <LinkedInIcon />
     },
 ];

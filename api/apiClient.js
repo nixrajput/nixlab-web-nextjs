@@ -2,15 +2,22 @@ import ApiUrls from "../constants/urls";
 import axios from 'axios';
 
 async function apiClient(endpoint, method, { body, ...options } = {}) {
-    const headers = { 'Content-Type': 'application/json' };
+    let headers = { 'Content-Type': 'application/json' };
 
-    const config = {
-        method: method || 'GET',
-        ...options,
-        headers: {
+    if (options && options.headers) {
+        if ('Content-Type' in options.headers) {
+            headers['Content-Type'] = options.headers['Content-Type'];
+        }
+
+        headers = {
             ...headers,
             ...options.headers,
         }
+    }
+
+    const config = {
+        method: method || 'GET',
+        headers: headers,
     }
 
     if (body) {
@@ -34,12 +41,12 @@ async function apiClient(endpoint, method, { body, ...options } = {}) {
             return data;
         }
         else {
-            throw new Error(data.message || 'Something went wrong');
+            return new Error(data.message || 'Something went wrong');
         }
     }
     catch (error) {
         console.log('apiClientError:', error);
-        return Promise.reject(error.response.data.message || error.message);
+        return new Error(error.response.data.message || error.message);
     }
 }
 

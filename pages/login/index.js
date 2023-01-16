@@ -15,7 +15,7 @@ import ResponsiveFormBox from "../../components/ResponsiveFormBox";
 import ExpandedBox from "../../components/ExpandedBox";
 import InputBox from "../../components/InputBox";
 import {
-    loginAction,
+    loginUserAction,
     getProfileDetailsAction,
     clearAuthErrorAction,
     clearProfileErrorAction,
@@ -48,7 +48,7 @@ const Login = () => {
     const onClickLoginEvent = async (e) => {
         e.preventDefault();
 
-        const loginPromise = loginAction(dispatch, emailUsername.trim(), password.trim());
+        const loginPromise = loginUserAction(dispatch, emailUsername.trim(), password.trim());
         await loginPromise;
 
         if (auth.status === 'authenticated' && auth.token) {
@@ -127,6 +127,14 @@ const Login = () => {
                 }}
                 >
                     Welcome, Login to continue
+                </p>
+
+                <p style={{
+                    fontSize: "0.95rem",
+                    marginBottom: "0.5rem",
+                    color: colors.primary[200]
+                }}>
+                    Please enter your email or username and password to login
                 </p>
 
                 <InputBox>
@@ -212,10 +220,7 @@ const Login = () => {
                         Don&apos;t have an account?
                     </span>
                     <div className="app__text_btn"
-                        onClick={() => router.push({
-                            pathname: '/send-otp',
-                            query: { returnUrl: '/register' },
-                        })}
+                        onClick={() => router.push('/register')}
                     >Register</div>
                 </Box>
             </ResponsiveFormBox>

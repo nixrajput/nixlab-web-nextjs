@@ -40,7 +40,9 @@ function App({ Component, pageProps }) {
 
           if (data) {
             const loadProfileDetailsPromise = loadProfileDetailsAction(dispatch);
+            const getProfileDetailsPromise = getProfileDetailsAction(dispatch, auth.token);
             await loadProfileDetailsPromise;
+            await getProfileDetailsPromise;
           }
           else {
             const getProfileDetailsPromise = getProfileDetailsAction(dispatch, auth.token);

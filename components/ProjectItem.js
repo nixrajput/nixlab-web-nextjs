@@ -1,10 +1,12 @@
 import { Box, useTheme } from "@mui/material";
 import { tokens } from "../theme/theme";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const ProjectItem = ({ item, ...props }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    const router = useRouter();
 
     return (
         <Box
@@ -33,28 +35,37 @@ const ProjectItem = ({ item, ...props }) => {
             boxShadow="0 0.1rem 0.5rem rgba(0, 0, 0, 0.08)"
             sx={{
                 backgroundColor: colors.dialog,
-                transition: "all 0.8s ease-in-out",
+                transition: "all 0.5s ease-in-out",
                 overflow: "hidden",
+                cursor: "pointer",
+                '&:hover': {
+                    transform: "scale(1.02)"
+                },
             }}
             {...props}
+            onClick={() => router.push(`/projects/${item._id}`)}
         >
             <Box
-                className="service__image"
                 position='relative'
-                width="50%"
+                width="10rem"
                 maxWidth="10rem"
-                height="50%"
+                height="10rem"
                 maxHeight="10rem"
+                border={`1px solid ${colors.primary[800]}`}
+                borderRadius="50%"
+                overflow={'hidden'}
+                p="1rem"
             >
                 <Image
-                    src={item.image}
+                    src={item.icon}
                     alt={item.title}
                     fill
-                    sizes="100%"
+                    sizes="80%"
                     priority
                     style={{
                         aspectRatio: '1',
-                        objectFit: 'contain'
+                        objectFit: 'contain',
+                        padding: '1rem',
                     }}
                     placeholder="blur"
                     blurDataURL={item.image}
@@ -72,7 +83,6 @@ const ProjectItem = ({ item, ...props }) => {
                     style={{
                         color: colors.primary[100],
                         fontFamily: 'Proxima Nova, sans-serif',
-                        marginTop: '0.5rem',
                     }}
                 >
                     {item.title}
@@ -80,13 +90,13 @@ const ProjectItem = ({ item, ...props }) => {
 
                 <p
                     style={{
-                        color: colors.primary[100],
+                        color: colors.primary[300],
                         fontFamily: 'Proxima Nova, sans-serif',
                         fontSize: '1rem',
                         marginBottom: '0.5rem',
                     }}
                 >
-                    {item.shortDescription}
+                    {item.type}
                 </p>
 
                 <Box

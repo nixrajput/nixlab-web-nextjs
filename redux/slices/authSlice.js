@@ -38,11 +38,6 @@ const authSlice = createSlice({
             state.status = 'idle';
         },
 
-        setError: (state, action) => {
-            state.error = action.payload;
-            state.status = 'error';
-        },
-
         logout: (state, action) => {
             state.token = null;
             state.expiresAt = null;
@@ -50,14 +45,6 @@ const authSlice = createSlice({
             storage.remove('auth');
             storage.remove('user');
             state.status = 'idle';
-        },
-
-        registering: (state, action) => {
-            state.status = 'registering';
-        },
-
-        registered: (state, action) => {
-            state.status = 'registered';
         },
 
         sendingOtp: (state, action) => {
@@ -76,6 +63,11 @@ const authSlice = createSlice({
             state.status = 'resetPassword';
         },
 
+        setError: (state, action) => {
+            state.error = action.payload;
+            state.status = 'error';
+        },
+
         clearError: (state, action) => {
             state.error = null;
             state.status = 'noError';
@@ -90,8 +82,6 @@ export const {
     clearAuth,
     logout,
     setError,
-    registering,
-    registered,
     sendingOtp,
     sentOtp,
     resettingPassword,

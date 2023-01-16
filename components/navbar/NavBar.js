@@ -2,17 +2,14 @@ import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Box, IconButton, useTheme, } from "@mui/material";
+import { Box, Button, IconButton, useTheme, } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import SettingsIcon from "@mui/icons-material/Settings";
-import LoginIcon from '@mui/icons-material/Login';
 import CloseIcon from '@mui/icons-material/Close';
 import { ColorModeContext, tokens } from "../../theme/theme";
 import {
@@ -172,11 +169,7 @@ const Navbar = () => {
             maxWidth="1024px"
             height="80px"
             maxHeight="80px"
-            bgcolor={
-                scrolled ?
-                    colors.dialog :
-                    colors.background
-            }
+            bgcolor={colors.background}
             display="flex"
             flexDirection="row"
             justifyContent="center"
@@ -273,13 +266,6 @@ const Navbar = () => {
                 {/* ICONS */}
 
                 <Box display="flex">
-                    <IconButton onClick={colorMode.toggleColorMode}>
-                        {theme.palette.mode === "dark" ? (
-                            <DarkModeOutlinedIcon />
-                        ) : (
-                            <LightModeOutlinedIcon />
-                        )}
-                    </IconButton>
 
                     {
                         auth.status === 'authenticated' ?
@@ -289,10 +275,6 @@ const Navbar = () => {
                                 alignItems="center"
                                 justifyContent="center"
                             >
-                                <IconButton>
-                                    <NotificationsOutlinedIcon />
-                                </IconButton>
-
                                 <Box>
                                     <IconButton
                                         id="user-button"
@@ -358,9 +340,19 @@ const Navbar = () => {
                                         </MenuItem>
                                     </Menu>
                                 </Box>
+
+                                <IconButton>
+                                    <NotificationsOutlinedIcon />
+                                </IconButton>
                             </Box>
                             :
-                            <IconButton
+                            <Button variant="contained"
+                                sx={{
+                                    backgroundColor: colors.accent,
+                                    color: '#f0f0f0',
+                                    borderRadius: "4px",
+                                    fontWeight: "bold",
+                                }}
                                 onClick={() => {
                                     if (mobileNav && showMobileMenu) {
                                         setShowMobileMenu(false);
@@ -368,9 +360,17 @@ const Navbar = () => {
                                     router.push('/login');
                                 }}
                             >
-                                <LoginIcon />
-                            </IconButton>
+                                Login
+                            </Button>
                     }
+
+                    <IconButton onClick={colorMode.toggleColorMode}>
+                        {theme.palette.mode === "dark" ? (
+                            <DarkModeOutlinedIcon />
+                        ) : (
+                            <LightModeOutlinedIcon />
+                        )}
+                    </IconButton>
 
                     {/* Mobile Nav Toggle */}
 
