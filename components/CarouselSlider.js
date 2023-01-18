@@ -7,7 +7,7 @@ const CarouselSlideItem = ({ item, idx }) => {
 
     return (
         <img className='carousel__img'
-            src={item}
+            src={item.url}
             alt={`slide-${idx}`}
         />
     );

@@ -93,11 +93,11 @@ const ServiceItem = ({ item, ...props }) => {
                                     sx={{
                                         fontFamily: 'Proxima Nova, sans-serif',
                                         fontSize: '0.85rem',
-                                        mr: '0.25rem',
-                                        mb: '0.25rem',
+                                        m: '0.25rem 0.5rem',
+                                        ml: '0',
                                         padding: '0.25rem 0.5rem',
-                                        borderRadius: '4px',
-                                        backgroundColor: colors.grey[500],
+                                        borderRadius: '0.5rem',
+                                        border: `1px solid ${colors.grey[500]}`,
                                         color: colors.primary[100],
                                         ':last-child': {
                                             mr: '0'

@@ -53,6 +53,22 @@ export const projectList = [
             '/rippl_screenshots/9.png',
             '/rippl_screenshots/10.png',
         ],
+        features: [
+            "Login and Signup",
+            "Create and edit profile",
+            "Follow and unfollow users",
+            "Create and edit posts and polls",
+            "Like and unlike posts and polls",
+            "Comment on posts and polls",
+            "Share posts and polls",
+            "View posts of users you follow",
+            "View posts of users you don't follow",
+            "Search users and posts",
+            "View user profiles",
+            "View user followers and following",
+            "View posts of a user",
+            "View and edit your profile",
+        ],
         githubLink: 'https://github.com/nixrajput/social-media-app-flutter',
         demoLink: 'https://github.com/nixrajput/social-media-app-flutter/releases/latest',
         downloadUrl: 'https://github.com/nixrajput/social-media-app-flutter/releases/download/v1.0.1%2B29/app-release.apk',
@@ -68,6 +84,15 @@ export const projectList = [
         shortDescription: 'A video calling and video streaming app.',
         description: "LiveBox is a video calling and video streaming app for sharing and connecting with people around the world. It is a mobile app that allows users to share their photos and videos with other users.",
         technologies: ['Flutter', 'Dart', 'Agora SDK', 'GetX'],
+        features: [
+            "Login and Signup",
+            "Create and edit profile",
+            "Make video calls",
+            "Multi-party video calls",
+            "Mute and unmute audio",
+            "Switch camera",
+            "View and edit your profile"
+        ],
         githubLink: 'https://github.com/nixrajput/video-calling-app-flutter',
         demoLink: 'https://github.com/nixrajput/video-calling-app-flutter/releases/latest',
         downloadUrl: 'https://github.com/nixrajput/video-calling-app-flutter/releases/download/v1.0.1%2B03/app-release.apk',
@@ -81,12 +106,33 @@ export const projectList = [
         type: 'Web Application',
         projectType: 'webApp',
         shortDescription: 'An e-commerce web app.',
-        description: 'NixLab Shop is a e-commerce web app that allows users to do shopping online. It is a web app that allows users to check out their cart and checkout their orders with ease.',
+        description: 'NixLab Shop is an e-commerce web app that allows users to do shopping online. It is a web app that allows users to check out their cart and checkout their orders with ease.',
         technologies: ['React.js', 'HTML', 'CSS', 'Node.js', 'Express', 'Mongo'],
+        features: [
+            "Login and Signup",
+            "Create and edit profile",
+            "Add and remove products from cart",
+            "Checkout products",
+            "View orders",
+            "View products",
+            "View product details",
+            "View product reviews",
+            "Create and edit product reviews",
+            "Search products"
+        ],
         githubLink: 'https://github.com/nixrajput/ecommerce-mern',
         demoLink: 'https://nixlab-shop.cyclic.com',
         websiteUrl: 'https://nixlab-shop.cyclic.com',
     },
+];
+
+export const projectCategories = [
+    "business", "education", "entertainment",
+    "finance", "food", "games", "health",
+    "lifestyle", "medical", "music", "news",
+    "photography", "productivity", "shopping",
+    "social", "sports", "travel", "utilities",
+    "weather", "other"
 ];
 
 export const description = "NixLab Technologies is a software development company based in the India. We are a team of passionate developers who are passionate about building high quality software. We are always looking for talented and creative people to join our team.";

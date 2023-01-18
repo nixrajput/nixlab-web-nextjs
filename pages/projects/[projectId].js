@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from 'next/router';
 import Image from "next/image";
 import Head from 'next/head';
-import { Box, useTheme, Backdrop, CircularProgress, Button } from "@mui/material";
+import {
+    Box, useTheme, Backdrop, CircularProgress, Button
+} from "@mui/material";
 import { useSnackbar } from 'notistack';
 import AppWrap from "../../components/AppWrap";
 import ExpandedBox from "../../components/ExpandedBox";
 import ResponsiveBox from "../../components/ResponsiveBox";
-import { projectList } from '../../data';
 import { tokens } from '../../theme/theme';
 import CarouselSlider from '../../components/CarouselSlider';
+import {
+    getProjectDetailsAction, clearProjectsDetailsErrorAction,
+    incrementProjectViewsCountAction,
+    incrementProjectDownloadsCountAction
+} from '../../redux/actions/projectsAction';
 
 const ProjectDetails = () => {
     const theme = useTheme();
@@ -18,8 +25,8 @@ const ProjectDetails = () => {
     const router = useRouter()
     const { projectId } = router.query;
 
-    const [loading, setLoading] = useState(false);
-    const [project, setProject] = useState(null);
+    const projectDetails = useSelector((state) => state.projectDetails);
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
 
     const { enqueueSnackbar } = useSnackbar();
@@ -32,21 +39,123 @@ const ProjectDetails = () => {
         setOpen(true);
     };
 
+    const renderProjectType = (type) => {
+        switch (type) {
+            case "mobile":
+                return "Mobile Application";
+            case "web":
+                return "Web Application";
+            case "desktop":
+                return "Desktop Application";
+            case "game":
+                return "Game";
+            default:
+                return "Unknown";
+        }
+    };
+
+    const renderProjectActionBtn = (type, project) => {
+        switch (type) {
+            case "mobile":
+            case "desktop":
+                return (
+                    <Button
+                        variant="contained"
+                        sx={{
+
+                            backgroundColor: colors.accent,
+                            color: '#f0f0f0',
+                            borderRadius: "0.5rem",
+                            fontWeight: "bold",
+                            width: {
+                                xs: '100%',
+                                sm: '30%',
+                                md: '25%',
+                                lg: '25%',
+                                xl: '25%',
+                            }
+                        }}
+                        onClick={() => {
+                            window.open(project.downloadUrl, '_blank');
+                            incrementProjectDownloadsCount();
+                        }}
+                    >
+                        Download
+                    </Button>
+                );
+            case "web":
+                return (
+                    <Button
+                        variant="contained"
+                        sx={{
+
+                            backgroundColor: colors.accent,
+                            color: '#f0f0f0',
+                            borderRadius: "0.5rem",
+                            fontWeight: "bold",
+                            width: {
+                                xs: '100%',
+                                sm: '30%',
+                                md: '25%',
+                                lg: '25%',
+                                xl: '25%',
+                            }
+                        }}
+                        onClick={() => {
+                            window.open(project.demoUrl, '_blank');
+                        }}
+                    >
+                        Visit
+                    </Button>
+                );
+            default:
+                return null;
+        }
+    };
+
+    const getData = async () => {
+        const getProjectDetailsPromise = getProjectDetailsAction(dispatch, projectId);
+        openBackdrop();
+        await getProjectDetailsPromise;
+        closeBackdrop();
+    }
+
+    const incrementProjectViewsCount = async () => {
+        const incrementProjectViewsCountPromise = incrementProjectViewsCountAction(dispatch, projectId);
+        await incrementProjectViewsCountPromise;
+    }
+
+    const incrementProjectDownloadsCount = async () => {
+        const incrementProjectDownloadsCountPromise = incrementProjectDownloadsCountAction(dispatch, projectId);
+        await incrementProjectDownloadsCountPromise;
+    }
+
     useEffect(() => {
-        if (projectId && project === null) {
-            setLoading(true);
-            const project = projectList.find(project => project._id === projectId);
-            setProject(project);
-            setLoading(false);
+        if (projectId && (projectDetails.status === 'idle'
+            || projectDetails.project === null
+            || (projectDetails.project && projectId !== projectDetails.project._id))) {
+            getData();
         }
 
-        if (loading) {
-            openBackdrop();
-        } else {
-            closeBackdrop();
+        if (projectDetails.status === 'success' && projectDetails.project !== null) {
+            incrementProjectViewsCount();
         }
 
-    }, [projectId, project, loading]);
+        return () => { }
+
+    }, [
+        projectDetails.status, projectId, projectDetails.project
+    ]);
+
+    useEffect(() => {
+        if (projectDetails.error !== null) {
+            enqueueSnackbar(projectDetails.error, { variant: 'error' });
+            const clearErrorPromise = clearProjectsDetailsErrorAction(dispatch);
+            clearErrorPromise;
+        }
+    }, [
+        projectDetails.error, enqueueSnackbar, dispatch
+    ]);
 
     return (
         <ExpandedBox
@@ -55,16 +164,19 @@ const ProjectDetails = () => {
         >
             <Head>
                 <title>{
-                    project ? project.title + ' - Project Details'
+                    projectDetails.project ? projectDetails.project.title + ' - Details'
                         : 'Project Details'
                 }</title>
             </Head>
 
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{
+                    color: colors.accent,
+                    zIndex: (theme) => theme.zIndex.drawer + 1
+                }}
                 open={open}
             >
-                <CircularProgress color="inherit" />
+                <CircularProgress color='inherit' />
             </Backdrop>
 
             <ResponsiveBox
@@ -72,17 +184,21 @@ const ProjectDetails = () => {
                 bgcolor="transparent"
                 p='0'
             >
-                <Box
-                    width="100%"
-                    position="relative"
-                    display="flex"
-                    flexDirection="column"
-                    alignitems="flex-start"
-                    justifyContent="space-between"
-                >
 
-                    {
-                        project ?
+                {
+                    (projectDetails.status === 'success' &&
+                        projectDetails.project !== null) ?
+                        <Box
+                            width="100%"
+                            position="relative"
+                            display="flex"
+                            flexDirection="column"
+                            alignitems="flex-start"
+                            justifyContent="space-between"
+                        >
+
+                            {/* Project Details Header */}
+
                             <Box
                                 width="100%"
                                 position="relative"
@@ -113,8 +229,8 @@ const ProjectDetails = () => {
                                     p="1rem"
                                 >
                                     <Image
-                                        src={project.icon}
-                                        alt={project.title}
+                                        src={projectDetails.project.icon.url}
+                                        alt='icon'
                                         fill
                                         sizes="80%"
                                         style={{
@@ -123,7 +239,7 @@ const ProjectDetails = () => {
                                             padding: '1rem',
                                         }}
                                         placeholder="blur"
-                                        blurDataURL={project.image}
+                                        blurDataURL={projectDetails.project.icon.url}
                                     />
                                 </Box>
 
@@ -141,7 +257,7 @@ const ProjectDetails = () => {
                                             fontFamily: 'Proxima Nova, sans-serif',
                                         }}
                                     >
-                                        {project.title}
+                                        {projectDetails.project.title}
                                     </h1>
 
                                     <p
@@ -152,16 +268,13 @@ const ProjectDetails = () => {
                                             fontSize: '1rem',
                                         }}
                                     >
-                                        {project.type}
+                                        {renderProjectType(projectDetails.project.projectType)}
                                     </p>
                                 </Box>
-
                             </Box>
-                            : null
-                    }
 
-                    {
-                        project ?
+                            {/* Button */}
+
                             <Box
                                 position="relative"
                                 display="flex"
@@ -171,64 +284,11 @@ const ProjectDetails = () => {
                                 mt='1.5rem'
                                 width="100%"
                             >
-                                {
-                                    project.projectType === 'mobileApp' ?
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-
-                                                backgroundColor: colors.accent,
-                                                color: '#f0f0f0',
-                                                borderRadius: "0.5rem",
-                                                fontWeight: "bold",
-                                                width: {
-                                                    xs: '100%',
-                                                    sm: '30%',
-                                                    md: '25%',
-                                                    lg: '25%',
-                                                    xl: '25%',
-                                                }
-                                            }}
-                                            onClick={() => {
-                                                window.open(project.downloadUrl, '_blank');
-                                            }}
-                                        >
-                                            Download
-                                        </Button>
-                                        : null
-                                }
-
-                                {
-                                    project.projectType === 'webApp' ?
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                backgroundColor: colors.accent,
-                                                color: '#f0f0f0',
-                                                borderRadius: "0.5rem",
-                                                fontWeight: "bold",
-                                                width: {
-                                                    xs: '100%',
-                                                    sm: '30%',
-                                                    md: '25%',
-                                                    lg: '25%',
-                                                    xl: '25%',
-                                                }
-                                            }}
-                                            onClick={() => {
-                                                window.open(project.websiteUrl, '_blank');
-                                            }}
-                                        >
-                                            Visit
-                                        </Button>
-                                        : null
-                                }
+                                {renderProjectActionBtn(projectDetails.project.projectType, projectDetails.project)}
                             </Box>
-                            : null
-                    }
 
-                    {
-                        project ?
+                            {/* Project Details */}
+
                             <Box
                                 position="relative"
                                 display="flex"
@@ -270,9 +330,9 @@ const ProjectDetails = () => {
                             >
 
                                 {
-                                    (project.screenshots && project.screenshots.length > 0) ?
+                                    (projectDetails.project.screenshots && projectDetails.project.screenshots.length > 0) ?
                                         <CarouselSlider
-                                            items={project.screenshots}
+                                            items={projectDetails.project.screenshots}
                                         />
                                         : null
                                 }
@@ -280,63 +340,121 @@ const ProjectDetails = () => {
                                 <h4 style={{
                                     color: colors.primary[100],
                                     fontFamily: 'Proxima Nova, sans-serif',
-                                    marginTop: project.screenshots && project.screenshots.length > 0 ? '1.5rem' : '0',
+                                    marginTop: projectDetails.project.screenshots && projectDetails.project.screenshots.length > 0 ? '1.5rem' : '0',
                                 }}>
                                     About
                                 </h4>
 
                                 <p style={{
                                     color: colors.primary[200],
-                                    fontFamily: 'Proxima Nova, sans-serif',
                                     marginTop: '0.5rem',
                                 }}
                                 >
-                                    {project.description}
+                                    {projectDetails.project.description}
                                 </p>
 
-                                <Box
-                                    position="relative"
-                                    display="flex"
-                                    flexDirection="row"
-                                    flexWrap="wrap"
-                                    alignItems="center"
-                                    justifyContent="flex-start"
-                                    mt='1rem'
-                                >
-                                    {
-                                        project.technologies ?
-                                            project.technologies.map((item, index) => (
-                                                <Box key={`technology-${index}`}
-                                                    sx={{
-                                                        fontFamily: 'Proxima Nova, sans-serif',
-                                                        fontSize: '0.85rem',
-                                                        m: '0.25rem 0.5rem',
-                                                        ml: '0',
-                                                        padding: '0.25rem 0.5rem',
-                                                        borderRadius: '0.5rem',
-                                                        border: `1px solid ${colors.grey[500]}`,
-                                                        color: colors.primary[100],
-                                                        ':last-child': {
-                                                            mr: '0'
-                                                        },
-                                                    }}
-                                                >
-                                                    {item}
-                                                    <br />
-                                                </Box>
-                                            ))
-                                            :
-                                            null
-                                    }
-                                </Box>
+                                {
+                                    projectDetails.project.tags ?
+                                        <Box
+                                            position="relative"
+                                            display="flex"
+                                            flexDirection="row"
+                                            flexWrap="wrap"
+                                            alignItems="center"
+                                            justifyContent="flex-start"
+                                            mt='0.75rem'
+                                        >
+                                            {
+                                                projectDetails.project.tags ?
+                                                    projectDetails.project.tags.map((tag, index) => (
+                                                        <Box key={`tag-${index}`}
+                                                            sx={{
+                                                                m: '0.25rem 0.5rem',
+                                                                ml: '0',
+                                                                padding: '0.25rem 0.5rem',
+                                                                borderRadius: '0.5rem',
+                                                                border: `1px solid ${colors.grey[500]}`,
+                                                                ':last-child': {
+                                                                    mr: '0'
+                                                                },
+                                                            }}
+                                                        >
+                                                            <p style={{
+                                                                color: colors.primary[200],
+                                                            }}
+                                                            >
+                                                                {tag}
+                                                            </p>
+                                                        </Box>
+                                                    ))
+                                                    :
+                                                    null
+                                            }
+                                        </Box>
+                                        : null
+                                }
 
+                                {
+                                    projectDetails.project.features ?
+                                        <Box
+                                            position="relative"
+                                            display="flex"
+                                            flexDirection="column"
+                                            alignprojects="flex-start"
+                                            justifyContent="flex-start"
+                                            mt='1rem'
+                                            p='0.5rem 1rem'
+                                            width='fit-content'
+                                            sx={{
+                                                borderRadius: '0.5rem',
+                                                border: `1px solid ${colors.primary[600]}`,
+                                            }}
+                                        >
+                                            {
+                                                projectDetails.project.features.map((feature, index) => (
+                                                    <Box key={`feature-${index}`}
+                                                        position="relative"
+                                                        display="flex"
+                                                        flexDirection="row"
+                                                        alignprojects="center"
+                                                        justifyContent="flex-start"
+                                                        m='0.25rem'
+                                                        width="100%"
+                                                        sx={{
+                                                            ':last-child': {
+                                                                mb: '0'
+                                                            },
+                                                            ':first-child': {
+                                                                mt: '0'
+                                                            }
+                                                        }}
+                                                    >
+                                                        <p style={{
+                                                            color: colors.primary[200],
+                                                        }}>
+                                                            •
+                                                        </p>
+                                                        <p style={{
+                                                            color: colors.primary[200],
+                                                            marginLeft: '0.5rem',
+                                                        }}>
+                                                            {feature}
+                                                        </p>
+                                                    </Box>
+                                                ))
+
+                                            }
+                                        </Box>
+                                        : null
+                                }
                             </Box>
-                            : null
-                    }
 
-                </Box>
+                        </Box>
+                        : null
+                }
+
             </ResponsiveBox>
-        </ExpandedBox>
+        </ExpandedBox >
     )
 }
 

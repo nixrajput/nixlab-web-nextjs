@@ -8,6 +8,21 @@ const ProjectItem = ({ item, ...props }) => {
     const colors = tokens(theme.palette.mode);
     const router = useRouter();
 
+    const renderProjectType = (type) => {
+        switch (type) {
+            case "mobile":
+                return "Mobile Application";
+            case "web":
+                return "Web Application";
+            case "desktop":
+                return "Desktop Application";
+            case "game":
+                return "Game";
+            default:
+                return "Unknown";
+        }
+    };
+
     return (
         <Box
             position="relative"
@@ -18,7 +33,8 @@ const ProjectItem = ({ item, ...props }) => {
                 lg: "calc(33% - 2rem)",
                 xl: "calc(33% - 2rem)",
             }}
-            height="24rem"
+            height="auto"
+            maxHeight="20rem"
             display="flex"
             flexDirection="column"
             alignItems="stretch"
@@ -47,17 +63,17 @@ const ProjectItem = ({ item, ...props }) => {
         >
             <Box
                 position='relative'
-                width="10rem"
-                maxWidth="10rem"
-                height="10rem"
-                maxHeight="10rem"
+                width="8rem"
+                maxWidth="8rem"
+                height="8rem"
+                maxHeight="8rem"
                 border={`1px solid ${colors.primary[800]}`}
                 borderRadius="50%"
                 overflow={'hidden'}
                 p="1rem"
             >
                 <Image
-                    src={item.icon}
+                    src={item.icon.url}
                     alt={item.title}
                     fill
                     sizes="80%"
@@ -68,7 +84,7 @@ const ProjectItem = ({ item, ...props }) => {
                         padding: '1rem',
                     }}
                     placeholder="blur"
-                    blurDataURL={item.image}
+                    blurDataURL={item.icon.url}
                 />
             </Box>
 
@@ -78,11 +94,11 @@ const ProjectItem = ({ item, ...props }) => {
                 flexDirection="column"
                 alignItems="flex-start"
                 justifyContent="flex-start"
+                mt="1.5em"
             >
                 <h3
                     style={{
                         color: colors.primary[100],
-                        fontFamily: 'Proxima Nova, sans-serif',
                     }}
                 >
                     {item.title}
@@ -91,12 +107,10 @@ const ProjectItem = ({ item, ...props }) => {
                 <p
                     style={{
                         color: colors.primary[300],
-                        fontFamily: 'Proxima Nova, sans-serif',
-                        fontSize: '1rem',
                         marginBottom: '0.5rem',
                     }}
                 >
-                    {item.type}
+                    {renderProjectType(item.projectType)}
                 </p>
 
                 <Box
@@ -108,11 +122,10 @@ const ProjectItem = ({ item, ...props }) => {
                     justifyContent="flex-start"
                 >
                     {
-                        item.technologies ?
-                            item.technologies.map((item, index) => (
-                                <Box key={`technology-${index}`}
+                        item.tags ?
+                            item.tags.map((tag, index) => (
+                                <Box key={`tag-${index}`}
                                     sx={{
-                                        fontFamily: 'Proxima Nova, sans-serif',
                                         fontSize: '0.85rem',
                                         m: '0.25rem 0.5rem',
                                         ml: '0',
@@ -125,7 +138,7 @@ const ProjectItem = ({ item, ...props }) => {
                                         },
                                     }}
                                 >
-                                    {item}
+                                    {tag}
                                     <br />
                                 </Box>
                             ))
@@ -133,17 +146,6 @@ const ProjectItem = ({ item, ...props }) => {
                             null
                     }
                 </Box>
-
-                {/* <a
-                    href={item.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                        marginTop: '0.5rem'
-                    }}
-                >
-                    GitHub
-                </a> */}
             </Box>
         </Box>
     )

@@ -18,114 +18,62 @@ const Hero = () => {
     return (
         <ExpandedBox>
             <ResponsiveBox>
-                <FlexRow>
-                    <Box
-                        width={{
-                            xs: '100%',
-                            sm: '100%',
-                            md: "100%",
-                            lg: "calc(60% - 2rem)",
-                            xl: "calc(60% - 2rem)",
-                        }}
-                        textAlign={{
-                            xs: 'center',
-                            sm: 'center',
-                            md: "center",
-                            lg: "left",
-                            xl: "left",
-                        }}
-                        order={{
-                            xs: 2,
-                            sm: 2,
-                            md: 2,
-                            lg: 1,
-                            xl: 1,
-                        }}
-                    >
-                        {
-                            (auth.status === 'authenticated' &&
-                                profileDetails.status === 'success')
-                                ?
-                                <h3
-                                    style={{
-                                        margin: "1rem auto",
-                                        marginBottom: "0.5rem",
-                                        fontWeight: 500,
-                                        color: colors.primary[100],
-                                    }}
-                                >
-                                    Hi 👋 {profileDetails.user?.fname} {profileDetails.user?.lname}
-                                </h3>
-                                :
-                                null
+                <Box
+                    width="100%"
+                    textAlign={{
+                        xs: 'center',
+                        sm: 'center',
+                        md: "center",
+                        lg: "left",
+                        xl: "left",
+                    }}
+                >
+                    {
+                        (auth.status === 'authenticated' &&
+                            profileDetails.status === 'success')
+                            ?
+                            <h3
+                                style={{
+                                    margin: "1rem auto",
+                                    marginBottom: "0.5rem",
+                                    fontWeight: 500,
+                                    color: colors.primary[100],
+                                }}
+                            >
+                                Hi 👋 {profileDetails.user?.fname} {profileDetails.user?.lname}
+                            </h3>
+                            :
+                            null
+                    }
+
+                    <h1 style={{
+                        margin: "1rem auto",
+                        marginTop: "0.5rem",
+                        fontWeight: 700,
+                        textTransform: "uppercase",
+                        wordSpacing: "0.5rem",
+                        color: colors.primary[100],
+                        "& span": {
+                            color: colors.accent,
                         }
+                    }}
+                    >
+                        Welcome to <span style={{
+                            color: colors.accent,
+                        }}
+                        >NixLab Technologies
+                        </span>
+                    </h1>
 
-                        <h1 style={{
+                    <p
+                        style={{
                             margin: "1rem auto",
-                            marginTop: "0.5rem",
-                            fontWeight: 700,
-                            textTransform: "uppercase",
-                            wordSpacing: "0.5rem",
                             color: colors.primary[100],
-                            "& span": {
-                                color: colors.accent,
-                            }
-                        }}
-                        >
-                            Welcome to <span style={{
-                                color: colors.accent,
-                            }}
-                            >NixLab Technologies
-                            </span>
-                        </h1>
-
-                        <p
-                            style={{
-                                margin: "1rem auto",
-                                color: colors.primary[100],
-                            }}
-                        >
-                            {description}
-                        </p>
-                    </Box>
-
-                    <Box
-                        width={{
-                            xs: '100%',
-                            sm: '100%',
-                            md: "100%",
-                            lg: "calc(40% - 2rem)",
-                            xl: "calc(40% - 2rem)",
-                        }}
-                        maxWidth="400px"
-                        position="relative"
-                        order={{
-                            xs: 1,
-                            sm: 1,
-                            md: 1,
-                            lg: 2,
-                            xl: 2,
-                        }}
-                        sx={{
-                            aspectRatio: '4/3',
-                            objectFit: 'contain',
                         }}
                     >
-                        <Image
-                            src="/hero.png"
-                            alt="hero"
-                            fill
-                            sizes="100%"
-                            priority
-                            placeholder="blur"
-                            blurDataURL='/hero.png'
-                            sx={{
-                                aspectRatio: '4/3',
-                                objectFit: 'contain',
-                            }}
-                        />
-                    </Box>
-                </FlexRow>
+                        {description}
+                    </p>
+                </Box>
 
                 {/* Services */}
 
