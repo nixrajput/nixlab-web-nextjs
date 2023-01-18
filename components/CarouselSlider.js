@@ -60,13 +60,15 @@ const CarouselSlider = ({ items }) => {
             }
         };
 
-        carouselRef.current?.addEventListener('srcoll', calculateScroll);
+        window.addEventListener('load', calculateScroll);
+        carouselRef.current.addEventListener('scroll', calculateScroll);
 
         return () => {
+            window.removeEventListener('load', () => { });
             carouselRef.current?.removeEventListener('scroll', () => { });
         }
 
-    }, [carouselRef]);
+    }, [carouselRef.current]);
 
     return (
         <Box
