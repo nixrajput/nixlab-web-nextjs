@@ -6,27 +6,27 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 export const serviceDetailsList = [
     {
         image: '/mobile-app-dev.png',
-        title: 'iOS & ANDROID APP DEVELOPMENT',
+        title: 'MOBILE APP DEVELOPMENT',
         shortDescription: 'Flutter, React Native, Java, Kotlin, Objective-C',
-        description: 'iOS and Android app development is a key part of our business. We have a team of iOS and Android developers who are capable of building apps for any platform.',
+        description: 'Mobile app development is a key part of our business. We have a team of iOS and Android developers who are capable of building apps for any platform. We have experience in building apps for iOS and Android using Flutter, React Native, Java, Kotlin, and Objective-C.',
     },
     {
         image: '/web-dev.png',
         title: 'FRONTEND WEB DEVELOPMENT',
         shortDescription: 'React.js, Next.js, Angular, HTML, CSS, Python, Node.js',
-        description: 'We have a team of frontend web developers who are capable of building websites for any platform.',
+        description: 'We have a team of frontend web developers who are capable of building websites for any platform. We have experience in building websites using React.js, Next.js, Angular, HTML, CSS, Python, and Node.js.',
     },
     {
         image: '/backend-dev.png',
         title: 'BACKEND DEVELOPMENT',
         shortDescription: 'Node.js, C++, Dart, Python, Java, PHP, Ruby, Go',
-        description: 'We have a team of backend developers who are capable of building websites for any platform.',
+        description: 'We have a team of backend developers who are capable of building backend systems for any platform. We have experience in building backend systems for web, mobile, and desktop platforms.',
     },
     {
         image: '/software-dev.png',
         title: 'SOFTWARE DEVELOPMENT',
         shortDescription: 'C++, Java, Python, Dart',
-        description: 'We have a team of software developers who are capable of building websites for any platform.',
+        description: 'We have a team of software developers who are capable of building applications for desktop platforms. We have experience in building applications for Windows, Mac, and Linux.',
     },
 ];
 

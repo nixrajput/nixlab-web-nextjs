@@ -17,6 +17,7 @@ import {
     incrementProjectViewsCountAction,
     incrementProjectDownloadsCountAction
 } from '../../redux/actions/projectsAction';
+import numberUtils from '../../utils/numberUtils';
 
 const ProjectDetails = () => {
     const theme = useTheme();
@@ -269,6 +270,87 @@ const ProjectDetails = () => {
                                         }}
                                     >
                                         {renderProjectType(projectDetails.project.projectType)}
+                                    </p>
+                                </Box>
+                            </Box>
+
+                            {/* Stats */}
+
+                            <Box
+                                position="relative"
+                                display="flex"
+                                flexDirection="row"
+                                alignprojects="center"
+                                justifyContent="flex-start"
+                                mt='1.5rem'
+                                width="100%"
+                            >
+
+                                <Box
+                                    position="relative"
+                                    display="flex"
+                                    flexDirection="column"
+                                    alignprojects="center"
+                                    justifyContent="center"
+                                    mr={{
+                                        xs: '1.5rem',
+                                        sm: '2rem',
+                                        md: '2rem',
+                                        lg: '2rem',
+                                        xl: '2rem',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            color: colors.primary[200],
+                                            fontWeight: '600',
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        {numberUtils.toCountingNumber(projectDetails.project.viewsCount)}+
+                                    </p>
+
+                                    <p
+                                        style={{
+                                            color: colors.primary[400],
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        Views
+                                    </p>
+                                </Box>
+
+                                <Box
+                                    position="relative"
+                                    display="flex"
+                                    flexDirection="column"
+                                    alignprojects="center"
+                                    justifyContent="center"
+                                    mr={{
+                                        xs: '1.5rem',
+                                        sm: '2rem',
+                                        md: '2rem',
+                                        lg: '2rem',
+                                        xl: '2rem',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            color: colors.primary[200],
+                                            fontWeight: '600',
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        {numberUtils.toCountingNumber(projectDetails.project.downloadsCount)}+
+                                    </p>
+
+                                    <p
+                                        style={{
+                                            color: colors.primary[400],
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        Downloads
                                     </p>
                                 </Box>
                             </Box>

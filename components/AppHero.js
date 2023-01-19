@@ -15,6 +15,35 @@ const Hero = () => {
     const auth = useSelector((state) => state.auth);
     const profileDetails = useSelector((state) => state.profileDetails);
 
+    const renderShreemadBhagvadGitaQuote = () => {
+        return (
+            <h4 style={{
+                margin: "0 auto 0.5rem auto",
+                fontWeight: 700,
+                textAlign: "center",
+                color: colors.accent,
+            }}
+            >
+                कर्मण्येवाधिकारस्ते मा फलेषु कदाचन । <br />
+                मा कर्मफलहेतुर्भुर्मा ते संगोऽस्त्वकर्मणि ॥
+            </h4>
+        )
+    }
+
+    const renderUserGreeting = () => {
+        return (
+            <h4
+                style={{
+                    margin: "1rem auto 0",
+                    fontWeight: 600,
+                    color: colors.primary[200],
+                }}
+            >
+                Hi 👋 {profileDetails.user?.fname} {profileDetails.user?.lname}
+            </h4>
+        )
+    }
+
     return (
         <ExpandedBox>
             <ResponsiveBox>
@@ -28,34 +57,23 @@ const Hero = () => {
                         xl: "left",
                     }}
                 >
+                    {renderShreemadBhagvadGitaQuote()}
+
                     {
                         (auth.status === 'authenticated' &&
                             profileDetails.status === 'success')
                             ?
-                            <h3
-                                style={{
-                                    margin: "1rem auto",
-                                    marginBottom: "0.5rem",
-                                    fontWeight: 500,
-                                    color: colors.primary[100],
-                                }}
-                            >
-                                Hi 👋 {profileDetails.user?.fname} {profileDetails.user?.lname}
-                            </h3>
+                            renderUserGreeting()
                             :
                             null
                     }
 
                     <h1 style={{
-                        margin: "1rem auto",
-                        marginTop: "0.5rem",
+                        margin: "0 auto",
                         fontWeight: 700,
                         textTransform: "uppercase",
-                        wordSpacing: "0.5rem",
+                        wordSpacing: "0.25rem",
                         color: colors.primary[100],
-                        "& span": {
-                            color: colors.accent,
-                        }
                     }}
                     >
                         Welcome to <span style={{
@@ -67,7 +85,7 @@ const Hero = () => {
 
                     <p
                         style={{
-                            margin: "1rem auto",
+                            margin: "0 auto 1rem",
                             color: colors.primary[100],
                         }}
                     >
@@ -169,6 +187,13 @@ const Hero = () => {
                                     mt={{
                                         xs: '2rem',
                                         sm: '2rem',
+                                        md: "0",
+                                        lg: "0",
+                                        xl: "0",
+                                    }}
+                                    p={{
+                                        xs: '0 1.5rem',
+                                        sm: '0 2rem',
                                         md: "0",
                                         lg: "0",
                                         xl: "0",

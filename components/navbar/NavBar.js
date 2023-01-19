@@ -5,13 +5,12 @@ import { useRouter } from "next/router";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box, Button, IconButton, useTheme, } from "@mui/material";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import PaletteOutlinedButton from "@mui/icons-material/PaletteOutlined"
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CloseIcon from '@mui/icons-material/Close';
-import { ColorModeContext, tokens } from "../../theme/theme";
+import { ColorModeContext, tokens, useMode } from "../../theme/theme";
 import {
     logoutAction
 } from '../../redux/actions';
@@ -63,7 +62,8 @@ const menuItems = [
 const Navbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const colorMode = useContext(ColorModeContext);
+    const themeModeCtx = useContext(ColorModeContext);
+    const themeHook = useMode();
 
     const auth = useSelector((state) => state.auth);
     const profileDetails = useSelector((state) => state.profileDetails);
@@ -74,18 +74,25 @@ const Navbar = () => {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [themeModeAnchorEl, setThemeModeAnchorEl] = useState(null);
 
     const open = Boolean(anchorEl);
+    const themeModeOpen = Boolean(themeModeAnchorEl);
+
+    const handleOpenThemeModeMenu = (event) => {
+        setThemeModeAnchorEl(event.currentTarget);
+    };
+
+    const handleCloseThemeModeMenu = () => {
+        setThemeModeAnchorEl(null);
+    };
 
     const handleOpenUserMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleCloseUserMenu = (path) => {
+    const handleCloseUserMenu = () => {
         setAnchorEl(null);
-        if (path) {
-            router.push(path);
-        }
     };
 
     const logoutUser = async () => {
@@ -266,7 +273,6 @@ const Navbar = () => {
                 {/* ICONS */}
 
                 <Box display="flex">
-
                     {
                         auth.status === 'authenticated' ?
                             <Box
@@ -306,26 +312,34 @@ const Navbar = () => {
                                         }}
                                         sx={{
                                             '& .MuiMenu-paper': {
-                                                width: '20ch',
                                                 bgcolor: colors.background,
                                                 color: colors.primary[100],
-                                                borderRadius: "4px",
+                                                borderRadius: "0.5rem",
                                             },
                                             '& .MuiMenuItem-root': {
+                                                color: colors.primary[100],
+                                                fontWeight: "600",
+                                                padding: "0.5rem 2rem",
                                                 '&:hover': {
-                                                    backgroundColor: colors.grey[800],
+                                                    backgroundColor: colors.primary[800],
                                                 }
                                             }
                                         }}
                                     >
                                         <MenuItem
-                                            onClick={() => handleCloseUserMenu('/profile')}
+                                            onClick={() => {
+                                                handleCloseUserMenu();
+                                                router.push('/profile');
+                                            }}
                                         >
                                             Profile
                                         </MenuItem>
 
                                         <MenuItem
-                                        // onClick={() => handleCloseUserMenu('/settings')}
+                                            onClick={() => {
+                                                handleCloseUserMenu();
+                                                //router.push('/settings');
+                                            }}
                                         >
                                             Settings
                                         </MenuItem>
@@ -355,12 +369,21 @@ const Navbar = () => {
                                     padding: {
                                         xs: "0.25rem 1rem",
                                         sm: "0.25rem 1rem",
-                                        md: "0.5rem 1.5rem",
-                                        lg: "0.5rem 1.5rem",
-                                        xl: "0.5rem 2rem",
+                                        md: "0.25rem 1.5rem",
+                                        lg: "0.25rem 1.5rem",
+                                        xl: "0.25rem 1.5rem",
                                     },
-                                    fontFamily: "Proxima Nova, sans-serif",
+                                    fontSize: {
+                                        xs: "0.8rem",
+                                        sm: "0.8rem",
+                                        md: "0.875rem",
+                                        lg: "0.875rem",
+                                        xl: "0.875rem",
+                                    },
                                     fontWeight: "600",
+                                    border: "none",
+                                    outline: "none",
+                                    boxShadow: "none",
                                 }}
                                 onClick={() => {
                                     if (mobileNav && showMobileMenu) {
@@ -373,13 +396,83 @@ const Navbar = () => {
                             </Button>
                     }
 
-                    <IconButton onClick={colorMode.toggleColorMode}>
-                        {theme.palette.mode === "dark" ? (
-                            <DarkModeOutlinedIcon />
-                        ) : (
-                            <LightModeOutlinedIcon />
-                        )}
-                    </IconButton>
+                    {/* Theme Menu */}
+
+                    <Box
+                        display="flex"
+                        flexDirection="row"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <IconButton
+                            id="theme-button"
+                            aria-controls={themeModeOpen ? 'theme-menu' : undefined}
+                            aria-haspopup="true"
+                            aria-expanded={themeModeOpen ? 'true' : undefined}
+                            onClick={handleOpenThemeModeMenu}
+                        >
+                            <PaletteOutlinedButton />
+                        </IconButton>
+                        <Menu
+                            id="theme-menu"
+                            anchorEl={themeModeAnchorEl}
+                            open={themeModeOpen}
+                            onClose={handleCloseThemeModeMenu}
+                            MenuListProps={{
+                                'aria-labelledby': 'theme-menu-btn',
+                            }}
+                            sx={{
+                                '& .MuiMenu-paper': {
+                                    bgcolor: colors.background,
+                                    color: colors.primary[100],
+                                    borderRadius: "0.5rem",
+                                },
+                                '& .MuiMenuItem-root': {
+                                    padding: "0.5rem 2rem",
+                                    fontWeight: "600",
+                                    '&:hover': {
+                                        backgroundColor: colors.primary[800],
+                                    }
+                                }
+                            }}
+                        >
+                            <MenuItem
+                                sx={{
+                                    color: themeHook[2] === 'system' ? colors.accent : colors.primary[100],
+                                }}
+                                onClick={() => {
+                                    themeModeCtx.setColorMode('system');
+                                    handleCloseThemeModeMenu();
+                                }}
+                            >
+                                System
+                            </MenuItem>
+
+                            <MenuItem
+                                sx={{
+                                    color: themeHook[2] === 'light' ? colors.accent : colors.primary[100],
+                                }}
+                                onClick={() => {
+                                    themeModeCtx.setColorMode('light');
+                                    handleCloseThemeModeMenu();
+                                }}
+                            >
+                                Light
+                            </MenuItem>
+
+                            <MenuItem
+                                sx={{
+                                    color: themeHook[2] === 'dark' ? colors.accent : colors.primary[100],
+                                }}
+                                onClick={() => {
+                                    themeModeCtx.setColorMode('dark');
+                                    handleCloseThemeModeMenu();
+                                }}
+                            >
+                                Dark
+                            </MenuItem>
+                        </Menu>
+                    </Box>
 
                     {/* Mobile Nav Toggle */}
 

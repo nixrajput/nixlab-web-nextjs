@@ -25,7 +25,9 @@ export const sendOtpToEmailAction = async (dispatch, email) => {
     dispatch(sendingOtp());
 
     try {
-        const response = await apiClient.post(ApiUrls.sendOtpToEmailEndpoint, body);
+        const response = await apiClient.post(
+            ApiUrls.sendVerifyEmailOtpEndpoint, body
+        );
         if (response.status === 200) {
             dispatch(sentOtp(email));
         }

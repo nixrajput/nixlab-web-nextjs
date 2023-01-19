@@ -48,7 +48,7 @@ const DropdownMenu = ({
                             cursor: "pointer",
                             color: path == child.path ?
                                 colors.accent :
-                                colors.grey[200],
+                                colors.primary[300],
                             transition: "all 0.3s ease-in-out",
                             textDecoration: "none",
                             textTransform: "capitalize",
@@ -57,7 +57,7 @@ const DropdownMenu = ({
                                 700 :
                                 400,
                             ":hover": {
-                                backgroundColor: colors.grey[500],
+                                backgroundColor: colors.primary[800],
                             }
                         }}
                     >

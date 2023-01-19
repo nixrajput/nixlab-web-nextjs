@@ -33,7 +33,8 @@ const ProjectItem = ({ item, ...props }) => {
                 lg: "calc(33% - 2rem)",
                 xl: "calc(33% - 2rem)",
             }}
-            height="auto"
+            height="20rem"
+            minHeight="20rem"
             maxHeight="20rem"
             display="flex"
             flexDirection="column"

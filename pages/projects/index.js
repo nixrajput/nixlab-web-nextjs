@@ -55,7 +55,7 @@ const Projects = () => {
 
         return () => { }
 
-    }, [projects.status]);
+    }, [projects.status, projects.results]);
 
     useEffect(() => {
         if (projects.error !== null) {

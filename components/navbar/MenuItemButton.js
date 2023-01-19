@@ -73,14 +73,14 @@ const MenuItemButton = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) =>
                 color: (path == item.path ||
                     item.childrens?.find(e => e.path === path)) ?
                     colors.accent :
-                    colors.grey[200],
+                    colors.primary[300],
                 fontWeight: (path == item.path ||
                     item.childrens?.find(e => e.path === path)) ?
                     700 :
                     400,
                 transition: "all 0.3s ease-in-out",
                 "&:hover": {
-                    color: colors.accent
+                    backgroundColor: colors.primary[800],
                 },
                 "@media (max-width: 900px)": {
                     width: "100%",
