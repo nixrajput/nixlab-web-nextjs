@@ -64,7 +64,7 @@ const ProjectDetails = () => {
                         variant="contained"
                         sx={{
 
-                            backgroundColor: colors.accent,
+                            backgroundColor: colors.accent[900],
                             color: '#f0f0f0',
                             borderRadius: "0.5rem",
                             fontWeight: "bold",
@@ -74,7 +74,9 @@ const ProjectDetails = () => {
                                 md: '25%',
                                 lg: '25%',
                                 xl: '25%',
-                            }
+                            },
+                            boxShadow: 'none',
+                            border: 'none'
                         }}
                         onClick={() => {
                             incrementProjectDownloadsCount();
@@ -90,7 +92,7 @@ const ProjectDetails = () => {
                         variant="contained"
                         sx={{
 
-                            backgroundColor: colors.accent,
+                            backgroundColor: colors.accent[900],
                             color: '#f0f0f0',
                             borderRadius: "0.5rem",
                             fontWeight: "bold",
@@ -100,7 +102,9 @@ const ProjectDetails = () => {
                                 md: '25%',
                                 lg: '25%',
                                 xl: '25%',
-                            }
+                            },
+                            boxShadow: 'none',
+                            border: 'none'
                         }}
                         onClick={() => {
                             window.open(project.demoUrl, '_blank');
@@ -353,6 +357,40 @@ const ProjectDetails = () => {
                                         Downloads
                                     </p>
                                 </Box>
+
+                                <Box
+                                    position="relative"
+                                    display="flex"
+                                    flexDirection="column"
+                                    alignprojects="center"
+                                    justifyContent="center"
+                                    mr={{
+                                        xs: '1.5rem',
+                                        sm: '2rem',
+                                        md: '2rem',
+                                        lg: '2rem',
+                                        xl: '2rem',
+                                    }}
+                                >
+                                    <p
+                                        style={{
+                                            color: colors.primary[200],
+                                            fontWeight: '600',
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        {numberUtils.toCountingNumber(projectDetails.project.likesCount)}+
+                                    </p>
+
+                                    <p
+                                        style={{
+                                            color: colors.primary[400],
+                                            textAlign: 'center',
+                                        }}
+                                    >
+                                        Likes
+                                    </p>
+                                </Box>
                             </Box>
 
                             {/* Button */}
@@ -476,6 +514,8 @@ const ProjectDetails = () => {
                                         : null
                                 }
 
+                                {/* Features */}
+
                                 {
                                     projectDetails.project.features ?
                                         <Box
@@ -489,7 +529,7 @@ const ProjectDetails = () => {
                                             width='fit-content'
                                             sx={{
                                                 borderRadius: '0.5rem',
-                                                border: `1px solid ${colors.primary[600]}`,
+                                                border: `0.8px solid ${colors.primary[700]}`,
                                             }}
                                         >
                                             {

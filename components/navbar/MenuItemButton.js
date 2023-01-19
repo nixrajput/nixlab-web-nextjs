@@ -66,21 +66,10 @@ const MenuItemButton = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) =>
                 alignItems: "center",
                 justifyContent: "flex-start",
                 cursor: "pointer",
-                textTransform: "capitalize",
-                textDecoration: "none",
-                fontSize: "1rem",
                 mr: "0.5rem",
-                color: (path == item.path ||
-                    item.childrens?.find(e => e.path === path)) ?
-                    colors.accent :
-                    colors.primary[300],
-                fontWeight: (path == item.path ||
-                    item.childrens?.find(e => e.path === path)) ?
-                    700 :
-                    400,
                 transition: "all 0.3s ease-in-out",
                 "&:hover": {
-                    backgroundColor: colors.primary[800],
+                    backgroundColor: colors.primary[700],
                 },
                 "@media (max-width: 900px)": {
                     width: "100%",
@@ -100,7 +89,22 @@ const MenuItemButton = ({ item, mobileNav, showMobileMenu, closeMobileMenu }) =>
                 alignItems="center"
                 justifyContent="flex-start"
             >
-                {item.title}
+                <p style={{
+                    color: (path == item.path ||
+                        item.childrens?.find(e => e.path === path)) ?
+                        colors.accent[900] :
+                        colors.primary[300],
+                    fontWeight: (path == item.path ||
+                        item.childrens?.find(e => e.path === path)) ?
+                        600 :
+                        400,
+                    textTransform: "capitalize",
+                    textDecoration: "none",
+                    textAlign: "left",
+                }}
+                >
+                    {item.title}
+                </p>
                 {
                     item.childrens ?
                         <ExpandMoreIcon

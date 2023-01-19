@@ -4,7 +4,7 @@ import storage from "../../utils/storage";
 const initialState = {
     status: 'idle',
     user: null,
-    error: '',
+    error: null,
 };
 
 const profileDetailsSlice = createSlice({
@@ -22,7 +22,7 @@ const profileDetailsSlice = createSlice({
 
         loadProfileDetailsError: (state, action) => {
             state.error = action.payload;
-            state.status = 'failed';
+            state.status = 'error';
         },
 
         getProfileDetails: (state, action) => {
@@ -37,12 +37,11 @@ const profileDetailsSlice = createSlice({
 
         getProfileDetailsError: (state, action) => {
             state.error = action.payload;
-            state.status = 'failed';
+            state.status = 'error';
         },
 
         clearError: (state, action) => {
             state.error = null;
-            state.status = 'noError';
         },
 
         clearProfileDetails: (state, action) => {

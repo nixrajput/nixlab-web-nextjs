@@ -16,12 +16,13 @@ const ServiceItem = ({ item, ...props }) => {
                 lg: "calc(33% - 2rem)",
                 xl: "calc(33% - 2rem)",
             }}
-            height="25rem"
+            height="20rem"
+            maxHeight="22rem"
             display="flex"
             flexDirection="column"
-            alignItems="stretch"
+            alignItems="flex-start"
             justifyContent="space-between"
-            borderRadius="8px"
+            borderRadius="0.5rem"
             boxShadow="0 0.1rem 0.5rem rgba(0, 0, 0, 0.08)"
             m={{
                 xs: "0 0 1rem 0",
@@ -40,10 +41,13 @@ const ServiceItem = ({ item, ...props }) => {
         >
             <Box
                 position='relative'
-                width="50%"
-                maxWidth="10rem"
-                height="50%"
-                maxHeight="10rem"
+                width="8rem"
+                maxWidth="8rem"
+                height="8rem"
+                maxHeight="8rem"
+                borderRadius="50%"
+                overflow="hidden"
+                border={`1px solid ${colors.primary[800]}`}
             >
                 <Image
                     src={item.image}
@@ -55,7 +59,8 @@ const ServiceItem = ({ item, ...props }) => {
                     blurDataURL={item.image}
                     style={{
                         aspectRatio: '1',
-                        objectFit: 'contain'
+                        objectFit: 'contain',
+                        padding: '1rem'
                     }}
                 />
             </Box>
@@ -66,12 +71,12 @@ const ServiceItem = ({ item, ...props }) => {
                 flexDirection="column"
                 alignItems="flex-start"
                 justifyContent="flex-start"
+                mt="1rem"
             >
                 <h3
                     style={{
                         color: colors.primary[100],
-                        fontFamily: 'Proxima Nova, sans-serif',
-                        margin: '0.5rem 0',
+                        marginBottom: "0.5rem",
                         padding: '0',
                     }}
                 >

@@ -21,7 +21,7 @@ const Hero = () => {
                 margin: "0 auto 0.5rem auto",
                 fontWeight: 700,
                 textAlign: "center",
-                color: colors.accent,
+                color: colors.accent[900],
             }}
             >
                 कर्मण्येवाधिकारस्ते मा फलेषु कदाचन । <br />
@@ -77,7 +77,7 @@ const Hero = () => {
                     }}
                     >
                         Welcome to <span style={{
-                            color: colors.accent,
+                            color: colors.accent[900],
                         }}
                         >NixLab Technologies
                         </span>
@@ -120,38 +120,31 @@ const Hero = () => {
                                 }}
                             >
                                 <Box
-                                    width={{
-                                        xs: '100%',
-                                        sm: '100%',
-                                        md: "calc(40% - 2rem)",
-                                        lg: "calc(40% - 2rem)",
-                                        xl: "calc(40% - 2rem)",
-                                    }}
-                                    maxWidth={{
-                                        xs: '280px',
-                                        sm: '280px',
-                                        md: "400px",
-                                        lg: "400px",
-                                        xl: "400px",
-                                    }}
-                                    maxHeight={{
-                                        xs: '280px',
-                                        sm: '280px',
-                                        md: "400px",
-                                        lg: "400px",
-                                        xl: "400px",
-                                    }}
                                     position="relative"
+                                    width={{
+                                        xs: '12rem',
+                                        sm: '12rem',
+                                        md: "15rem",
+                                        lg: "20rem",
+                                        xl: "20rem",
+                                    }}
+                                    height={{
+                                        xs: '12rem',
+                                        sm: '12rem',
+                                        md: "15rem",
+                                        lg: "20rem",
+                                        xl: "20rem",
+                                    }}
+                                    borderRadius="50%"
+                                    overflow="hidden"
+                                    border={`1px solid ${colors.primary[800]}`}
+
                                     order={{
                                         xs: 1,
                                         sm: 1,
                                         md: index % 2 === 0 ? 1 : 2,
                                         lg: index % 2 === 0 ? 1 : 2,
                                         xl: index % 2 === 0 ? 1 : 2,
-                                    }}
-                                    sx={{
-                                        aspectRatio: '1',
-                                        objectFit: 'cover',
                                     }}
                                 >
                                     <Image
@@ -164,7 +157,8 @@ const Hero = () => {
                                         blurDataURL={item.image}
                                         style={{
                                             aspectRatio: '1',
-                                            objectFit: 'cover',
+                                            objectFit: 'contain',
+                                            padding: '1.5rem'
                                         }}
                                     />
                                 </Box>
@@ -173,9 +167,9 @@ const Hero = () => {
                                     width={{
                                         xs: '100%',
                                         sm: '100%',
-                                        md: "calc(60% - 2rem)",
-                                        lg: "calc(60% - 2rem)",
-                                        xl: "calc(60% - 2rem)",
+                                        md: "calc(100% - 17rem)",
+                                        lg: "calc(100% - 22rem)",
+                                        xl: "calc(100% - 22rem)",
                                     }}
                                     order={{
                                         xs: 2,
@@ -206,14 +200,14 @@ const Hero = () => {
                                         xl: "left",
                                     }}
                                 >
-                                    <h4
+                                    <h3
                                         style={{
                                             marginBottom: "0.5rem",
                                             color: colors.primary[100],
                                         }}
                                     >
                                         {item.title}
-                                    </h4>
+                                    </h3>
 
                                     <p
                                         style={{

@@ -217,8 +217,20 @@ const Navbar = () => {
                     alignItems="flex-start"
                     justifyContent="flex-start"
                     sx={{ aspectRatio: "16/9" }}
-                    height={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
-                    maxHeight={{ xs: "48px", sm: "48px", md: "48px", lg: "48px" }}
+                    height={{
+                        xs: "48px",
+                        sm: "48px",
+                        md: "48px",
+                        lg: "52px",
+                        xl: "56px"
+                    }}
+                    maxHeight={{
+                        xs: "48px",
+                        sm: "48px",
+                        md: "48px",
+                        lg: "52px",
+                        xl: "56px"
+                    }}
                     ml={{
                         xs: "0",
                         sm: "0",
@@ -291,13 +303,11 @@ const Navbar = () => {
                                     >
                                         {
                                             profileDetails.status === 'success' ?
-                                                profileDetails.user.avatar ?
-                                                    <CircleAvatar
-                                                        avatar={profileDetails.user.avatar}
-                                                        size="32px"
-                                                    />
-                                                    :
-                                                    <PersonOutlinedIcon />
+                                                <CircleAvatar
+                                                    avatar={profileDetails.user.avatar}
+                                                    gender={profileDetails.user.gender || 'others'}
+                                                    size="32px"
+                                                />
                                                 :
                                                 null
                                         }
@@ -356,7 +366,24 @@ const Navbar = () => {
                                 </Box>
 
                                 <IconButton>
-                                    <NotificationsOutlinedIcon />
+                                    <NotificationsOutlinedIcon
+                                        sx={{
+                                            width: {
+                                                xs: "1.25rem",
+                                                sm: "1.25rem",
+                                                md: "1.5rem",
+                                                lg: "1.5rem",
+                                                xl: "1.5rem",
+                                            },
+                                            height: {
+                                                xs: "1.25rem",
+                                                sm: "1.25rem",
+                                                md: "1.5rem",
+                                                lg: "1.5rem",
+                                                xl: "1.5rem",
+                                            },
+                                        }}
+                                    />
                                 </IconButton>
                             </Box>
                             :
@@ -403,6 +430,8 @@ const Navbar = () => {
                         flexDirection="row"
                         alignItems="center"
                         justifyContent="center"
+                        m="0"
+                        p="0"
                     >
                         <IconButton
                             id="theme-button"
@@ -411,7 +440,24 @@ const Navbar = () => {
                             aria-expanded={themeModeOpen ? 'true' : undefined}
                             onClick={handleOpenThemeModeMenu}
                         >
-                            <PaletteOutlinedButton />
+                            <PaletteOutlinedButton
+                                sx={{
+                                    width: {
+                                        xs: "1.25rem",
+                                        sm: "1.25rem",
+                                        md: "1.5rem",
+                                        lg: "1.5rem",
+                                        xl: "1.5rem",
+                                    },
+                                    height: {
+                                        xs: "1.25rem",
+                                        sm: "1.25rem",
+                                        md: "1.5rem",
+                                        lg: "1.5rem",
+                                        xl: "1.5rem",
+                                    },
+                                }}
+                            />
                         </IconButton>
                         <Menu
                             id="theme-menu"
@@ -483,9 +529,29 @@ const Navbar = () => {
                                 sx={{
                                     mr: "0",
                                     pr: "0",
+                                    ':hover': {
+                                        backgroundColor: 'transparent'
+                                    }
                                 }}
                             >
-                                <MenuOutlinedIcon />
+                                <MenuOutlinedIcon
+                                    sx={{
+                                        width: {
+                                            xs: "1.25rem",
+                                            sm: "1.25rem",
+                                            md: "1.5rem",
+                                            lg: "1.5rem",
+                                            xl: "1.5rem",
+                                        },
+                                        height: {
+                                            xs: "1.25rem",
+                                            sm: "1.25rem",
+                                            md: "1.5rem",
+                                            lg: "1.5rem",
+                                            xl: "1.5rem",
+                                        },
+                                    }}
+                                />
                             </IconButton>
                             :
                             null

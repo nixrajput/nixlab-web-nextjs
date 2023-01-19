@@ -1,58 +1,11 @@
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("../assets/fonts/Proxima-Nova-Thin.otf");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("../assets/fonts/ProximaNova-Regular.otf");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("../assets/fonts/Proxima-Nova-Bold.otf");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("../assets/fonts/Proxima-Nova-Bold.otf");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("../assets/fonts/Proxima-Nova-Extrabold.otf");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Proxima Nova";
-  src: url("../assets/fonts/Proxima-Nova-Black.otf");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --primaryFontFace: "Proxima Nova", sans-serif;
-
   --primaryColor: #e3096f;
-  --primaryLightColor: #dd5896;
+  --primaryLightColor: #e3096f99;
 
-  --linkColor: #1056be;
+  --linkColor: #2566c9;
+  --linkColorHover: #2567c993;
 
   --primaryGradient: linear-gradient(to right, #1c1d31, #203246);
   --boxGradient: linear-gradient(120deg, var(--darkDialogColor), #203246);
@@ -66,9 +19,8 @@
 }
 
 body {
-  font-family: var(--primaryFontFace), -apple-system, BlinkMacSystemFont,
-    Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 400;
@@ -97,10 +49,10 @@ body {
 
 a {
   text-decoration: none;
-  color: var(--primaryLightColor);
+  color: var(--linkColor);
 
   &:hover {
-    color: var(--primaryColor);
+    color: var(--linkColorHover);
   }
 }
 
@@ -129,7 +81,7 @@ iframe {
 }
 
 .app {
-  font-family: var(--primaryFontFace);
+  font-family: Poppins, sans-serif;
 }
 
 .spacer {
@@ -155,7 +107,7 @@ p {
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -205,11 +157,11 @@ h3 {
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 
@@ -223,11 +175,11 @@ h4 {
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.15rem;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 }
 
@@ -248,7 +200,6 @@ h4 {
   padding: 0.5rem 2rem;
   font-size: 1rem;
   text-transform: uppercase;
-  font-family: var(--primaryFontFace);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
@@ -262,8 +213,20 @@ h4 {
     color: var(--primaryLightColor);
   }
 
+  @media screen and (min-width: 1600px) {
+    font-size: 1.025rem;
+  }
+
   @media screen and (max-width: 900px) {
     height: 3.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.875rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
   }
 }
 
@@ -284,7 +247,6 @@ h4 {
   padding: 0.5rem 2rem;
   font-size: 1rem;
   text-transform: uppercase;
-  font-family: var(--primaryFontFace);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-in-out;
@@ -294,12 +256,23 @@ h4 {
   }
 
   &:hover {
-    background-color: var(--primaryLightColor);
-    border-color: var(--primaryLightColor);
+    opacity: 0.75;
+  }
+
+  @media screen and (min-width: 1600px) {
+    font-size: 1.025rem;
   }
 
   @media screen and (max-width: 900px) {
     height: 3.5rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.875rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.8rem;
   }
 }
 
@@ -316,7 +289,6 @@ h4 {
   border: none;
   font-size: 1.05rem;
   text-transform: capitalize;
-  font-family: var(--primaryFontFace);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease-in-out;

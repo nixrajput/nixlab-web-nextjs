@@ -2,6 +2,7 @@ import { Box, useTheme } from "@mui/material";
 import { tokens } from "../theme/theme";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import numberUtils from "../utils/numberUtils";
 
 const ProjectItem = ({ item, ...props }) => {
     const theme = useTheme();
@@ -34,8 +35,7 @@ const ProjectItem = ({ item, ...props }) => {
                 xl: "calc(33% - 2rem)",
             }}
             height="20rem"
-            minHeight="20rem"
-            maxHeight="20rem"
+            maxHeight="22rem"
             display="flex"
             flexDirection="column"
             alignItems="stretch"
@@ -56,7 +56,8 @@ const ProjectItem = ({ item, ...props }) => {
                 overflow: "hidden",
                 cursor: "pointer",
                 '&:hover': {
-                    transform: "scale(1.02)"
+                    backgroundColor: colors.accent[100],
+                    boxShadow: "0 0.1rem 0.5rem rgba(0, 0, 0, 0.2)",
                 },
             }}
             {...props}
@@ -82,7 +83,7 @@ const ProjectItem = ({ item, ...props }) => {
                     style={{
                         aspectRatio: '1',
                         objectFit: 'contain',
-                        padding: '1rem',
+                        padding: '1.5rem',
                     }}
                     placeholder="blur"
                     blurDataURL={item.icon.url}
@@ -108,44 +109,125 @@ const ProjectItem = ({ item, ...props }) => {
                 <p
                     style={{
                         color: colors.primary[300],
-                        marginBottom: '0.5rem',
                     }}
                 >
                     {renderProjectType(item.projectType)}
                 </p>
 
+                {/* Stats */}
+
                 <Box
                     position="relative"
                     display="flex"
                     flexDirection="row"
+                    alignprojects="center"
                     flexWrap="wrap"
-                    alignItems="center"
                     justifyContent="flex-start"
+                    mt='1rem'
+                    width="100%"
                 >
-                    {
-                        item.tags ?
-                            item.tags.map((tag, index) => (
-                                <Box key={`tag-${index}`}
-                                    sx={{
-                                        fontSize: '0.85rem',
-                                        m: '0.25rem 0.5rem',
-                                        ml: '0',
-                                        padding: '0.25rem 0.5rem',
-                                        borderRadius: '0.5rem',
-                                        border: `1px solid ${colors.grey[500]}`,
-                                        color: colors.primary[100],
-                                        ':last-child': {
-                                            mr: '0'
-                                        },
-                                    }}
-                                >
-                                    {tag}
-                                    <br />
-                                </Box>
-                            ))
-                            :
-                            null
-                    }
+
+                    <Box
+                        position="relative"
+                        display="flex"
+                        flexDirection="column"
+                        alignprojects="center"
+                        justifyContent="center"
+                        mr={{
+                            xs: '1.5rem',
+                            sm: '2rem',
+                            md: '2rem',
+                            lg: '2rem',
+                            xl: '2rem',
+                        }}
+                    >
+                        <p
+                            style={{
+                                color: colors.primary[200],
+                                fontWeight: '600',
+                                textAlign: 'center',
+                            }}
+                        >
+                            {numberUtils.toCountingNumber(item.viewsCount)}+
+                        </p>
+
+                        <p
+                            style={{
+                                color: colors.primary[400],
+                                textAlign: 'center',
+                            }}
+                        >
+                            Views
+                        </p>
+                    </Box>
+
+                    <Box
+                        position="relative"
+                        display="flex"
+                        flexDirection="column"
+                        alignprojects="center"
+                        justifyContent="center"
+                        mr={{
+                            xs: '1.5rem',
+                            sm: '2rem',
+                            md: '2rem',
+                            lg: '2rem',
+                            xl: '2rem',
+                        }}
+                    >
+                        <p
+                            style={{
+                                color: colors.primary[200],
+                                fontWeight: '600',
+                                textAlign: 'center',
+                            }}
+                        >
+                            {numberUtils.toCountingNumber(item.downloadsCount)}+
+                        </p>
+
+                        <p
+                            style={{
+                                color: colors.primary[400],
+                                textAlign: 'center',
+                            }}
+                        >
+                            Downloads
+                        </p>
+                    </Box>
+
+                    <Box
+                        position="relative"
+                        display="flex"
+                        flexDirection="column"
+                        alignprojects="center"
+                        justifyContent="center"
+                        mr={{
+                            xs: '1.5rem',
+                            sm: '2rem',
+                            md: '2rem',
+                            lg: '2rem',
+                            xl: '2rem',
+                        }}
+                    >
+                        <p
+                            style={{
+                                color: colors.primary[200],
+                                fontWeight: '600',
+                                textAlign: 'center',
+                            }}
+                        >
+                            {numberUtils.toCountingNumber(item.likesCount)}+
+                        </p>
+
+                        <p
+                            style={{
+                                color: colors.primary[400],
+                                textAlign: 'center',
+                            }}
+                        >
+                            Likes
+                        </p>
+                    </Box>
                 </Box>
             </Box>
         </Box>

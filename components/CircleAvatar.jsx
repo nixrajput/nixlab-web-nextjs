@@ -1,6 +1,6 @@
 import Image from "next/image"
 
-const CircleAvatar = ({ avatar, size = '40px', fit = 'cover' }) => {
+const CircleAvatar = ({ avatar, gender, size = '40px', fit = 'cover' }) => {
     const style = {
         position: "relative",
         width: size,
@@ -32,13 +32,19 @@ const CircleAvatar = ({ avatar, size = '40px', fit = 'cover' }) => {
     return (
         <div style={style}>
             <Image
-                src={'../../avatar.png'}
+                src={
+                    String(gender).toLowerCase() === 'female' ?
+                        '/female_avatar.svg' :
+                        '/male_avatar.svg'
+                }
                 alt="avatar"
                 priority
                 fill
                 sizes="100%"
                 placeholder="blur"
-                blurDataURL={'../../avatar.png'}
+                blurDataURL={String(gender).toLowerCase() === 'female' ?
+                    '/female_avatar.svg' :
+                    '/male_avatar.svg'}
                 style={{
                     objectFit: fit,
                     borderRadius: '50%',

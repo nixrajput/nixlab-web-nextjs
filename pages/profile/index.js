@@ -13,8 +13,9 @@ import PageTitle from "../../components/PageTitle";
 import CircleAvatar from "../../components/CircleAvatar";
 import { tokens } from '../../theme/theme';
 import {
-    logoutAction,
-} from '../../redux/actions';
+    getProfileDetailsAction,
+    clearProfileErrorAction
+} from '../../redux/actions/profileAction';
 import DateFormater from "../../utils/dateUtils";
 
 const Profile = () => {
@@ -39,10 +40,16 @@ const Profile = () => {
         setOpen(true);
     };
 
-    const logoutUser = async () => {
-        const logoutPromise = logoutAction(dispatch);
-        await logoutPromise;
-    }
+    useEffect(() => {
+        const getData = async () => {
+            const getProfileDetailsPromise = getProfileDetailsAction(dispatch, auth.token);
+            openBackdrop();
+            await getProfileDetailsPromise;
+            closeBackdrop();
+        }
+        getData();
+
+    }, [auth.token, dispatch]);
 
     useEffect(() => {
         if (
@@ -59,17 +66,21 @@ const Profile = () => {
             closeBackdrop();
         }
 
-        if (profileDetails.status === 'error') {
-            enqueueSnackbar(profileDetails.error, { variant: 'error' });
-            clearProfileErrorAction(dispatch);
-        }
-
         return () => { }
 
     }, [
         router, profileDetails.status, auth.status,
         enqueueSnackbar, dispatch, auth.token,
-        profileDetails.error,
+    ]);
+
+    useEffect(() => {
+        if (profileDetails.error !== null) {
+            enqueueSnackbar(profileDetails.error, { variant: 'error' });
+            const clearErrorPromise = clearProfileErrorAction(dispatch);
+            clearErrorPromise;
+        }
+    }, [
+        profileDetails.error, enqueueSnackbar, dispatch
     ]);
 
     return (
@@ -93,15 +104,14 @@ const Profile = () => {
             </Head>
 
             <Backdrop
-                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                sx={{
+                    color: colors.accent,
+                    zIndex: (theme) => theme.zIndex.drawer + 1
+                }}
                 open={open}
             >
                 <CircularProgress color="inherit" />
             </Backdrop>
-
-            <PageTitle>
-                PROFILE
-            </PageTitle>
 
             <ResponsiveBox
                 alignItems="center"
@@ -111,6 +121,7 @@ const Profile = () => {
                         <Box>
                             <CircleAvatar
                                 avatar={profileDetails.user?.avatar}
+                                gender={profileDetails.user?.gender || 'others'}
                                 size="20rem"
                             />
 
