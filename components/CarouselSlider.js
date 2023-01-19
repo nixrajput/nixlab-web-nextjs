@@ -35,15 +35,15 @@ const CarouselSlider = ({ items }) => {
     };
 
     useEffect(() => {
+        const carousel = carouselRef.current;
         const calculateScroll = () => {
-            const carousel = carouselRef.current;
             const carouselOffsetWidth = carousel.offsetWidth;
             const carouselScrollWidth = carousel.scrollWidth;
             const carouselScrollLeft = carousel.scrollLeft;
             const carouselScrollRight = carouselScrollWidth - carouselOffsetWidth - carouselScrollLeft;
 
-            console.log('carouselScrollLeft', carouselScrollLeft);
-            console.log('carouselScrollRight', carouselScrollRight);
+            // console.log('carouselScrollLeft', carouselScrollLeft);
+            // console.log('carouselScrollRight', carouselScrollRight);
 
             if (carouselScrollLeft > 0) {
                 setLeftScroll(true);
@@ -61,14 +61,14 @@ const CarouselSlider = ({ items }) => {
         };
 
         window.addEventListener('load', calculateScroll);
-        carouselRef.current.addEventListener('scroll', calculateScroll);
+        carousel.addEventListener('scroll', calculateScroll);
 
         return () => {
             window.removeEventListener('load', () => { });
-            carouselRef.current?.removeEventListener('scroll', () => { });
+            carousel.removeEventListener('scroll', () => { });
         }
 
-    }, [carouselRef.current]);
+    }, []);
 
     return (
         <Box

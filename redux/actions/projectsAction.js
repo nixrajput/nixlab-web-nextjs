@@ -132,7 +132,7 @@ export const incrementProjectDownloadsCountAction = async (dispatch, projectId) 
     }
 
     try {
-        const response = await apiClient.post(
+        const response = await apiClient.get(
             `${ApiUrls.incrementProjectDownloadsCountEndpoint}?projectId=${projectId}`,
         );
         if (response.status === 200) {

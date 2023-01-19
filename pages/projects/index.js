@@ -35,13 +35,6 @@ const Projects = () => {
         setOpen(true);
     };
 
-    const getData = async () => {
-        const getProjectsPromise = getProjectsAction(dispatch);
-        openBackdrop();
-        await getProjectsPromise;
-        closeBackdrop();
-    }
-
     const loadMore = async () => {
         const nextPage = projects.currentPage + 1;
         const loadMoreProjectsPromise = loadMoreProjectsAction(dispatch, nextPage);
@@ -50,12 +43,18 @@ const Projects = () => {
 
     useEffect(() => {
         if (projects.status === 'idle' || projects.results === null) {
+            const getData = async () => {
+                const getProjectsPromise = getProjectsAction(dispatch);
+                openBackdrop();
+                await getProjectsPromise;
+                closeBackdrop();
+            }
             getData();
         }
 
         return () => { }
 
-    }, [projects.status, projects.results]);
+    }, [projects.status, projects.results, dispatch]);
 
     useEffect(() => {
         if (projects.error !== null) {

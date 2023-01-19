@@ -77,8 +77,8 @@ const ProjectDetails = () => {
                             }
                         }}
                         onClick={() => {
-                            window.open(project.downloadUrl, '_blank');
                             incrementProjectDownloadsCount();
+                            window.open(project.downloadUrl, '_blank');
                         }}
                     >
                         Download
@@ -114,18 +114,6 @@ const ProjectDetails = () => {
         }
     };
 
-    const getData = async () => {
-        const getProjectDetailsPromise = getProjectDetailsAction(dispatch, projectId);
-        openBackdrop();
-        await getProjectDetailsPromise;
-        closeBackdrop();
-    }
-
-    const incrementProjectViewsCount = async () => {
-        const incrementProjectViewsCountPromise = incrementProjectViewsCountAction(dispatch, projectId);
-        await incrementProjectViewsCountPromise;
-    }
-
     const incrementProjectDownloadsCount = async () => {
         const incrementProjectDownloadsCountPromise = incrementProjectDownloadsCountAction(dispatch, projectId);
         await incrementProjectDownloadsCountPromise;
@@ -135,17 +123,29 @@ const ProjectDetails = () => {
         if (projectId && (projectDetails.status === 'idle'
             || projectDetails.project === null
             || (projectDetails.project && projectId !== projectDetails.project._id))) {
+
+            const getData = async () => {
+                const getProjectDetailsPromise = getProjectDetailsAction(dispatch, projectId);
+                openBackdrop();
+                await getProjectDetailsPromise;
+                closeBackdrop();
+            }
             getData();
         }
 
         if (projectDetails.status === 'success' && projectDetails.project !== null) {
+            const incrementProjectViewsCount = async () => {
+                const incrementProjectViewsCountPromise = incrementProjectViewsCountAction(dispatch, projectId);
+                await incrementProjectViewsCountPromise;
+            }
             incrementProjectViewsCount();
         }
 
         return () => { }
 
     }, [
-        projectDetails.status, projectId, projectDetails.project
+        projectDetails.status, projectId, projectDetails.project,
+        dispatch
     ]);
 
     useEffect(() => {
