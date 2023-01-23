@@ -2,6 +2,8 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TelegramIcon from '@mui/icons-material/Telegram';
 
 export const serviceDetailsList = [
     {
@@ -177,6 +179,16 @@ export const socialLinks = [
         id: 4,
         url: 'https://linkedin.com/in/nixrajput/',
         icon: <LinkedInIcon />
+    },
+    {
+        id: 4,
+        url: 'https://github.com/nixrajput/',
+        icon: <GitHubIcon />
+    },
+    {
+        id: 4,
+        url: 'https://telegram.me/nixlab_in/',
+        icon: <TelegramIcon />
     },
 ];
 

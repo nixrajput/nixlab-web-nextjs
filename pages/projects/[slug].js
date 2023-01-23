@@ -230,18 +230,18 @@ const ProjectDetails = () => {
                                     }}
                                     border={`1px solid ${colors.primary[800]}`}
                                     borderRadius="50%"
-                                    overflow={'hidden'}
+                                    overflow='hidden'
                                     p="1rem"
                                 >
                                     <Image
                                         src={projectDetails.project.icon.url}
                                         alt='icon'
                                         fill
-                                        sizes="80%"
+                                        sizes="100%"
                                         style={{
-                                            aspectRatio: '1',
+                                            aspectRatio: '1/1',
                                             objectFit: 'contain',
-                                            padding: '1rem',
+                                            padding: '1.5rem',
                                         }}
                                         placeholder="blur"
                                         blurDataURL={projectDetails.project.icon.url}
@@ -259,7 +259,6 @@ const ProjectDetails = () => {
                                     <h1
                                         style={{
                                             color: colors.primary[100],
-                                            fontFamily: 'Proxima Nova, sans-serif',
                                         }}
                                     >
                                         {projectDetails.project.title}
@@ -267,13 +266,19 @@ const ProjectDetails = () => {
 
                                     <p
                                         style={{
-                                            color: colors.primary[400],
-                                            fontFamily: 'Proxima Nova, sans-serif',
-                                            fontWeight: '600',
-                                            fontSize: '1rem',
+                                            color: colors.primary[300],
                                         }}
                                     >
                                         {renderProjectType(projectDetails.project.projectType)}
+                                    </p>
+
+                                    <p
+                                        style={{
+                                            color: colors.accent[800],
+                                            fontWeight: '500',
+                                        }}
+                                    >
+                                        {projectDetails.project.owner?.fname} {projectDetails.project.owner?.lname}
                                     </p>
                                 </Box>
                             </Box>
@@ -415,7 +420,13 @@ const ProjectDetails = () => {
                                 flexDirection="column"
                                 alignprojects="flex-start"
                                 justifyContent="flex-start"
-                                mt='1.5rem'
+                                mt={{
+                                    xs: '1rem',
+                                    sm: '1rem',
+                                    md: '1.5rem',
+                                    lg: '1.5rem',
+                                    xl: '1.5rem',
+                                }}
                                 width="100%"
                                 bgcolor={{
                                     xs: 'transparent',
@@ -450,24 +461,19 @@ const ProjectDetails = () => {
                             >
 
                                 {
-                                    (projectDetails.project.screenshots && projectDetails.project.screenshots.length > 0) ?
+                                    (projectDetails.project.screenshots
+                                        && projectDetails.project.screenshots.length > 0) ?
                                         <CarouselSlider
                                             items={projectDetails.project.screenshots}
                                         />
                                         : null
                                 }
 
-                                <h4 style={{
-                                    color: colors.primary[100],
-                                    fontFamily: 'Proxima Nova, sans-serif',
-                                    marginTop: projectDetails.project.screenshots && projectDetails.project.screenshots.length > 0 ? '1.5rem' : '0',
-                                }}>
-                                    About
-                                </h4>
-
                                 <p style={{
                                     color: colors.primary[200],
-                                    marginTop: '0.5rem',
+                                    marginTop: projectDetails.project.screenshots
+                                        && projectDetails.project.screenshots.length > 0
+                                        ? '1.5rem' : '0',
                                 }}
                                 >
                                     {projectDetails.project.description}
@@ -491,20 +497,20 @@ const ProjectDetails = () => {
                                                             sx={{
                                                                 m: '0.25rem 0.5rem',
                                                                 ml: '0',
-                                                                padding: '0.25rem 0.5rem',
+                                                                padding: '0.125rem 0.5rem',
                                                                 borderRadius: '0.5rem',
-                                                                border: `1px solid ${colors.grey[500]}`,
+                                                                border: `1px solid ${colors.primary[700]}`,
                                                                 ':last-child': {
                                                                     mr: '0'
                                                                 },
                                                             }}
                                                         >
-                                                            <p style={{
+                                                            <span style={{
                                                                 color: colors.primary[200],
                                                             }}
                                                             >
                                                                 {tag}
-                                                            </p>
+                                                            </span>
                                                         </Box>
                                                     ))
                                                     :
@@ -525,12 +531,7 @@ const ProjectDetails = () => {
                                             alignprojects="flex-start"
                                             justifyContent="flex-start"
                                             mt='1rem'
-                                            p='0.5rem 1rem'
                                             width='fit-content'
-                                            sx={{
-                                                borderRadius: '0.5rem',
-                                                border: `0.8px solid ${colors.primary[700]}`,
-                                            }}
                                         >
                                             {
                                                 projectDetails.project.features.map((feature, index) => (
@@ -538,30 +539,28 @@ const ProjectDetails = () => {
                                                         position="relative"
                                                         display="flex"
                                                         flexDirection="row"
-                                                        alignprojects="center"
                                                         justifyContent="flex-start"
-                                                        m='0.25rem'
+                                                        alignItems="flex-start"
+                                                        mb='0.25rem'
                                                         width="100%"
                                                         sx={{
                                                             ':last-child': {
                                                                 mb: '0'
                                                             },
-                                                            ':first-child': {
-                                                                mt: '0'
-                                                            }
                                                         }}
                                                     >
-                                                        <p style={{
+                                                        <span style={{
                                                             color: colors.primary[200],
                                                         }}>
                                                             •
-                                                        </p>
-                                                        <p style={{
+                                                        </span>
+
+                                                        <span style={{
                                                             color: colors.primary[200],
                                                             marginLeft: '0.5rem',
                                                         }}>
                                                             {feature}
-                                                        </p>
+                                                        </span>
                                                     </Box>
                                                 ))
 
@@ -576,7 +575,7 @@ const ProjectDetails = () => {
                 }
 
             </ResponsiveBox>
-        </ExpandedBox >
+        </ExpandedBox>
     )
 }
 

@@ -76,11 +76,11 @@ const Hero = () => {
                         color: colors.primary[100],
                     }}
                     >
-                        Welcome to <span style={{
+                        Welcome to <b style={{
                             color: colors.accent[900],
                         }}
                         >NixLab Technologies
-                        </span>
+                        </b>
                     </h1>
 
                     <p

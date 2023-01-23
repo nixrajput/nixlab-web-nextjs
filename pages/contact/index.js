@@ -25,31 +25,29 @@ const Contact = () => {
             </PageTitle>
 
             <ResponsiveBox>
-                <p
+                <h4
                     style={{
                         color: colors.primary[100],
-                        marginBottom: '1rem',
-                        fontSize: '1.25rem',
+                        marginBottom: '1.5rem',
                     }}
                 >
-                    For any queries, please contact us at
+                    For any queries, please contact us
                     at <a
                         href="mailto:nixlab.in@gmail.com"
                         target="_blank"
                         rel="noreferrer"
                     >
                         nixlab.in@gmail.com</a>.
-                </p>
+                </h4>
 
-                <p
+                <h4
                     style={{
                         color: colors.primary[100],
-                        marginBottom: '0.5rem',
-                        fontSize: '1.25rem',
+                        marginBottom: '1rem',
                     }}
                 >
                     Follow us on social media 👇
-                </p>
+                </h4>
 
                 <Box
                     display='flex'
@@ -74,8 +72,8 @@ const Contact = () => {
                                         color: colors.primary[100],
                                         fontSize: '2rem',
                                         transition: 'all 0.2s ease-in-out',
-                                        '&:hover': {
-                                            color: colors.accent,
+                                        ':hover': {
+                                            color: colors.accent[800],
                                         }
                                     }
                                 }}

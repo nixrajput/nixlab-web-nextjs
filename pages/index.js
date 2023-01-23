@@ -17,7 +17,6 @@ const Home = () => {
         <link rel='apple-touch-icon' href='/logo_small.png' />
 
         <meta name="robots" content="index,follow" />
-        <link rel="canonical" href="https://nixlab.co.in" />
 
         <title>Welcome To NixLab Technologies</title>
       </Head>

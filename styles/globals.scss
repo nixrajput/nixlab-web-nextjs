@@ -4,7 +4,7 @@
   --primaryColor: #e3096f;
   --primaryLightColor: #e3096f99;
 
-  --linkColor: #2566c9;
+  --linkColor: #5997f3;
   --linkColorHover: #2567c993;
 
   --primaryGradient: linear-gradient(to right, #1c1d31, #203246);
@@ -52,7 +52,7 @@ a {
   color: var(--linkColor);
 
   &:hover {
-    color: var(--linkColorHover);
+    opacity: 0.8;
   }
 }
 
@@ -111,6 +111,24 @@ p {
   }
 }
 
+span {
+  font-size: 0.755rem;
+  font-weight: 400;
+  transition: all 0.5s ease-in-out;
+
+  @media screen and (min-width: 1600px) {
+    font-size: 0.785rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.655rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.625rem;
+  }
+}
+
 h1 {
   font-size: 2.5rem;
   font-weight: 700;
@@ -148,26 +166,26 @@ h2 {
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
   transition: all 0.5s ease-in-out;
 
   @media screen and (min-width: 1600px) {
-    font-size: 1.525rem;
+    font-size: 1.45rem;
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
 }
 
 h4 {
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 500;
   transition: all 0.5s ease-in-out;
 
   @media screen and (min-width: 1600px) {
@@ -175,11 +193,47 @@ h4 {
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   @media screen and (max-width: 480px) {
     font-size: 1rem;
+  }
+}
+
+h5 {
+  font-size: 1.05rem;
+  font-weight: 400;
+  transition: all 0.5s ease-in-out;
+
+  @media screen and (min-width: 1600px) {
+    font-size: 1.075rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.025rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
+}
+
+h6 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: all 0.5s ease-in-out;
+
+  @media screen and (min-width: 1600px) {
+    font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.75rem;
   }
 }
 
@@ -339,7 +393,7 @@ h4 {
   justify-content: center;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 100;
+  z-index: 10;
   border-radius: 50%;
   padding: 0.75rem;
   box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.08);

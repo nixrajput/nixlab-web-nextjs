@@ -21,9 +21,16 @@ const PageTitle = ({ children, ...props }) => {
                 transition: "all 0.25s ease-in-out",
                 "& span": {
                     color: colors.accent[900],
+                    fontSize: "1.75rem",
+                    lineHeight: "1",
+                    fontWeight: "700",
+                    textTransform: "uppercase",
                 },
                 "@media screen and (max-width: 900px)": {
                     fontSize: "1.5rem",
+                    "& span": {
+                        fontSize: "1.5rem",
+                    },
                 },
             }}
             {...props}
