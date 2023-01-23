@@ -66,14 +66,14 @@ export const loadMoreProjectsAction = async (dispatch, page, limit = 10) => {
     }
 }
 
-export const getProjectDetailsAction = async (dispatch, projectId) => {
+export const getProjectDetailsAction = async (dispatch, slug) => {
     if (!dispatch) {
         console.log("dispatch is null");
         return;
     }
 
-    if (!projectId) {
-        getProjectDetailsError("Project id is required");
+    if (!slug) {
+        getProjectDetailsError("Slug is required");
         return;
     }
 
@@ -81,7 +81,7 @@ export const getProjectDetailsAction = async (dispatch, projectId) => {
 
     try {
         const response = await apiClient.get(
-            `${ApiUrls.getProjectDetailsEndpoint}?projectId=${projectId}`,
+            `${ApiUrls.getProjectDetailsEndpoint}?slug=${slug}`,
         );
         if (response.status === 200) {
             dispatch(getProjectDetailsSuccess(response));

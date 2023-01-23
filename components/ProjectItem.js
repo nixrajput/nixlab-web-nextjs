@@ -61,7 +61,7 @@ const ProjectItem = ({ item, ...props }) => {
                 },
             }}
             {...props}
-            onClick={() => router.push(`/projects/${item._id}`)}
+            onClick={() => router.push(`/projects/${item.slug}`)}
         >
             <Box
                 position='relative'

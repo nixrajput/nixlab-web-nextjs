@@ -389,7 +389,7 @@ const Navbar = () => {
                             :
                             <Button variant="contained"
                                 sx={{
-                                    backgroundColor: colors.accent,
+                                    backgroundColor: colors.accent[900],
                                     color: '#f0f0f0',
                                     borderRadius: "0.5rem",
                                     transition: "all 0.5 ease-in-out",

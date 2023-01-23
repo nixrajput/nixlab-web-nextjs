@@ -24,7 +24,7 @@ const ProjectDetails = () => {
     const colors = tokens(theme.palette.mode);
 
     const router = useRouter()
-    const { projectId } = router.query;
+    const { slug } = router.query;
 
     const projectDetails = useSelector((state) => state.projectDetails);
     const dispatch = useDispatch();
@@ -119,17 +119,17 @@ const ProjectDetails = () => {
     };
 
     const incrementProjectDownloadsCount = async () => {
-        const incrementProjectDownloadsCountPromise = incrementProjectDownloadsCountAction(dispatch, projectId);
+        const incrementProjectDownloadsCountPromise = incrementProjectDownloadsCountAction(dispatch, projectDetails.project._id);
         await incrementProjectDownloadsCountPromise;
     }
 
     useEffect(() => {
-        if (projectId && (projectDetails.status === 'idle'
+        if (slug && (projectDetails.status === 'idle'
             || projectDetails.project === null
-            || (projectDetails.project && projectId !== projectDetails.project._id))) {
+            || (projectDetails.project && slug !== projectDetails.project.slug))) {
 
             const getData = async () => {
-                const getProjectDetailsPromise = getProjectDetailsAction(dispatch, projectId);
+                const getProjectDetailsPromise = getProjectDetailsAction(dispatch, slug);
                 openBackdrop();
                 await getProjectDetailsPromise;
                 closeBackdrop();
@@ -139,7 +139,7 @@ const ProjectDetails = () => {
 
         if (projectDetails.status === 'success' && projectDetails.project !== null) {
             const incrementProjectViewsCount = async () => {
-                const incrementProjectViewsCountPromise = incrementProjectViewsCountAction(dispatch, projectId);
+                const incrementProjectViewsCountPromise = incrementProjectViewsCountAction(dispatch, projectDetails.project._id);
                 await incrementProjectViewsCountPromise;
             }
             incrementProjectViewsCount();
@@ -148,7 +148,7 @@ const ProjectDetails = () => {
         return () => { }
 
     }, [
-        projectDetails.status, projectId, projectDetails.project,
+        projectDetails.status, slug, projectDetails.project,
         dispatch
     ]);
 
