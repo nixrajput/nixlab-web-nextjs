@@ -18,7 +18,7 @@ const Hero = () => {
     const renderShreemadBhagvadGitaQuote = () => {
         return (
             <h4 style={{
-                margin: "0 auto 0.5rem auto",
+                margin: "0 auto 1rem auto",
                 fontWeight: 700,
                 textAlign: "center",
                 color: colors.accent[900],
@@ -138,7 +138,6 @@ const Hero = () => {
                                     borderRadius="50%"
                                     overflow="hidden"
                                     border={`1px solid ${colors.primary[800]}`}
-
                                     order={{
                                         xs: 1,
                                         sm: 1,

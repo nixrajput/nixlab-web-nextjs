@@ -505,12 +505,12 @@ const ProjectDetails = () => {
                                                                 },
                                                             }}
                                                         >
-                                                            <span style={{
+                                                            <p style={{
                                                                 color: colors.primary[200],
                                                             }}
                                                             >
                                                                 {tag}
-                                                            </span>
+                                                            </p>
                                                         </Box>
                                                     ))
                                                     :
@@ -549,18 +549,18 @@ const ProjectDetails = () => {
                                                             },
                                                         }}
                                                     >
-                                                        <span style={{
+                                                        <p style={{
                                                             color: colors.primary[200],
                                                         }}>
                                                             •
-                                                        </span>
+                                                        </p>
 
-                                                        <span style={{
+                                                        <p style={{
                                                             color: colors.primary[200],
                                                             marginLeft: '0.5rem',
                                                         }}>
                                                             {feature}
-                                                        </span>
+                                                        </p>
                                                     </Box>
                                                 ))
 
