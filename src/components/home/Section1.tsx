@@ -15,7 +15,7 @@ const HomeSection1 = ({ id }: Readonly<{ id?: string }>) => {
       <ConstraintedBox classNames="px-4 py-8 z-[5]">
         <GridBox classNames="!gap-16 w-full !grid-cols-1 md:!grid-cols-2">
           <Column classNames="w-full !justify-center">
-            <p className="text-5xl/none lg:text-6xl/none xl:text-7xl/none font-bold text-[var(--whiteColor)] drop_in">
+            <p className="text-5xl/none md:text-6xl/none xl:text-7xl/none font-bold text-[var(--whiteColor)] drop_in">
               Welcome To NixLab Technologies
             </p>
 

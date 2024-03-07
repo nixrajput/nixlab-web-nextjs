@@ -18,12 +18,19 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .box-shadow {
+    box-shadow: 0px 4px 12px -6px rgba(0, 0, 0, 0.1),
+      0px -4px 12px -6px rgba(0, 0, 0, 0.1),
+      -4px 0px 12px -6px rgba(0, 0, 0, 0.1),
+      4px 0px 12px -6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 :root {
   --maxWidth: 1200px;
-  --borderRadius: 1rem;
-  --defaultRadius: 1rem;
+  --borderRadius: 0.5rem;
+  --defaultRadius: 0.5srem;
 
   --dialogColor10: rgba(32, 39, 47, 0.1);
   --dialogColor20: rgba(32, 39, 47, 0.2);

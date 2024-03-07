@@ -47,7 +47,7 @@ export interface IProjectItem {
 
 export interface IServiceItem {
   title: string;
-  icon: IconDefinition;
+  icon: string;
   shortDescription: string;
   description: string;
 }
