@@ -39,7 +39,7 @@ const AnimatedElement = () => {
         </div>
       </div>
 
-      <div className="absolute w-full max-w-[15rem] h-auto bg-transparent pointer-events-none z-5 top-[10%] right-[40%] upDown">
+      <div className="absolute w-full max-w-[15rem] h-auto bg-transparent pointer-events-none z-5 top-[5%] sm:top-[10%] right-[25%] sm:right-[40%] upDown">
         <Image
           src="/boy.png"
           alt="img"

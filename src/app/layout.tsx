@@ -30,9 +30,19 @@ export const metadata: Metadata = {
   title: "NixLab Technologies - an Indian Software Development Company",
   description:
     "NixLab Technologies is a software development company based in the India.",
+  keywords: [
+    "NixLab",
+    "nixlab",
+    "nixlab technologies",
+    "nixlab tech",
+    "web development",
+    "android app development",
+    "iOS app development",
+  ],
   robots: {
     index: true,
     follow: true,
+    nocache: true,
     googleBot: {
       index: true,
       follow: true,
@@ -41,14 +51,31 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: [
-    {
-      url: "/favicon.ico",
-      rel: "icon",
-      sizes: "any",
-      type: "image/svg+xml",
-    },
-  ],
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        rel: "icon",
+        sizes: "any",
+        type: "image/svg+xml",
+      },
+      {
+        url: "/favicon.ico",
+        rel: "icon",
+        sizes: "any",
+        type: "image/svg+xml",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    shortcut: ["/icon.png"],
+    apple: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/apple-icon.png", sizes: "144x144", type: "image/png" },
+    ],
+  },
+  verification: {
+    google: "j7ODdQNwjVQNYmNEX_5boI9PagNu3Uoiu2EL-yVpBI0",
+  },
 };
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {

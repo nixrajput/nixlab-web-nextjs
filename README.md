@@ -38,7 +38,7 @@ This repository contains the source code for the NixLab's website built using Ne
 
 ## Sceenshots
 
-![Screenshot 1](/screenshot-desktop.png)
+![Screenshot 1](/screenshots/screenshot_01.png)
 
 ## Getting Started
 
