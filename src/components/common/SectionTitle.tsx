@@ -1,4 +1,4 @@
-import Column from "../core/Column";
+import Column from "@/components/core/Column";
 
 const SectionTitle = ({
   children,

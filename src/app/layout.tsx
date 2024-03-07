@@ -6,6 +6,7 @@ import Script from "next/script";
 import NavBar from "@/components/navbar/NavBar";
 import ScrollToTop from "@/components/common/ScrollToTop";
 import LocalConfig from "@/constants/config";
+import Footer from "@/components/footer/Footer";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -106,6 +107,7 @@ const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
       >
         <NavBar />
         <main>{children}</main>
+        <Footer />
         <ScrollToTop />
       </body>
     </html>
