@@ -1,20 +1,20 @@
-# NixLab Website with Next.js and Sass
+# NixLab Website with Next.js, TypeScript, and Sass
 
-This repository contains the source code for a portfolio website built using Next.js and Sass. This README.md file provides an overview of the project and instructions on how to set it up and customize it for your own use.
+This repository contains the source code for the NixLab's website built using Next.js, TypeScript, and Sass. This README.md file provides an overview of the project and instructions on how to set it up and customize it for your own use.
 
-[![Stars](https://img.shields.io/github/stars/nixrajput/portfolio-nextjs?label=Stars&style=flat)][repo]
-[![Forks](https://img.shields.io/github/forks/nixrajput/portfolio-nextjs?label=Forks&style=flat)][repo]
-[![Watchers](https://img.shields.io/github/watchers/nixrajput/portfolio-nextjs?label=Watchers&style=flat)][repo]
-[![Contributors](https://img.shields.io/github/contributors/nixrajput/portfolio-nextjs?label=Contributors&style=flat)][repo]
+[![Stars](https://img.shields.io/github/stars/nixrajput/nixlab-web-nextjs?label=Stars&style=flat)][repo]
+[![Forks](https://img.shields.io/github/forks/nixrajput/nixlab-web-nextjs?label=Forks&style=flat)][repo]
+[![Watchers](https://img.shields.io/github/watchers/nixrajput/nixlab-web-nextjs?label=Watchers&style=flat)][repo]
+[![Contributors](https://img.shields.io/github/contributors/nixrajput/nixlab-web-nextjs?label=Contributors&style=flat)][repo]
 
-[![GitHub last commit](https://img.shields.io/github/last-commit/nixrajput/portfolio-nextjs?label=Last+Commit&style=flat)][repo]
-[![GitHub issues](https://img.shields.io/github/issues/nixrajput/portfolio-nextjs?label=Issues&style=flat)][issues]
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/nixrajput/portfolio-nextjs?label=Pull+Requests&style=flat)][pulls]
-[![GitHub Licence](https://img.shields.io/github/license/nixrajput/portfolio-nextjs?label=Licence&style=flat)][license]
+[![GitHub last commit](https://img.shields.io/github/last-commit/nixrajput/nixlab-web-nextjs?label=Last+Commit&style=flat)][repo]
+[![GitHub issues](https://img.shields.io/github/issues/nixrajput/nixlab-web-nextjs?label=Issues&style=flat)][issues]
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/nixrajput/nixlab-web-nextjs?label=Pull+Requests&style=flat)][pulls]
+[![GitHub Licence](https://img.shields.io/github/license/nixrajput/nixlab-web-nextjs?label=Licence&style=flat)][license]
 
 ## Table of Contents
 
-- [NixLab Website with Next.js and Sass](#nixlab-website-with-nextjs-and-sass)
+- [NixLab Website with Next.js, TypeScript, and Sass](#nixlab-website-with-nextjs-typescript-and-sass)
   - [Table of Contents](#table-of-contents)
   - [Features](#features)
   - [Sceenshots](#sceenshots)
@@ -29,12 +29,11 @@ This repository contains the source code for a portfolio website built using Nex
   - [License](#license)
   - [Sponsor Me](#sponsor-me)
   - [Connect With Me](#connect-with-me)
+  - [Activities](#activities)
 
 ## Features
 
 - Responsive design for various screen sizes.
-- A customizable portfolio section to showcase your projects.
-- An about section to introduce yourself.
 - Easily customizable with Sass for styling.
 
 ## Sceenshots
@@ -112,9 +111,6 @@ You can customize various aspects of the portfolio website to make it your own.
 
    - Edit the `projects.ts` file to add or modify project details.
    - Edit the `services.ts` file to add or modify services you provide.
-   - Edit the `experiences.ts` file to add or modify experiences you have.
-   - Edit the `skills.ts` file to add or modify skills you know.
-   - Edit the `socialLinks.ts` file to add or modify socila media links.
 
 2. Replace or add images in the `public/images` directory to match your projects and profile picture.
 
@@ -149,6 +145,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [![Twitter: nixrajput07](https://img.shields.io/badge/nixrajput-EFF7F6?logo=X&logoColor=333&link=https://x.com/nixrajput)][twitter]
 [![Telegram: nixrajput](https://img.shields.io/badge/nixrajput-EFF7F6?logo=Telegram&link=https://telegram.me/nixrajput)][telegram]
 [![Gmail: nkr.nikhi.nkr@gmail.com](https://img.shields.io/badge/nkr.nikhil.nkr@gmail.com-EFF7F6?logo=Gmail&link=mailto:nkr.nikhil.nkr@gmail.com)][gmail]
+
+## Activities
+
+![Alt](https://repobeats.axiom.co/api/embed/f8bafdbe26c734f6416ecf1a2d3de3a3e3e41a91.svg "Repobeats analytics image")
 
 [github]: https://github.com/nixrajput
 [twitter]: https://twitter.com/nixrajput07
