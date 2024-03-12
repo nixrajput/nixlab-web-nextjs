@@ -86,10 +86,10 @@ const NavBar = () => {
   return (
     <div
       className={`fixed w-screen h-[5rem] z-[1000] top-0 ${
-        isScrolled ? "bg-[var(--dialogColor50)]" : "bg-[var(--dialogColor)]"
-      } ${isScrolled ? "backdrop-blur-sm" : "backdrop-blur-0"} ${
+        isScrolled ? "backdrop-blur-sm" : "backdrop-blur-0"
+      } ${
         isScrolled ? "shadow-[0_4px_30px_rgba(0,0,0,0.1)]" : "shadow-none"
-      }`}
+      } gradient_bg`}
       ref={navRef}
     >
       <div className="h-full flex mx-auto px-4 py-6 constrained-width">

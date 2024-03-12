@@ -92,7 +92,7 @@ export interface DropdownMenuProps
 
 export interface ButtonComponentProps {
   label: string;
-  onClick: MouseEventHandler<HTMLButtonElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   classNames?: string;
   name?: string;
 }

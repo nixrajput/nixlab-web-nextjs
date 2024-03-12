@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const AnimatedElement = () => {
   return (
-    <div className="relative w-full flex items-center justify-center md:justify-end">
+    <div className="relative w-full flex items-center justify-center lg:justify-end">
       <div className="relative w-[20rem] h-[20rem] md:w-[25rem] md:h-[25rem] lg:w-[28rem] lg:h-[28rem] xl:w-[30rem] xl:h-[30rem]">
         <div className="absolute inset-0 flex justify-center items-center">
           <div className="absolute w-[calc(40%-2rem)] aspect-square bg-[#333c57] rounded-full" />

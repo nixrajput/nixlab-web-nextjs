@@ -18,7 +18,13 @@ const HomeSection2 = ({ id }: { id?: string }) => {
 
         <GridBox classNames="justify-items-center sm:grid-cols-2 lg:grid-cols-3 mt-16">
           {services.map((service, index) => {
-            return <ServiceItem key={`service-${index}`} data={service} />;
+            return (
+              <ServiceItem
+                key={`service-${index}`}
+                data={service}
+                index={index}
+              />
+            );
           })}
         </GridBox>
       </ConstraintedBox>

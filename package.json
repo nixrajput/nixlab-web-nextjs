@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "push": "git add -A && git commit -m \"update changes and bug fixes\" && git push origin master"
+    "push": "git add -A && git commit -m \"TypeScript Support Added & UI Updates\" && git push origin master"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
