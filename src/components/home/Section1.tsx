@@ -9,7 +9,7 @@ import AnimatedElement from "./components/AnimatedElement";
 const HomeSection1 = ({ id }: Readonly<{ id?: string }>) => {
   return (
     <ResponsiveBox
-      classNames="bg-[var(--dialogColor)] gradient_bg min-h-[calc(100vh-5rem)] items-center justify-center relative"
+      classNames="gradient_bg min-h-[calc(100vh-5rem)] items-center justify-center relative"
       id={id}
     >
       <ConstraintedBox classNames="px-4 py-8 z-[5]">

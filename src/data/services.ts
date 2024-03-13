@@ -5,33 +5,41 @@ const services: IServiceItem[] = [
     title: "Mobile App Development",
     icon: "/icons/mobile-dev.svg",
     shortDescription:
-      "We are specialized in creating captivating mobile applications that engage your audience.",
+      "We specialize in crafting native and cross-platform apps for iOS and Android, ensuring seamless performance and engaging user interfaces.",
     description:
-      "I specialize in creating captivating mobile applications that engage your audience. From concept to deployment, I develop native and cross-platform apps for iOS and Android. With cutting-edge technologies, I ensure seamless performance, intuitive interfaces, and robust functionality that aligns perfectly with your business goals.",
+      "Turn your ideas into captivating mobile experiences with our expert mobile app development services. From concept to launch, we specialize in crafting native and cross-platform apps for iOS and Android, ensuring seamless performance and engaging user interfaces.",
   },
   {
     title: "Web Development",
     icon: "/icons/software-dev.svg",
     shortDescription:
-      "We deliver visually stunning and user-friendly websites to help you establish a strong online presence.",
+      "We deliver tailored solutions that are visually stunning, user-friendly, and optimized for search engines.",
     description:
-      "I deliver visually stunning and user-friendly websites to help you establish a strong online presence. Whether it's a simple informational site or a complex e-commerce platform, I provide tailored web development solutions. Using the latest frameworks and technologies, I create responsive, SEO-friendly websites that offer a seamless browsing experience on all devices.",
+      "Establish a strong online presence with our professional web development services. Whether you need a simple brochure site or a complex e-commerce platform, we deliver tailored solutions that are visually stunning, user-friendly, and optimized for search engines.",
   },
   {
     title: "Backend Development",
+    icon: "/icons/backend-dev.svg",
+    shortDescription:
+      "We design and implement efficient database structures, develop robust APIs, and configure servers to ensure optimal performance and security.",
+    description:
+      "Enhance the performance and scalability of your digital applications with our expert backend development services. We design and implement efficient database structures, develop robust APIs, and configure servers to ensure optimal performance and security.",
+  },
+  {
+    title: "Dedicated Development Team",
     icon: "/icons/dev-team.svg",
     shortDescription:
-      "We enhance your digital applications with a robust and scalable backend infrastructure.",
+      "We offer flexible engagement models to meet your project requirements and deliver exceptional results.",
     description:
-      "I enhance your digital applications with a robust and scalable backend infrastructure. With expertise in backend development, I create efficient database structures, develop APIs, and configure servers to ensure optimal performance, security, and scalability. My solutions empower your applications to seamlessly handle high traffic and complex data management.",
+      "Augment your in-house team or outsource your entire project to our dedicated development team. With a pool of skilled professionals, we offer flexible engagement models to meet your project requirements and deliver exceptional results.",
   },
   {
     title: "Product Strategy",
     icon: "/icons/strategy-dev.svg",
     shortDescription:
-      "We collaborate with you to define clear goals, target audiences, and a roadmap for success.",
+      "Our product strategy services help you define and refine your product vision, ensuring alignment with your business goals.",
     description:
-      "I collaborate with you to define clear goals, target audiences, and a roadmap for success. My expertise in product ideation and market analysis ensures that your product not only meets user needs but also aligns with your business strategy for long-term growth and full potential of your digital products with effective product strategy.",
+      "Shape the future of your digital products with our strategic guidance. Our product strategy services help you define and refine your product vision, ensuring alignment with your business goals and user needs throughout the entire product lifecycle.",
   },
 ];
 

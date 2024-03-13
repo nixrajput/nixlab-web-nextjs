@@ -1,50 +1,36 @@
+import type { ISocialLinkItem } from "@/types";
 import {
   faGithub,
   faLinkedin,
-  faTelegram,
   faInstagram,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import Strings from "@/constants/strings";
-import type { ISocialLinkItem } from "@/types";
 
 const socialLinks: ISocialLinkItem[] = [
   {
-    name: Strings.github,
-    url: Strings.githubLink,
-    icon: faGithub,
-    text: Strings.githubUsername,
-  },
-  {
-    name: Strings.linkedIn,
-    url: Strings.linkedInLink,
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/nixlab-technologies",
     icon: faLinkedin,
-    text: Strings.linkedInUsername,
+    text: "nixlab-technologies",
   },
   {
-    name: Strings.telegram,
-    url: Strings.telegramLink,
-    icon: faTelegram,
-    text: Strings.telegramUsername,
-  },
-  {
-    name: Strings.instagram,
-    url: Strings.instagramLink,
-    icon: faInstagram,
-    text: Strings.instagramUsername,
-  },
-  {
-    name: Strings.twitter,
-    url: Strings.twitterLink,
+    name: "X",
+    url: "https://twitter.com/nixlab_in",
     icon: faXTwitter,
-    text: Strings.twitterUsername,
+    text: "nixlab_in",
   },
   {
-    name: Strings.email,
-    url: Strings.primaryEmailLink,
-    icon: faEnvelope,
-    text: Strings.primaryEmail,
+    name: "Instagram",
+    url: "https://instagram.com/nixlab.in",
+    icon: faInstagram,
+    text: "nixlab.in",
+  },
+
+  {
+    name: "GitHub",
+    url: "https://github.com/nixlab-technologies",
+    icon: faGithub,
+    text: "nixlab-technologies",
   },
 ];
 

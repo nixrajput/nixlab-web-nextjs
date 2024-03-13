@@ -57,7 +57,7 @@ const ServiceItem = ({
           </p>
 
           <AppFilledButton
-            label="More"
+            label="Learn More"
             classNames="mx-auto mt-8 min-w-[10rem]"
           />
         </Column>
