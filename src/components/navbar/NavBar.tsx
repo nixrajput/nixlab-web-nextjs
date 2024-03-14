@@ -107,7 +107,7 @@ const NavBar = () => {
               priority
               placeholder="blur"
               blurDataURL="/icon-alt.png"
-              className="h-10 lg:h-12 w-auto block lg:hidden"
+              className="h-10 lg:h-12 w-auto block md:hidden"
             />
 
             <Image
@@ -119,7 +119,7 @@ const NavBar = () => {
               priority
               placeholder="blur"
               blurDataURL="/icon-alt.png"
-              className="h-10 lg:h-12 w-auto lg:block hidden"
+              className="h-10 lg:h-12 w-auto md:block hidden"
             />
           </Link>
 

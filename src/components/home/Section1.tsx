@@ -15,13 +15,13 @@ const HomeSection1 = ({ id }: Readonly<{ id?: string }>) => {
       <ConstraintedBox classNames="px-4 py-8 z-[5]">
         <GridBox classNames="!gap-16 w-full !grid-cols-1 lg:!grid-cols-2">
           <Column classNames="w-full !justify-center items-center lg:items-start">
-            <p className="text-5xl/none md:text-6xl/none xl:text-7xl/none font-bold text-[var(--whiteColor)] drop_in text-center lg:text-start">
+            <p className="text-4xl/tight md:text-5xl/tight xl:text-6xl/tight font-bold text-[var(--whiteColor)] drop_in text-center lg:text-start">
               <Balancer>
                 Transforming Your Ideas into Innovative Solutions
               </Balancer>
             </p>
 
-            <p className="text-base/normal lg:text-lg/normal xl:text-xl/normal font-normal mt-8 drop_in text-center lg:text-start">
+            <p className="text-base/normal md:text-lg/normal xl:text-xl/normal font-normal mt-8 drop_in text-center lg:text-start">
               <Balancer>
                 We specialize in transforming your concepts into cutting-edge
                 solutions. Our team of developers will partner with you to craft
