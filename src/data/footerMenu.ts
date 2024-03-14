@@ -56,6 +56,12 @@ const footerMenu: INavMenuItem[][] = [
       path: "/terms-of-use",
       section: "terms-of-use",
     },
+    {
+      id: "contact",
+      title: "Contact Us",
+      path: "/#contact",
+      section: "contact",
+    },
   ],
 ];
 

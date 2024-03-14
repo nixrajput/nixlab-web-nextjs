@@ -324,6 +324,15 @@ h6 {
   );
 }
 
+.secondary_gradient_bg {
+  background: var(--bgColor);
+  background-image: linear-gradient(
+    90deg,
+    var(--secondaryColor30) 35%,
+    var(--dialogColor) 100%
+  );
+}
+
 .app__outlined_btn {
   position: relative;
   display: flex;
@@ -346,7 +355,6 @@ h6 {
   text-decoration: none;
   font-size: 1rem;
   font-family: inherit;
-  text-transform: capitalize;
   font-weight: 600;
   line-height: 1.5rem;
 
@@ -426,7 +434,6 @@ h6 {
   text-decoration: none;
   font-size: 1rem;
   font-family: inherit;
-  text-transform: capitalize;
   font-weight: 600;
   line-height: 1.5rem;
 
@@ -582,14 +589,6 @@ h6 {
   @media screen and (max-width: 480px) {
     font-size: 0.905rem;
   }
-}
-
-.btn__radius_left {
-  border-radius: 100% 70% 70% 100%;
-}
-
-.btn__radius_right {
-  border-radius: 70% 100% 100% 70%;
 }
 
 .small__btn {

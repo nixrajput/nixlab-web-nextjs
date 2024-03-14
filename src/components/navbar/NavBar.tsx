@@ -147,7 +147,7 @@ const NavBar = () => {
             {/*  Menu Items */}
 
             <div
-              className="flex-col justify-center lg:justify-start items-center m-0 p-4 text-center bg-[var(--dialogColor)] w-screen lg:max-w-[16rem] h-screen lg:max-h-[22rem] absolute top-0 lg:top-[calc(100%+1rem)] right-0 transition duration-300 ease-in-out drop_out hidden opacity-0 z-0 invisible overflow-hidden lg:border-[1px] lg:rounded-[var(--borderRadius)]"
+              className="flex-col justify-center lg:justify-start items-center m-0 p-4 text-center gradient_bg w-screen lg:max-w-[16rem] h-screen lg:max-h-[22rem] absolute top-0 lg:top-[calc(100%+1rem)] right-0 transition duration-300 ease-in-out drop_out hidden opacity-0 z-0 invisible overflow-hidden lg:border-[1px] lg:rounded-[var(--borderRadius)]"
               ref={mobileMenuRef}
             >
               <button

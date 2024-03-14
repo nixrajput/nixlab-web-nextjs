@@ -7,7 +7,7 @@ import FooterCopyright from "./components/Copyright";
 
 const Footer = () => {
   return (
-    <ResponsiveBox classNames="gradient_bg">
+    <ResponsiveBox classNames="secondary_gradient_bg">
       <ConstraintedBox classNames="p-4 py-8">
         <FooterLogoAndSocialLinks />
         <FooterMenu />
